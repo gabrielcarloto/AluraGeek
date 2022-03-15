@@ -9,13 +9,30 @@ function Header() {
     height: '115px',
     backgroundColor: '#ffffff',
 
+    '@media (min-width: 768px) and (orientation: portrait)': {
+      '.container': {
+        padding: '0px 35px',
+      },
+    },
+
+    '@media (min-width: 768px) and (orientation: landscape)': {
+      '.container': {
+        padding: '0px 152px',
+      },
+    },
+
+    '@media (max-width: 768px)': {
+      '.container': {
+        padding: '0px 19px',
+      },
+    },
+
     '.container': {
       height: '100%',
       width: '100%',
-      // padding: '0px 10%',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'space-around',
+      justifyContent: 'space-between',
       
       '.left': {
         display: 'flex',
@@ -29,6 +46,7 @@ function Header() {
           '@media (min-width: 768px)': {
             width: '176px',
             height: '50px',
+            marginRight: '48px',
           },
         },
 
@@ -44,8 +62,7 @@ function Header() {
           '@media (min-width: 768px)': {
             display: 'block',
             height: '40px',
-            width: '400px',
-            marginLeft: '32px',
+            width: 'clamp(300px, 30vw, 400px)',
             border: 'none',
             borderRadius: '20px',
             padding: '0 20px',
@@ -104,7 +121,7 @@ function Header() {
             </button>
           </form>
         </div>
-        <Button width="clamp(133px, 10vw, 182px)" variant="secondary" text="Login" />
+        <Button width="clamp(133px, 15vw, 182px)" variant="secondary" text="Login" />
         <div className="search-icon--mobile">
           <Image src="/search.svg" width="17" height="17" alt="ícone de busca" />
         </div>
