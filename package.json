@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/raleway": "^4.5.3",
     "@stitches/react": "^1.2.7",
     "next": "12.1.0",
     "react": "17.0.2",
