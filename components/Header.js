@@ -1,6 +1,7 @@
-import { styled } from '@stitches/react'
+import { styled, css } from '@stitches/react'
 import Image from 'next/image';
 import Button from "./Button";
+import Container from './Container';
 
 function Header() {
   const Header = styled('header', {
@@ -9,27 +10,7 @@ function Header() {
     height: '115px',
     backgroundColor: '#ffffff',
 
-    '@media (min-width: 768px) and (orientation: portrait)': {
-      '.container': {
-        padding: '0px 35px',
-      },
-    },
-
-    '@media (min-width: 768px) and (orientation: landscape)': {
-      '.container': {
-        padding: '0px 152px',
-      },
-    },
-
-    '@media (max-width: 768px)': {
-      '.container': {
-        padding: '0px 19px',
-      },
-    },
-
     '.container': {
-      height: '100%',
-      width: '100%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
@@ -110,7 +91,7 @@ function Header() {
   
   return (
     <Header>
-      <div className="container">
+      <Container className="container">
         <div className="left">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="logo" src="/Logo.svg" alt="logo da empresa" />
@@ -121,11 +102,15 @@ function Header() {
             </button>
           </form>
         </div>
-        <Button width="clamp(133px, 15vw, 182px)" variant="secondary" text="Login" />
+        <Button color="secondary" css={{
+          width: 'clamp(133px, 15vw, 182px)'
+        }}>
+          Login
+        </Button>
         <div className="search-icon--mobile">
           <Image src="/search.svg" width="17" height="17" alt="ícone de busca" />
         </div>
-      </div>
+      </Container>
     </Header>
   )
 }
