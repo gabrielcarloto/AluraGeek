@@ -40,13 +40,13 @@ export default function Home() {
 
       <Header />
       <Banner />
-      <Spacer />
+      <Spacer y={1} />
       <ProductsGallery title="Star Wars" products={starWarsProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer />
+      <Spacer y={2} />
       <ProductsGallery title="Console" products={consoleProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer />
+      <Spacer y={2} />
       <ProductsGallery title="Outros" products={otherProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer />
+      <Spacer y={1} />
     </>
   )
 }
