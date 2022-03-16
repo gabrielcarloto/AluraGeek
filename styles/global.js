@@ -4,12 +4,12 @@ import "@fontsource/raleway";
 const globalStyles = globalCss({
   '*': {
     boxSizing: 'border-box',
+    margin: 0,
+    padding: 0,
   },
 
   'body': {
     fontFamily: 'Raleway, sans-serif',
-    margin: 0,
-    padding: 0,
   },
 
   'html, body': {

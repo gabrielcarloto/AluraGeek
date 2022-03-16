@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react';
 import { styled, css } from '@stitches/react'
 import Header from '../components/Header'
+import Spacer from '../components/Spacer'
 import Button from '../components/Button'
 import Container from '../components/Container'
 import Banner from '../components/Banner'
@@ -39,9 +40,13 @@ export default function Home() {
 
       <Header />
       <Banner />
+      <Spacer />
       <ProductsGallery title="Star Wars" products={starWarsProducts.slice(0, isMobile ? 4 : 6)} />
+      <Spacer />
       <ProductsGallery title="Console" products={consoleProducts.slice(0, isMobile ? 4 : 6)} />
+      <Spacer />
       <ProductsGallery title="Outros" products={otherProducts.slice(0, isMobile ? 4 : 6)} />
+      <Spacer />
     </>
   )
 }

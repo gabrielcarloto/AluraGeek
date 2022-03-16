@@ -7,6 +7,7 @@ function ProductsTitle({ title }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: '16px',
 
     'h2': {
       fontSize: '22px',
