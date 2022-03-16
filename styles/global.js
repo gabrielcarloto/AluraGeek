@@ -6,6 +6,7 @@ const globalStyles = globalCss({
     boxSizing: 'border-box',
     margin: 0,
     padding: 0,
+    maxWidth: '100%',
   },
 
   'body': {
@@ -16,7 +17,6 @@ const globalStyles = globalCss({
     height: '100vh',
     width: '100vw',
     backgroundColor: '#F5F5F5',
-    overflowX: 'hidden',
   },
 
   'a': {
