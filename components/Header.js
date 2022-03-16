@@ -7,8 +7,12 @@ function Header() {
   const Header = styled('header', {
     display: 'flex',
     width: '100vw',
-    height: '115px',
+    height: '72px',
     backgroundColor: '#ffffff',
+
+    '@media (min-width: 768px)': {
+      height: '115px',
+    },
 
     '.container': {
       display: 'flex',
