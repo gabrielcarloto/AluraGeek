@@ -24,10 +24,10 @@ export default function Home() {
       setIsMobile(e.matches);
     };
     
-    mobile.addEventListener('change', handleMobile);
+    mobile.addEventListener('change', handleMobile(mobile));
 
     return () => {
-      mobile.removeEventListener('change', handleMobile);
+      mobile.removeEventListener('change', handleMobile(mobile));
     };
   }, []);
 
