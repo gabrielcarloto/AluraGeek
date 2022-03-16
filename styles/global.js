@@ -6,7 +6,7 @@ const globalStyles = globalCss({
     boxSizing: 'border-box',
   },
 
-  body: {
+  'body': {
     fontFamily: 'Raleway, sans-serif',
     margin: 0,
     padding: 0,
@@ -15,6 +15,8 @@ const globalStyles = globalCss({
   'html, body': {
     height: '100vh',
     width: '100vw',
+    backgroundColor: '#F5F5F5',
+    overflowX: 'hidden',
   },
 
   'a': {
