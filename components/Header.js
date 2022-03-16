@@ -44,6 +44,7 @@ function Header() {
             display: 'block',
             height: '40px',
             width: 'clamp(300px, 30vw, 400px)',
+            maxWidth: '400px',
             border: 'none',
             borderRadius: '20px',
             padding: '0 20px',
@@ -75,7 +76,7 @@ function Header() {
 
         '.search-icon--desktop': {
           display: 'block',
-          marginLeft: '-40px',
+          marginLeft: '-35px',
           backgroundColor: 'transparent',
           color: 'transparent',
           border: 'none',
