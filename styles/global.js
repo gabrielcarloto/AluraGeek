@@ -1,5 +1,5 @@
 import { globalCss } from "@stitches/react";
-import "@fontsource/raleway";
+import "@fontsource/raleway/variable.css"
 
 const globalStyles = globalCss({
   '*': {
@@ -10,7 +10,8 @@ const globalStyles = globalCss({
   },
 
   'body': {
-    fontFamily: 'Raleway, sans-serif',
+    fontFamily: 'Raleway',
+    fontWeight: '400',
   },
 
   'html, body': {
