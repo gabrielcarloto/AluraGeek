@@ -1,6 +1,6 @@
 import React from "react";
 import Spacer from "../utils/Spacer";
-import Button from "../Button";
+import Button from "../Button/index";
 import Input from "../Inputs/Input";
 import Textarea from "../Inputs/Textarea";
 import formStyles from './formStyles'

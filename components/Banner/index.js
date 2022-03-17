@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Button from '../Button'
+import Button from '../Button/index'
 import Container from '../utils/Container'
 import StyledBanner from './StyledBanner'
 

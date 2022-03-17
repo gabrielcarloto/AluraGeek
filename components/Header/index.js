@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import StyledHeader from './StyledHeader';
-import Button from "../Button";
+import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
 
