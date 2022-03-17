@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import React from 'react';
-import Header from '../components/Header'
-import Spacer from '../components/Spacer'
-import Banner from '../components/Banner'
-import ProductsGallery from '../components/Products/ProductsGallery'
-import Footer from '../components/Footer/Footer'
+import Header from '../components/Header/index'
+import Banner from '../components/Banner/index'
+import ProductsGallery from '../components/ProductsGallery/index'
+import Footer from '../components/Footer/index'
+import Spacer from '../components/utils/Spacer'
 import { starWarsProducts, consoleProducts, otherProducts } from './api/products'
 
 

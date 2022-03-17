@@ -1,69 +1,18 @@
 import Link from 'next/link';
-import { styled } from "@stitches/react";
-import Grid from '../Grid';
-import Spacer from "../Spacer";
-import Container from "../Container";
-import { Form, formStyles } from "./Form";
+import Grid from '../utils/Grid';
+import Spacer from "../utils/Spacer";
+import Container from "../utils/Container";
+import StyledFooter from './StyledFooter';
+import { Form } from "./Form";
 
 function Footer() {
-  const Footer = styled('footer', {
-    ...formStyles,
-    backgroundColor: '#EAF2FD',
-
-    [`${Grid}`]: {
-      '@media (min-width: 1024px)': {
-        rowGap: '0',
-      },
-    },
-
-    '.footer-logo': {
-      gridColumn: '1 / -1',
-      margin: '0 auto',
-
-      '@media (min-width: 768px)': {
-        gridColumn: '1 / 3',
-        margin: '0',
-      },
-    },
-
-    '.footer-links': {
-      listStyleType: 'none',
-      textAlign: 'center',
-      marginBottom: '16px',
-      gridColumn: '1 / -1',
-
-      '@media (min-width: 768px)': {
-        textAlign: 'left',
-        gridColumn: '1 / 5',
-      },
-
-      '@media (min-width: 1024px)': {
-        gridColumn: '4 / 6',
-        marginBottom: '0',
-      },
-
-      'li': {
-        cursor: 'pointer',
-      },
-    },
-
-    '.dev': {
-      backgroundColor: '#FFFFFF',
-      fontFamily: 'Raleway',
-      fontSize: '16px',
-      fontWeight: '500',
-      color: '#464646',
-      textAlign: 'center',
-    }
-  });
-
   return (
-    <Footer>
+    <StyledFooter>
       <Spacer responsive={1} />
-      <Container>
-        <Grid>
+      <Container className="footer-container">
+        <Grid className="footer-grid">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/Logo.svg" alt="logo alura geek" className="footer-logo" />
+          <img className="footer-logo" src="/Logo.svg" alt="logo alura geek" />
           <ul className="footer-links">
             <li>
               <Link passHref href="/">
@@ -115,7 +64,7 @@ function Footer() {
         </p>
         <Spacer y={32} />
       </div>
-    </Footer>
+    </StyledFooter>
   )
 }
 

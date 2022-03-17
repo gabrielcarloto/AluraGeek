@@ -3,7 +3,6 @@ const commonStyles = {
   border: 'none',
   borderBottom: '1px solid #C8C8C8',
   borderRadius: '4px',
-  outlineColor: 'transparent',
   color: '#464646',
   fontFamily: 'Raleway',
   fontSize: '16px',

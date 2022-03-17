@@ -21,6 +21,16 @@ const globalStyles = globalCss({
 
   'a': {
     textDecoration: 'none',
+  },
+
+  '.scr-only': {
+    position: 'absolute',
+    height: '1px',
+    width: '1px',
+    clip: 'rect(1px 1px 1px 1px)',
+    clipPath: 'polygon(0px 0px, 0px 0px, 0px 0px)',
+    '-webkit-clip-path': 'polygon(0px 0px, 0px 0px, 0px 0px)',
+    overflow: 'hidden !important',
   }
 });
 
