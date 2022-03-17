@@ -5,7 +5,7 @@ import Banner from '../components/Banner/index'
 import ProductsGallery from '../components/ProductsGallery/index'
 import Footer from '../components/Footer/index'
 import Spacer from '../components/utils/Spacer'
-import { starWarsProducts, consoleProducts, otherProducts } from './api/products'
+import products from './api/products'
 
 
 export default function Home() {
@@ -35,11 +35,11 @@ export default function Home() {
       <Header />
       <Banner />
       <Spacer responsive={1} />
-      <ProductsGallery title="Star Wars" products={starWarsProducts.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Star Wars" products={products.starWars.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Console" products={consoleProducts.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Console" products={products.consoles.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Outros" products={otherProducts.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Outros" products={products.other.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={1} />
       <Footer />
     </>
