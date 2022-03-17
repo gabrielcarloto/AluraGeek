@@ -45,42 +45,42 @@ const starWarsProducts = [
 
 const consoleProducts = [
   {
-    id: 1,
+    id: 7,
     name: 'Controle Xbox',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     alt: 'Controle Xbox'
   },
   {
-    id: 2,
+    id: 8,
     name: 'Playstation 5 e Controle',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1607853202273-797f1c22a38e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80',
     alt: 'Playstation 5 e Controle'
   },
   {
-    id: 3,
+    id: 9,
     name: 'Nintendinho',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1533702165324-66678e2069b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     alt: 'Nintendinho'
   },
   {
-    id: 4,
+    id: 10,
     name: 'Par de Joy-Cons',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1617096200347-cb04ae810b1d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     alt: 'Par de Joy-Cons'
   },
   {
-    id: 5,
+    id: 11,
     name: 'Xbox Series X',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1621259182181-1ccb9ec306cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1512&q=80',
     alt: 'Xbox Series X'
   },
   {
-    id: 6,
+    id: 12,
     name: 'Game Boy Color',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1577583113753-ca7e95d1bdc6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
@@ -90,42 +90,42 @@ const consoleProducts = [
 
 const otherProducts = [
   {
-    id: 1,
+    id: 13,
     name: 'Camisa Atari',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1589021818993-a1223f8f0f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1045&q=80',
     alt: 'Camisa Atari'
   },
   {
-    id: 2,
+    id: 14,
     name: 'Camisa SNES',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     alt: 'Camisa SNES'
   },
   {
-    id: 3,
+    id: 15,
     name: 'Boneco Sonic',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1550747545-c896b5f89ff7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80',
     alt: 'Boneco Sonic'
   },
   {
-    id: 4,
+    id: 16,
     name: 'Seja lá o que é isso',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1611946258523-9c2bfabb94e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80',
     alt: 'Produto XYZ'
   },
   {
-    id: 5,
+    id: 17,
     name: 'Óculos VR',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     alt: 'Óculos VR'
   },
   {
-    id: 6,
+    id: 18,
     name: 'Pikachu ENORME',
     price: 'R$ 60,00',
     image: 'https://images.unsplash.com/photo-1609372332255-611485350f25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
