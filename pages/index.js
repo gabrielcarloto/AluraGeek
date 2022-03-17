@@ -1,20 +1,14 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 import React from 'react';
-import { styled, css } from '@stitches/react'
 import Header from '../components/Header'
 import Spacer from '../components/Spacer'
-import Button from '../components/Button'
-import Container from '../components/Container'
 import Banner from '../components/Banner'
-import Grid from '../components/Grid'
 import ProductsGallery from '../components/Products/ProductsGallery'
+import Footer from '../components/Footer/Footer'
 import { starWarsProducts, consoleProducts, otherProducts } from './api/products'
 
 
 export default function Home() {
-  
   const [ isMobile, setIsMobile ] = React.useState(false);
 
   React.useEffect(() => {
@@ -40,13 +34,14 @@ export default function Home() {
 
       <Header />
       <Banner />
-      <Spacer y={1} />
+      <Spacer responsive={1} />
       <ProductsGallery title="Star Wars" products={starWarsProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer y={2} />
+      <Spacer responsive={2} />
       <ProductsGallery title="Console" products={consoleProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer y={2} />
+      <Spacer responsive={2} />
       <ProductsGallery title="Outros" products={otherProducts.slice(0, isMobile ? 4 : 6)} />
-      <Spacer y={1} />
+      <Spacer responsive={1} />
+      <Footer />
     </>
   )
 }
