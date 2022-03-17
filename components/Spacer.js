@@ -4,7 +4,11 @@ const Spacer = styled('div', {
   width: '100%',
 
   variants: {
-    y: {
+    defaultProps: {
+      y: 2,
+    },
+    
+    responsive: {
       1: {
         height: '16px',
 
@@ -24,6 +28,28 @@ const Spacer = styled('div', {
           height: '64px',
         },
       },
+
+      3: {
+        height: '16px',
+
+        '@media (min-width: 768px)': {
+          height: '24px',
+        },
+      },
+    },
+
+    y: {
+      8: {
+        height: '8px',
+      },
+
+      16: {
+        height: '16px',
+      },
+
+      32: {
+        height: '32px',
+      }
     },
   },
 });
