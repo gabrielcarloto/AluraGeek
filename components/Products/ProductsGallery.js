@@ -8,6 +8,15 @@ import Grid from '../Grid';
 function ProductsGallery({ title, products }) {
   const Product = styled('div', {
     cursor: 'pointer',
+    gridColumn: 'span 6',
+
+    '@media (min-width: 768px)': {
+      gridColumn: 'span 3',
+    },
+
+    '@media (min-width: 1024px)': {
+      gridColumn: 'span 2',
+    },
 
     '.product-image': {
       width: '100%',
