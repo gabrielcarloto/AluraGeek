@@ -26,8 +26,10 @@ const FloatLabel = css({
   'label': {
     color: '#A2A2A2',
     position: 'absolute',
-    transition: 'all 200ms ease-in-out',
+    userSelect: 'none',
+    cursor: 'text',
     zIndex: '2',
+    transition: 'all 200ms ease-in-out',
   },
 });
 
