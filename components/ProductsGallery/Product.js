@@ -5,14 +5,16 @@ const Product = styled('div', {
   gridColumn: 'span 6',
   transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
 
-  '&:hover': {
-    padding: '20px',
-    // margin: '0 -20px',
-    backgroundColor: '#FFFFFF',
-    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-    transform: 'translate(10px, 20px) scale(1.2)',
-    zIndex: '1',
+  '@media (hover: hover) and (pointer: fine)': {
+    '&:hover': {
+      padding: '20px',
+      backgroundColor: '#FFFFFF',
+      boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+      transform: 'translate(10px, 20px) scale(1.2)',
+      zIndex: '1',
+    },
   },
+
 
   '@media (min-width: 768px)': {
     gridColumn: 'span 3',
