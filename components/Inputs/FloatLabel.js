@@ -24,8 +24,6 @@ const FloatLabel = css({
   },
   
   'label': {
-    fontSize: '12px',
-    fontWeight: '400',
     color: '#A2A2A2',
     position: 'absolute',
     transition: 'all 200ms ease-in-out',

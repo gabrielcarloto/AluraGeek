@@ -35,6 +35,9 @@ function Form() {
     },
   
     'label': {
+      fontSize: '12px',
+      fontWeight: '400',
+
       '&.active': {
         transform: 'translate(12px, 6px) scale(1)',
       },
