@@ -11,8 +11,10 @@ function Footer() {
       <Spacer responsive={1} />
       <Container className="footer-container">
         <Grid className="footer-grid">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="footer-logo" src="/Logo.svg" alt="logo alura geek" />
+          <Link passHref href="/">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="footer-logo" src="/Logo.svg" alt="logo alura geek" />
+          </Link>
           <ul className="footer-links">
             <li>
               <Link passHref href="/">

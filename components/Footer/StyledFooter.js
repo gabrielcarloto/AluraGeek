@@ -14,6 +14,7 @@ const StyledFooter = styled('footer', {
   '.footer-logo': {
     gridColumn: '1 / -1',
     margin: '0 auto',
+    cursor: 'pointer',
 
     '@media (min-width: 768px)': {
       gridColumn: '1 / 3',

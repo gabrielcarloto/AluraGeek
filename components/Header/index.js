@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Image from 'next/image';
 import StyledHeader from './StyledHeader';
 import Button from "../Button/index";
@@ -9,8 +10,10 @@ function Header() {
     <StyledHeader>
       <Container className="header-container">
         <div className="header-left-content">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="header-logo" src="/Logo.svg" alt="logo da empresa alurageek" />
+          <Link passHref href="/" >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="header-logo" src="/Logo.svg" alt="logo da empresa alurageek" />
+          </Link>
           <form>
             <label className="scr-only" htmlFor="header-search">O que deseja encontrar?</label>
             <Input className="header-search" id="header-search" color="grey" type="text" placeholder="O que deseja encontrar?" />

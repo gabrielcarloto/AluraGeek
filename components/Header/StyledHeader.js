@@ -23,6 +23,7 @@ const StyledHeader = styled('header', {
       '.header-logo': {
         width: '100px',
         height: '28px',
+        cursor: 'pointer',
 
         '@media (min-width: 768px)': {
           width: '176px',
