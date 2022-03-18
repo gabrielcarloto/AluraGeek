@@ -32,7 +32,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
+      <Header loginBtn />
       <Banner />
       <Spacer responsive={1} />
       <ProductsGallery title="Star Wars" products={products.starWars.slice(0, isMobile ? 4 : 6)} />

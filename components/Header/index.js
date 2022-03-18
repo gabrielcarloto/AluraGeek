@@ -5,7 +5,7 @@ import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
 
-function Header() {
+function Header({ loginBtn }) {
   const Header = css({
     display: 'flex',
     width: '100vw',
@@ -105,11 +105,13 @@ function Header() {
             </button>
           </form>
         </div>
-        <Link passHref href="/login">
-          <Button className="header-login" color="secondary">
-            Login
-          </Button>
-        </Link>
+        { loginBtn && (
+          <Link passHref href="/login">
+            <Button className="header-login" color="secondary">
+              Login
+            </Button>
+          </Link>
+        )}
         <div className="header-search-icon--mobile">
           <Image src="/search.svg" width="17" height="17" alt="ícone de busca" />
         </div>
