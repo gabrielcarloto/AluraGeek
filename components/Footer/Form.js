@@ -1,9 +1,10 @@
 import React from "react";
+import { css } from "@stitches/react";
 import Spacer from "../utils/Spacer";
 import Button from "../Button/index";
 import Input from "../Inputs/Input";
 import Textarea from "../Inputs/Textarea";
-import formStyles from './formStyles'
+import FloatLabel from "../Inputs/FloatLabel";
 
 function Form() {
   const [nameValue, setNameValue] = React.useState('');
@@ -11,12 +12,61 @@ function Form() {
   const nameLabelBg = React.useRef(null);
   const messageLabelBg = React.useRef(null);
 
+  const Form = css({
+    width: '100%',
+    gridColumn: '1 / -1',
+  
+    '@media (min-width: 768px)': {
+      gridColumn: '6 / -1',
+      gridRow: '-2 / 3',
+      alignSelf: 'flex-start',
+    },
+  
+    '@media (min-width: 1024px)': {
+      gridColumn: '7 / -1',
+    },
+  
+    '.form-title': {
+      fontFamily: 'Raleway',
+      fontSize: '16px',
+      fontWeight: '700',
+      color: '#464646',
+      marginBottom: '8px',
+    },
+  
+    'label': {
+      '&.active': {
+        transform: 'translate(12px, 6px) scale(1)',
+      },
+    },
+    
+    '.name-label': {
+      transform: 'translate(14px, 10px) scale(1.2)',
+    },
+    
+    '.message-label': {
+      transform: 'translate(24px, 10px) scale(1.2)',
+    },
+
+    '@media (min-width: 768px)': {
+      'label': {
+        '&.active': {
+          transform: 'translate(11px, 6px) scale(1)',
+        },
+      },
+
+      '.name-label': {
+        transform: 'translate(15px, 10px) scale(1.2)',
+      },
+    },
+  });
+
   return (
-    <form>
+    <form className={Form()}>
       <h3 className="form-title">
         Fale conosco
       </h3>
-      <div className="float-label">
+      <div className={FloatLabel()}>
         <div className={'label-background focus' + (nameValue == '' ? '' : ' active')} ref={nameLabelBg} />
         <Input
           className="form-input name"
@@ -35,7 +85,7 @@ function Form() {
         </label>
       </div>
       <Spacer y={16} />
-      <div className="float-label">
+      <div className={FloatLabel()}>
         <div 
           className={'label-background focus' + (messageValue == '' ? '' : ' active')}
           ref={messageLabelBg}
@@ -63,4 +113,4 @@ function Form() {
 }
 
 
-export { Form, formStyles };
+export default Form;

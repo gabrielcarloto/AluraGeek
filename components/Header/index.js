@@ -1,13 +1,96 @@
 import Link from 'next/link'
 import Image from 'next/image';
-import StyledHeader from './StyledHeader';
+import { css } from '@stitches/react';
 import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
 
-function Header() {  
+function Header() {
+  const Header = css({
+    display: 'flex',
+    width: '100vw',
+    height: '72px',
+    backgroundColor: '#ffffff',
+  
+    '@media (min-width: 768px)': {
+      height: '115px',
+    },
+  
+    '.header-container': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      
+      '.header-left-content': {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+  
+        '.header-logo': {
+          width: '100px',
+          height: '28px',
+          cursor: 'pointer',
+  
+          '@media (min-width: 768px)': {
+            width: '176px',
+            height: '50px',
+            marginRight: '48px',
+          },
+        },
+  
+        'form': {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        },
+  
+        '.header-search': {
+          display: 'none',
+          
+          '@media (min-width: 768px)': {
+            display: 'block',
+            width: 'clamp(300px, 30vw, 400px)',
+            maxWidth: '400px',
+          },
+        },
+      },
+  
+      '.header-search-icon--desktop': {
+        display: 'none',
+      },
+  
+      '@media (min-width: 768px)': {
+        '.header-search-icon--mobile': {
+          display: 'none',
+        },
+  
+        '.header-search-icon--desktop': {
+          display: 'block',
+          marginLeft: '-35px',
+          backgroundColor: 'transparent',
+          color: 'transparent',
+          border: 'none',
+          outline: 'none',
+          cursor: 'pointer',
+          background: 'url(/search.svg) no-repeat center',
+          width: '18px',
+          height: '18px',
+          transition: 'all 200ms ease-in-out',
+  
+          '&:focus': {
+            transform: 'scale(1.2)',
+          },
+        },
+      },
+    },
+  
+    '.header-login': {
+      width: 'clamp(133px, 15vw, 182px)'
+    }
+  })
+
   return (
-    <StyledHeader>
+    <header className={Header()}>
       <Container className="header-container">
         <div className="header-left-content">
           <Link passHref href="/" >
@@ -22,14 +105,16 @@ function Header() {
             </button>
           </form>
         </div>
-        <Button className="header-login" color="secondary">
-          Login
-        </Button>
+        <Link passHref href="/login">
+          <Button className="header-login" color="secondary">
+            Login
+          </Button>
+        </Link>
         <div className="header-search-icon--mobile">
           <Image src="/search.svg" width="17" height="17" alt="ícone de busca" />
         </div>
       </Container>
-    </StyledHeader>
+    </header>
   )
 }
 

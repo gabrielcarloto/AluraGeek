@@ -1,13 +1,68 @@
 import Link from 'next/link';
+import { css } from "@stitches/react";
 import Grid from '../utils/Grid';
 import Spacer from "../utils/Spacer";
 import Container from "../utils/Container";
-import StyledFooter from './StyledFooter';
-import { Form } from "./Form";
+import Form from "./Form";
 
 function Footer() {
+  const Footer = css({
+    backgroundColor: '#EAF2FD',
+  
+    'footer-grid': {
+      '@media (min-width: 1024px)': {
+        rowGap: '0',
+      },
+    },
+  
+    '.footer-logo': {
+      gridColumn: '1 / -1',
+      margin: '0 auto',
+      cursor: 'pointer',
+  
+      '@media (min-width: 768px)': {
+        gridColumn: '1 / 3',
+        margin: '0',
+      },
+    },
+  
+    '.footer-links': {
+      listStyleType: 'none',
+      textAlign: 'center',
+      marginBottom: '16px',
+      gridColumn: '1 / -1',
+  
+      '@media (min-width: 768px)': {
+        textAlign: 'left',
+        gridColumn: '1 / 5',
+      },
+  
+      '@media (min-width: 1024px)': {
+        gridColumn: '4 / 6',
+        marginBottom: '0',
+      },
+  
+      'li': {
+        cursor: 'pointer',
+      },
+    },
+  
+    '.form-btn': {
+      width: 'clamp(150px, 10vw, 165px)',
+    },
+  
+    '.dev': {
+      backgroundColor: '#FFFFFF',
+      fontFamily: 'Raleway',
+      fontSize: '16px',
+      fontWeight: '500',
+      color: '#464646',
+      textAlign: 'center',
+    }
+  });
+
   return (
-    <StyledFooter>
+    <footer className={Footer()}>
       <Spacer responsive={1} />
       <Container className="footer-container">
         <Grid className="footer-grid">
@@ -66,7 +121,7 @@ function Footer() {
         </p>
         <Spacer y={32} />
       </div>
-    </StyledFooter>
+    </footer>
   )
 }
 

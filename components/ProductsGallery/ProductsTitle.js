@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { styled } from "@stitches/react";
+import { css } from "@stitches/react";
 
 function ProductsTitle({ title }) {
-  const ProductsTitle = styled('div', {
+  const ProductsTitle = css({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -54,7 +54,7 @@ function ProductsTitle({ title }) {
   });
 
   return (
-    <ProductsTitle>
+    <div className={ProductsTitle()}>
       <h2>{title}</h2>
       <Link passHref href="/products">
         <div className="products-link">
@@ -64,7 +64,7 @@ function ProductsTitle({ title }) {
           </div>
         </div>
       </Link>
-    </ProductsTitle>
+    </div>
   );
 }
 
