@@ -7,10 +7,6 @@ const Product = styled('div', {
   padding: '10px',
   backgroundColor: '#FFFFFF',
 
-  '@media (min-width: 768px)': {
-    padding: '16px',
-  },  
-
   '@media (hover: hover) and (pointer: fine)': {
     '&:hover': {
       padding: '20px',
@@ -24,9 +20,10 @@ const Product = styled('div', {
   '@media (min-width: 768px)': {
     gridColumn: 'span 3',
   },
-
+  
   '@media (min-width: 1024px)': {
     gridColumn: 'span 2',
+    padding: '16px',
   },
 
   '.product-image': {
