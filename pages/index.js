@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import React from 'react';
-import Header from '../components/Header/index'
 import Banner from '../components/Banner/index'
 import ProductsGallery from '../components/ProductsGallery/index'
-import Footer from '../components/Footer/index'
 import Spacer from '../components/utils/Spacer'
 import products from './api/products'
 
@@ -32,7 +30,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header loginBtn />
       <Banner />
       <Spacer responsive={1} />
       <ProductsGallery title="Star Wars" products={products.starWars.slice(0, isMobile ? 4 : 6)} />
@@ -41,7 +38,6 @@ export default function Home() {
       <Spacer responsive={2} />
       <ProductsGallery title="Outros" products={products.other.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={1} />
-      <Footer />
     </>
   )
 }

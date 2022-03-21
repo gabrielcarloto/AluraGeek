@@ -1,14 +1,12 @@
 import React from 'react';
 import Head from 'next/head'
 import { css } from '@stitches/react';
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Input from '../components/Inputs/Input';
 import Button from '../components/Button/index';
 import Spacer from '../components/utils/Spacer';
 import FloatLabel from '../components/Inputs/FloatLabel';
 
-function Login() {
+function Login({ router }) {
   const FormSection = css({
     height: '60vh',
     display: 'flex',
@@ -162,11 +160,9 @@ function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header />
       <section className={FormSection()}>
         <Form />
       </section>
-      <Footer />
     </>
   )
 }

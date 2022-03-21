@@ -10,6 +10,7 @@ const globalStyles = globalCss({
   },
 
   'body': {
+    position: 'relative',
     fontFamily: 'Raleway',
     fontWeight: '400',
   },
@@ -18,6 +19,7 @@ const globalStyles = globalCss({
     height: '100vh',
     width: '100vw',
     backgroundColor: '#F5F5F5',
+    overflowX: 'hidden',
   },
 
   'a': {
