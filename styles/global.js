@@ -24,24 +24,24 @@ const globalStyles = globalCss({
     textDecoration: 'none',
     display: 'inline-block',
     position: 'relative',
-    transition: 'all 200ms ease-in-out',
     
     '&:visited': {
       color: 'inherit',
     },
-
+    
     '@media (hover: hover) and (pointer: fine)': {
       '&:hover': {
         color: '#2A7AE4',
       },
-  
+      
       '&::after': {
         content: '""',
         display: 'block',
         position: 'absolute',
-        width: '0',
+        width: '0%',
         height: '2.5px',
         backgroundColor: '#2A7AE4',
+        transition: 'all 200ms ease-in-out',
       },
   
       '&:hover::after': {
