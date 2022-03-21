@@ -73,37 +73,37 @@ function Footer() {
           <ul className="footer-links">
             <li>
               <Link passHref href="/">
-                <p>Quem somos</p>
+                <a>Quem somos</a>
               </Link>
             </li>
             <Spacer responsive={3} />
             <li>
               <Link passHref href="/">
-                <p>Política de Privacidade</p>
+                <a>Política de Privacidade</a>
               </Link>
             </li>
             <Spacer responsive={3} />
             <li>
               <Link passHref href="/">
-                <p>Programa fidelidade</p>
+                <a>Programa fidelidade</a>
               </Link>
             </li>
             <Spacer responsive={3} />
             <li>
               <Link passHref href="/">
-                <p>Nossas lojas</p>
+                <a>Nossas lojas</a>
               </Link>
             </li>
             <Spacer responsive={3} />
             <li>
               <Link passHref href="/">
-                <p>Quero ser franqueado</p>
+                <a>Quero ser franqueado</a>
               </Link>
             </li>
             <Spacer responsive={3} />
             <li>
               <Link passHref href="/">
-                <p>Anuncie aqui</p>
+                <a>Anuncie aqui</a>
               </Link>
             </li>
           </ul>

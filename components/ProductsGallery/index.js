@@ -19,6 +19,11 @@ function ProductsGallery({ title, products }) {
         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
         transform: 'translate(10px, 20px) scale(1.2)',
         zIndex: '1',
+
+        '.product-link::after': {
+          width: '100%',
+          top: '18px',
+        },
       },
     },
   
@@ -92,7 +97,7 @@ function ProductsGallery({ title, products }) {
                   <div className="product-details">
                     <h3 className="product-name">{product.name}</h3>
                     <p className="product-price">{product.price}</p>
-                    <p className="product-link">Ver produto</p>
+                    <a className="product-link">Ver produto</a>
                   </div>
                 </div>
               </Link>

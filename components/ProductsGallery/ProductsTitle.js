@@ -27,7 +27,7 @@ function ProductsTitle({ title }) {
       justifyContent: 'center',
       cursor: 'pointer',
 
-      'p': {
+      'a': {
         fontSize: '14px',
         fontWeight: '700',
         lineHeight: '16px',
@@ -58,7 +58,7 @@ function ProductsTitle({ title }) {
       <h2>{title}</h2>
       <Link passHref href="/products">
         <div className="products-link">
-          <p>Ver tudo</p>
+          <a>Ver tudo</a>
           <div className="products-arrow">
             <Image src="/arrow.svg" width="20px" height="20px" layout="responsive" alt="seta" />
           </div>
