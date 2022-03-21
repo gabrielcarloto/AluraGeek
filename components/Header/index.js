@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link'
-import Image from 'next/image';
 import { css } from '@stitches/react';
 import Button from "../Button/index";
 import Container from '../utils/Container';
@@ -134,14 +133,14 @@ function Header({ loginBtn }) {
     },
   })
 
-  return (
-    <header className={Header()}>
-      <Container className="header-container">
-        <div className="header-search--mobile" ref={headerSearchMobile} />
-        <Link passHref href="/" >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="header-logo" src="/Logo.svg" alt="logo da empresa alurageek" />
-        </Link>
+  function Form() {
+    function toggleClass() {
+      headerSearchMobile.current.classList.toggle('active');
+      headerForm.current.classList.toggle('active');
+    }
+
+    return (
+      <>
         <form className="header-form" ref={headerForm}>
           <label className="scr-only" htmlFor="header-search">O que deseja encontrar?</label>
           <Input 
@@ -159,22 +158,29 @@ function Header({ loginBtn }) {
             className="header-close-icon mobile"
             src="/close.svg"
             alt="fechar"
-            onClick={() => {
-              headerSearchMobile.current.classList.remove('active');
-              headerForm.current.classList.remove('active');
-            }}
+            onClick={toggleClass}
           />
         </form>
         <div 
           className="header-search-icon mobile"
-          onClick={() => {
-            headerSearchMobile.current.classList.add('active');
-            headerForm.current.classList.add('active');
-          }}
+          onClick={toggleClass}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/search.svg" alt="ícone de pesquisa" />
         </div>
+      </>
+    );
+  };
+
+  return (
+    <header className={Header()}>
+      <Container className="header-container">
+        <div className="header-search--mobile" ref={headerSearchMobile} />
+        <Link passHref href="/" >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="header-logo" src="/Logo.svg" alt="logo da empresa alurageek" />
+        </Link>
+        <Form />
         { loginBtn && (
           <Link passHref href="/login">
             <Button className="header-login" color="secondary">
