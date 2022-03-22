@@ -13,6 +13,7 @@ const globalStyles = globalCss({
     position: 'relative',
     fontFamily: 'Raleway',
     fontWeight: '400',
+    color: '#464646',
   },
 
   'html, body': {
