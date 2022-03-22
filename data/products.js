@@ -2,7 +2,7 @@ export const products = [
   {
     id: '1',
     name: 'Caneca Stormtrooper',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1620138694717-07141b500f57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
     alt: 'Caneca Stormtrooper'
@@ -10,7 +10,7 @@ export const products = [
   {
     id: '2',
     name: 'Lego Darth Vader',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1620950127852-92592960e363?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80',
     alt: 'Lego Darth Vader'
@@ -18,7 +18,7 @@ export const products = [
   {
     id: '3',
     name: 'Boneco Yoda',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1599002762948-19068b069803?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1122&q=80',
     alt: 'Boneco Yoda'
@@ -26,7 +26,7 @@ export const products = [
   {
     id: '4',
     name: 'Cosplay Stormtrooper',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1599719500956-d158a26ab3ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
     alt: 'Cosplay Stormtrooper'
@@ -34,7 +34,7 @@ export const products = [
   {
     id: '5',
     name: 'Boneco Baby Yoda',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1601814933824-fd0b574dd592?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1112&q=80',
     alt: 'Boneco Baby Yoda'
@@ -42,7 +42,7 @@ export const products = [
   {
     id: '6',
     name: 'Cosplay Kylo Ren',
-    category: 'starwars',
+    category: 'star wars',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1591927675938-b81b071d3e91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     alt: 'Cosplay Kylo Ren'
@@ -98,7 +98,7 @@ export const products = [
   {
     id: '13',
     name: 'Camisa Atari',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1589021818993-a1223f8f0f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1045&q=80',
     alt: 'Camisa Atari'
@@ -106,7 +106,7 @@ export const products = [
   {
     id: '14',
     name: 'Camisa SNES',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1554410637-1a8267402b57?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     alt: 'Camisa SNES'
@@ -114,7 +114,7 @@ export const products = [
   {
     id: '15',
     name: 'Boneco Sonic',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1550747545-c896b5f89ff7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80',
     alt: 'Boneco Sonic'
@@ -122,7 +122,7 @@ export const products = [
   {
     id: '16',
     name: 'Seja lá o que é isso',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1611946258523-9c2bfabb94e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1071&q=80',
     alt: 'Produto XYZ'
@@ -130,7 +130,7 @@ export const products = [
   {
     id: '17',
     name: 'Óculos VR',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     alt: 'Óculos VR'
@@ -138,7 +138,7 @@ export const products = [
   {
     id: '18',
     name: 'Pikachu ENORME',
-    category: 'others',
+    category: 'outros',
     price: '60.00',
     image: 'https://images.unsplash.com/photo-1609372332255-611485350f25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
     alt: 'Pikachu ENORME'

@@ -27,10 +27,16 @@ export default function Home() {
 
   // get products from api
   const data = useSWR('/api/products', fetcher);
+  const products = data.data;
+
   // filter products by category
-  const starWars = data.data ? data.data.filter(product => product.category === 'starwars') : [];
-  const consoles = data.data ? data.data.filter(product => product.category === 'consoles') : [];
-  const others = data.data ? data.data.filter(product => product.category === 'others') : [];  
+  function filter(category) {
+    return products ? products.filter(product => product.category === category) : [];
+  }
+
+  const starWars = filter('star wars');
+  const consoles = filter('consoles');
+  const others = filter('outros');
 
   return (
     <>
