@@ -14,7 +14,8 @@
     "framer-motion": "^6.2.8",
     "next": "12.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "swr": "^1.2.2"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^3.3.0",

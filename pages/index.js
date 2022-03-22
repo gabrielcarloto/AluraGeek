@@ -1,17 +1,19 @@
 import Head from 'next/head'
 import React from 'react';
+import useSWR from 'swr';
 import Banner from '../components/Banner/index'
 import ProductsGallery from '../components/ProductsGallery/index'
 import Spacer from '../components/utils/Spacer'
-import products from './api/products'
 
+const fetcher = (url) => fetch(url).then(res => res.json());
 
 export default function Home() {
+  // check if is mobile
   const [ isMobile, setIsMobile ] = React.useState(false);
 
   React.useEffect(() => {
     const mobile = window.matchMedia('(max-width: 1024px)');
-
+    
     const handleMobile = (e) => {
       setIsMobile(e.matches);
     };
@@ -23,6 +25,13 @@ export default function Home() {
     };
   }, []);
 
+  // get products from api
+  const data = useSWR('/api/products', fetcher);
+  // filter products by category
+  const starWars = data.data ? data.data.filter(product => product.category === 'starwars') : [];
+  const consoles = data.data ? data.data.filter(product => product.category === 'consoles') : [];
+  const others = data.data ? data.data.filter(product => product.category === 'others') : [];  
+
   return (
     <>
       <Head>
@@ -32,12 +41,12 @@ export default function Home() {
 
       <Banner />
       <Spacer responsive={1} />
-      <ProductsGallery title="Star Wars" products={products.starWars.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Star Wars" products={starWars.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Console" products={products.consoles.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Console" products={consoles.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Outros" products={products.other.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Outros" products={others.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive={1} />
     </>
-  )
-}
+  );
+};
