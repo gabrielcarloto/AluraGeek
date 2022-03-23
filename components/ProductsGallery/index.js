@@ -41,8 +41,11 @@ function ProductsGallery({ title, products }) {
     },
     
     '@media (min-width: 1024px)': {
-      gridColumn: 'span 2',
       padding: '16px',
+    },
+
+    '@media (min-width: 1440px)': {
+      gridColumn: 'span 2',
     },
   
     '.product-image-container': {

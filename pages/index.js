@@ -8,20 +8,20 @@ import Spacer from '../components/utils/Spacer'
 const fetcher = (url) => fetch(url).then(res => res.json());
 
 export default function Home() {
-  // check if is mobile
-  const [ isMobile, setIsMobile ] = React.useState(false);
+  // check if is small/medium screen
+  const [ isSmall, setIsSmall ] = React.useState(false);
 
   React.useEffect(() => {
-    const mobile = window.matchMedia('(max-width: 1024px)');
+    const screen = window.matchMedia('(max-width: 1400px)');
     
-    const handleMobile = (e) => {
-      setIsMobile(e.matches);
+    const handleChange = (e) => {
+      setIsSmall(e.matches);
     };
     
-    mobile.addEventListener('change', handleMobile(mobile));
+    screen.addEventListener('change', handleChange(screen));
 
     return () => {
-      mobile.removeEventListener('change', handleMobile(mobile));
+      screen.removeEventListener('change', handleChange(screen));
     };
   }, []);
 
@@ -47,11 +47,11 @@ export default function Home() {
 
       <Banner />
       <Spacer responsive={1} />
-      <ProductsGallery title="Star Wars" products={starWars.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Star Wars" products={starWars.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Console" products={consoles.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Console" products={consoles.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Outros" products={others.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Outros" products={others.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={1} />
     </>
   );
