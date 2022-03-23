@@ -11,9 +11,9 @@ function ProductsGallery({ title, isSmall, products }) {
   const Product = css({
     cursor: 'pointer',
     gridColumn: 'span 6',
-    transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
     padding: '10px',
     backgroundColor: '#FFFFFF',
+    transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
   
     '@media (hover: hover) and (pointer: fine)': {
       '&:hover': {
@@ -52,6 +52,7 @@ function ProductsGallery({ title, isSmall, products }) {
   
     '.product-image-container': {
       height: '174px',
+      transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
 
       '@media (min-width: 1440px)': {
         height: '220px',
@@ -70,7 +71,7 @@ function ProductsGallery({ title, isSmall, products }) {
       flexDirection: 'column',
       alignItems: 'flex-start',
       gap: '8px',
-  
+
       '.product-name': {
         fontSize: '14px',
         fontWeight: '500',
@@ -168,14 +169,15 @@ function ProductsGallery({ title, isSmall, products }) {
           ) : (
             Array(isSmall ? 4 : 6).fill(0).map((_, index) => {
               return (
-                <div className={SkeletonWrapper()} key={index}>
-                  <div className="product-image-container">
-                    <Skeleton css={{ width: '100%', height: '100%' }} />
-                  </div>
-                  <Skeleton css={{ width: '90%' }} />
-                  <Skeleton css={{ width: '40%' }} />
-                  <Skeleton css={{ width: '50%' }} />
-                </div>
+                // <div className={SkeletonWrapper()} key={index}>
+                //   <div className="product-image-container">
+                //     <Skeleton css={{ width: '100%', height: '100%' }} />
+                //   </div>
+                //   <Skeleton css={{ width: '90%' }} />
+                //   <Skeleton css={{ width: '40%' }} />
+                //   <Skeleton css={{ width: '50%' }} />
+                // </div>
+                <div key={index} />
               );
             })
           )}
