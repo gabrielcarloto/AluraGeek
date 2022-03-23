@@ -62,7 +62,7 @@ export default function Product({ product, products }) {
     
     '.product-image': {
       width: '100vw',
-      height: '192px',
+      height: '250px',
       position: 'relative',
 
       '@media (min-width: 768px)': {
