@@ -8,8 +8,21 @@ function Banner() {
     width: '100vw',
     height: '100vh',
     maxHeight: '352px',
-    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 41.15%, rgba(0, 0, 0, 0.8) 100%), url(/banner.jpg) no-repeat center',
-    backgroundSize: 'cover',
+    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, .8) 100%), url(/banner.jpg) no-repeat center top / 200% fixed',
+
+    '@media (min-width: 768px)': {
+      backgroundSize: '100%',
+    },
+
+    '@media (min-width: 1024px)': {
+      backgroundSize: 'cover',
+      backgroundPosition: 'center bottom',
+    },
+    
+    '@media (min-width: 1440px)': {
+      maxHeight: '400px',
+      backgroundPosition: 'center 115%',
+    },
   
     '.banner-container': {
       display: 'flex',
