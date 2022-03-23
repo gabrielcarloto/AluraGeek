@@ -9,7 +9,7 @@ function Footer() {
   const Footer = css({
     backgroundColor: '#EAF2FD',
   
-    'footer-grid': {
+    '.footer-grid': {
       '@media (min-width: 1024px)': {
         rowGap: '0',
       },
@@ -25,6 +25,10 @@ function Footer() {
         gridColumn: '1 / 5',
         margin: '0',
       },
+
+      '@media (min-width: 1024px)': {
+        gridColumn: '1 / 3',
+      },
     },
   
     '.footer-links': {
@@ -37,7 +41,7 @@ function Footer() {
         textAlign: 'left',
         gridColumn: '1 / 5',
       },
-  
+      
       '@media (min-width: 1024px)': {
         gridColumn: '4 / 6',
         marginBottom: '0',
