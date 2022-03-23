@@ -3,12 +3,67 @@ import Head from 'next/head'
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from '@stitches/react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Spacer from '../../components/utils/Spacer';
 import Button from '../../components/Button/index';
 import ProductsGallery from '../../components/ProductsGallery/index';
 
 const fetcher = (url) => fetch(url).then(res => res.json());
 const baseURL = 'https://alura-geek-mocha.vercel.app/api'
+
+function ImageZoom({ zoom, setZoom, product }) {
+  const [isZoomed, setIsZoomed] = React.useState(zoom);
+  const handleClick = () => {
+    setIsZoomed(!isZoomed);
+  };
+  setTimeout(() => {
+    if (!isZoomed) setZoom(false);
+  }, 200);
+
+  return (
+    <AnimatePresence>
+      {isZoomed && (
+        <motion.div 
+          className="product-image-zoom" 
+          onClick={handleClick}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          key="zoom"
+        >
+          <motion.img 
+            src={product.image}
+            alt={product.alt}
+            initial={{
+              scale: 0.5,
+              y: 100,
+              opacity: 0,
+            }}
+            animate={{
+              scale: 1,
+              y: 0,
+              opacity: 1,
+              transition: {
+                ease: [0.11, 0.67, 0, 0.98],
+              },
+            }}
+            exit={{
+              scale: 0.5,
+              y: 100,
+              opacity: 0,
+              transition: {
+                ease: 'easeInOut',
+              },
+            }}
+            transition={{ duration: .5 }}
+            key={product.image}
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
 
 export default function Product({ product, products }) {
   // similar products:
@@ -19,6 +74,12 @@ export default function Product({ product, products }) {
   const similarProducts = filteredProducts.length < 6 
   ? filteredProducts.concat(products.filter(p => p.category !== product.category).slice(0, 6 - filteredProducts.length))
   : filteredProducts;
+
+  // image zoom
+  const [zoom, setZoom] = React.useState(false);
+  const handleClick = () => {
+    setZoom(!zoom);
+  };
 
   // check if is mobile
   const [ isMobile, setIsMobile ] = React.useState(false);
@@ -64,6 +125,7 @@ export default function Product({ product, products }) {
       width: '100vw',
       height: '250px',
       position: 'relative',
+      cursor: 'zoom-in',
 
       '@media (min-width: 768px)': {
         width: '70%',
@@ -77,6 +139,26 @@ export default function Product({ product, products }) {
         minWidth: '560px',
         height: 'auto',
         minHeight: '400px',
+      },
+    },
+
+    '.product-image-zoom': {
+      position: 'fixed',
+      top: '0',
+      left: '0',
+      zIndex: '1',
+      width: '100vw',
+      height: '100vh',
+      padding: '20px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'rgba(0, 0, 0, 0.5)',
+      cursor: 'zoom-out',
+
+      'span': {
+        width: '80%',
+        height: 'auto',
       },
     },
 
@@ -163,10 +245,13 @@ export default function Product({ product, products }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Product className="product">
-        <div className="product-image">
+      <Product className="product" onScroll={() => {if(zoom) handleClick}}>
+        <div className="product-image" onClick={handleClick}>
           <Image src={product.image} layout="fill" objectFit="cover" alt={product.alt} />
         </div>
+
+        <ImageZoom zoom={zoom} setZoom={setZoom} product={product} />
+
         <article className="product-info">
           <h1 className="product-title">{product.name}</h1>
           <div className="product-details">
