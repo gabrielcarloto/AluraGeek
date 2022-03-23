@@ -21,7 +21,8 @@ function Footer() {
       cursor: 'pointer',
   
       '@media (min-width: 768px)': {
-        gridColumn: '1 / 3',
+        width: '176px',
+        gridColumn: '1 / 5',
         margin: '0',
       },
     },

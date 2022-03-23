@@ -18,12 +18,12 @@ function Form() {
   
     '@media (min-width: 768px)': {
       gridColumn: '6 / -1',
-      gridRow: '-2 / 3',
       alignSelf: 'flex-start',
     },
-  
+    
     '@media (min-width: 1024px)': {
       gridColumn: '7 / -1',
+      gridRow: '-2 / 3',
     },
   
     '.form-title': {
@@ -41,27 +41,29 @@ function Form() {
       '&.active': {
         transform: 'translate(12px, 6px) scale(1)',
       },
+
+      '@media (min-width: 768px)': {
+        'label': {
+          '&.active': {
+            transform: 'translate(11px, 6px) scale(1)',
+          },
+        },
+      },
     },
     
     '.name-label': {
       transform: 'translate(14px, 10px) scale(1.2)',
+
+      '@media (min-width: 768px)': {
+        transform: 'translate(15px, 10px) scale(1.2)',
+      },
     },
     
     '.message-label': {
       transform: 'translate(24px, 10px) scale(1.2)',
     },
 
-    '@media (min-width: 768px)': {
-      'label': {
-        '&.active': {
-          transform: 'translate(11px, 6px) scale(1)',
-        },
-      },
-
-      '.name-label': {
-        transform: 'translate(15px, 10px) scale(1.2)',
-      },
-    },
+    
   });
 
   return (
