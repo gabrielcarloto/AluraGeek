@@ -169,15 +169,14 @@ function ProductsGallery({ title, isSmall, products }) {
           ) : (
             Array(isSmall ? 4 : 6).fill(0).map((_, index) => {
               return (
-                // <div className={SkeletonWrapper()} key={index}>
-                //   <div className="product-image-container">
-                //     <Skeleton css={{ width: '100%', height: '100%' }} />
-                //   </div>
-                //   <Skeleton css={{ width: '90%' }} />
-                //   <Skeleton css={{ width: '40%' }} />
-                //   <Skeleton css={{ width: '50%' }} />
-                // </div>
-                <div key={index} />
+                <div className={SkeletonWrapper()} key={index}>
+                  <div className="product-image-container">
+                    <Skeleton css={{ width: '100%', height: '100%' }} />
+                  </div>
+                  <Skeleton css={{ width: '90%' }} />
+                  <Skeleton css={{ width: '40%' }} />
+                  <Skeleton css={{ width: '50%' }} />
+                </div>
               );
             })
           )}
