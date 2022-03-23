@@ -20,6 +20,14 @@ function ProductsGallery({ title, products }) {
         transform: 'translate(10px, 20px) scale(1.2)',
         zIndex: '1',
 
+        '.product-image-container': {
+          height: '164px',
+
+          '@media (min-width: 1440px)': {
+            height: '210px',
+          },
+        },
+
         '.product-link::after': {
           width: '100%',
           top: '18px',
@@ -37,8 +45,19 @@ function ProductsGallery({ title, products }) {
       padding: '16px',
     },
   
-    '.product-image': {
-      width: '100%',
+    '.product-image-container': {
+      height: '174px',
+      transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
+
+      '@media (min-width: 1440px)': {
+        height: '220px',
+      },
+
+      '.product-image': {
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+      },
     },
   
     '.product-details': {
@@ -91,8 +110,10 @@ function ProductsGallery({ title, products }) {
             return (
               <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id}>
                 <div className={Product()}>
-                  <div className="product-image">
-                    <Image src={product.image} alt={product.alt} width={500} height={500} objectFit="cover" />
+                  <div className="product-image-container">
+                    <div className="product-image">
+                      <Image src={product.image} alt={product.alt} layout="fill" objectFit="cover" />
+                    </div>
                   </div>
                   <div className="product-details">
                     <h3 className="product-name">{product.name}</h3>
