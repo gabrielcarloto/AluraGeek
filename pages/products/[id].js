@@ -44,7 +44,6 @@ export default function Product({ product, products }) {
 
     '@media (min-width: 768px)': {
       flexDirection: 'row',
-      gap: '16px',
       marginTop: '32px',
 
       '@media (orientation: portrait)': {
@@ -62,15 +61,15 @@ export default function Product({ product, products }) {
     },
     
     '.product-image': {
-      position: 'relative',
       width: '100vw',
       height: '192px',
-      marginBottom: '16px',
+      position: 'relative',
 
       '@media (min-width: 768px)': {
         width: '70%',
         height: 'auto',
-        margin: '0'
+        margin: '0',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
       },
 
       '@media (min-width: 1024px)': {
@@ -83,12 +82,15 @@ export default function Product({ product, products }) {
 
     '.product-info': {
       width: '100%',
-      padding: '0 16px',
+      padding: '16px',
       display: 'flex',
       flexDirection: 'column',
+      backgroundColor: '#FFFFFF',
 
-      '@media (min-width: 768px)': {
-        padding: '0',
+      '@media (min-width: 1024px)': {
+        height: '100vh',
+        maxHeight: '400px',
+        justifyContent: 'center',
       },
 
       '.product-title': {
