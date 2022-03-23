@@ -96,7 +96,7 @@ function ProductsGallery({ title, products }) {
                   </div>
                   <div className="product-details">
                     <h3 className="product-name">{product.name}</h3>
-                    <p className="product-price">{product.price}</p>
+                    <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
                     <a className="product-link">Ver produto</a>
                   </div>
                 </div>
