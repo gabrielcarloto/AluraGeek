@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { css } from "@stitches/react";
 
-function ProductsTitle({ title }) {
+function ProductsTitle({ title, all }) {
   const ProductsTitle = css({
     display: 'flex',
     alignItems: 'center',
@@ -56,14 +56,17 @@ function ProductsTitle({ title }) {
   return (
     <div className={ProductsTitle()}>
       <h2>{title}</h2>
-      <Link passHref href="/products">
-        <div className="products-link">
-          <a>Ver tudo</a>
-          <div className="products-arrow">
-            <Image src="/arrow.svg" width="20px" height="20px" layout="responsive" alt="seta" />
+      {
+        all &&
+        <Link passHref href="/products">
+          <div className="products-link">
+            <a>Ver tudo</a>
+            <div className="products-arrow">
+              <Image src="/arrow.svg" width="20px" height="20px" layout="responsive" alt="seta" />
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      }
     </div>
   );
 }
