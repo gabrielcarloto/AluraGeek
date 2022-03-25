@@ -23,12 +23,13 @@ export default NextAuth({
 
       authorize: (credentials) => {
         if (credentials.username === "peypey" && credentials.password === "negoney") {
-          return {
-            user: {
-              id: 0,
-              name: "Admin",
-            },
+          const user = {
+            id: 1,
+            name: "Admin",
+            email: "nevergonna@giveyou.up",
           }
+          
+          return user
         }
 
         return null;
