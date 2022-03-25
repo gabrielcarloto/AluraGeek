@@ -144,19 +144,18 @@ function Product({ product }) {
               layout="fill"
               objectFit="cover"
             />
-            <div className="admin-buttons">
-              {/* edit and delete button */}
-              { isAdmin && (
-                <>
+            { isAdmin && (
+              <>
+                <div className="admin-buttons">
                   <Link passHref href="/products/[id]/edit" as={`/products/${product.id}/edit`}>
                     <MdEdit className="admin-button" />
                   </Link>
                   <Link passHref href="/products/[id]/delete" as={`/products/${product.id}/delete`}>
                     <MdDelete className="admin-button" />
                   </Link>
-                </>
-              )}
-            </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <div className="product-details">
