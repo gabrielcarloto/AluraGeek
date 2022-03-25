@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { css } from "@stitches/react";
+import { css } from '../../styles/theme';
 import Grid from '../utils/Grid';
 import Spacer from "../utils/Spacer";
 import Container from "../utils/Container";
@@ -7,7 +7,7 @@ import Form from "./Form";
 
 function Footer() {
   const Footer = css({
-    backgroundColor: '#EAF2FD',
+    backgroundColor: '$secondary',
   
     '.footer-grid': {
       '@media (min-width: 1024px)': {
@@ -57,11 +57,9 @@ function Footer() {
     },
   
     '.dev': {
-      backgroundColor: '#FFFFFF',
-      fontFamily: 'Raleway',
+      backgroundColor: '$lightBackground',
       fontSize: '16px',
       fontWeight: '500',
-      color: '#464646',
       textAlign: 'center',
     }
   });

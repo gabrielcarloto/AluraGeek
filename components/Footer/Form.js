@@ -1,5 +1,5 @@
 import React from "react";
-import { css } from "@stitches/react";
+import { css } from '../../styles/theme';
 import Spacer from "../utils/Spacer";
 import Button from "../Button/index";
 import Input from "../Inputs/Input";
@@ -27,10 +27,9 @@ function Form() {
     },
   
     '.form-title': {
-      fontFamily: 'Raleway',
       fontSize: '16px',
       fontWeight: '700',
-      color: '#464646',
+      color: '$text',
       marginBottom: '8px',
     },
   
