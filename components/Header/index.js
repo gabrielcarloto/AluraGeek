@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react"
 import { css } from '../../styles/theme';
 import { FaRegUserCircle, FaSignOutAlt } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
+import useOnClickOutside from "react-cool-onclickoutside";
 import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
@@ -14,6 +15,21 @@ function Header({ loginBtn }) {
   const headerSearchMobile = React.useRef(null);
   const headerForm = React.useRef(null);
   const headerUser = React.useRef(null);
+  
+  const [isOpen, setIsOpen] = React.useState(false);
+  
+  const headerUserMenu = useOnClickOutside(() => {
+    setIsOpen(false);
+    headerUser.current.classList.remove('active');
+  }, {
+    ignoreClass: ["header-user-image", "header-user-icon"],
+  });
+
+  function toggleUserMenu() {
+    setIsOpen(!isOpen);
+    headerUser.current.classList.toggle('active');
+  };
+
 
   const userMenuVariants = {
     initial: {
@@ -40,13 +56,6 @@ function Header({ loginBtn }) {
     transition: {
       duration: 0.2,
     },
-  };
-
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  function toggleUserMenu() {
-    setIsOpen(!isOpen);
-    headerUser.current.classList.toggle('active');
   };
 
   const Header = css({
@@ -371,6 +380,7 @@ function Header({ loginBtn }) {
                   exit="exit"
                   variants={userMenuVariants}
                   key="user-menu"
+                  ref={headerUserMenu}
                 >
                   <ul>
                     <li tabIndex={0}>
