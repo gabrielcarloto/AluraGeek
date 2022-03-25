@@ -1,8 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { css } from "@stitches/react";
+import { useSession } from 'next-auth/react';
+import Button from '../../components/Button';
 
 function ProductsTitle({ title, all }) {
+  const { data: session } = useSession();
+  const isAdmin = session 
+                  && session.user 
+                  && session.user.name === "Admin"
+                  && session.user.email === "nevergonna@giveyou.up";
+
+
+
   const ProductsTitle = css({
     display: 'flex',
     alignItems: 'center',
@@ -49,15 +59,22 @@ function ProductsTitle({ title, all }) {
           height: '16px',
           marginLeft: '12px',
         },
-      }
+      },
+    },
+
+    '.add-product-btn': {
+      width: '150px',
+
+      '@media (min-width: 768px)': {
+        width: '165px',
+      },
     },
   });
 
   return (
     <div className={ProductsTitle()}>
       <h2>{title}</h2>
-      {
-        all &&
+      {all && (
         <Link passHref href="/products">
           <div className="products-link">
             <a>Ver tudo</a>
@@ -66,7 +83,14 @@ function ProductsTitle({ title, all }) {
             </div>
           </div>
         </Link>
-      }
+      )}
+      {!all && isAdmin && (
+        <Link passHref href="/products/new">
+          <Button className="add-product-btn" color="primary">
+            Adicionar produto
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }
