@@ -1,29 +1,23 @@
 import React from 'react';
 import Head from 'next/head'
-import { css } from '@stitches/react';
+import { signIn, getCsrfToken, getSession } from "next-auth/react";
+import { css, styled } from '@stitches/react';
+import { VscGithub } from 'react-icons/vsc';
 import Input from '../components/Inputs/Input';
 import Button from '../components/Button/index';
 import Spacer from '../components/utils/Spacer';
 import FloatLabel from '../components/Inputs/FloatLabel';
 
-function Login({ router }) {
-  const FormSection = css({
-    height: '60vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-
-    '@media (min-width: 768px)': {
-      height: '40vh',
-    },
-  });
-
+export default function Login({ csrfToken }) {
   function Form() {
-    const [emailValue, setEmailValue] = React.useState('');
+    const [userValue, setUserValue] = React.useState('');
     const [passwordValue, setPasswordValue] = React.useState('');
-    const emailLabelBg = React.useRef(null);
+    const userLabelBg = React.useRef(null);
     const passwordLabelBg = React.useRef(null);
+
+    function toggleClass(element, name) {
+      element.current.classList.toggle(name);
+    }
 
     const Form = css({
       width: '100%',
@@ -97,61 +91,119 @@ function Login({ router }) {
     });
 
     return (
-      <form className={Form()}>
-        <p className="form-title">
-          Iniciar Sessão
-        </p>
-        <Spacer responsive={3} />
-        <div className={FloatLabel()}>
-          <div 
-            className={'label-background focus' + (emailValue == '' ? '' : ' active')}
-            ref={emailLabelBg}
-          />
-          <Input
-            className="form-email input"
-            id="email"
-            type="email"
-            label="true"
-            onChange={event => setEmailValue(event.target.value)}
-            onFocus={() => emailLabelBg.current.classList.add('focus')}
-            onBlur={() => emailLabelBg.current.classList.remove('focus')}
-          />
-          <label 
-            className={'email-label' + (emailValue !== '' ? ' active' : '')}
-            htmlFor="email"
+      <>
+        <form className={Form()} method="post" action="/api/auth/callback/credentials">
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <p className="form-title">
+            Iniciar Sessão
+          </p>
+          <Spacer responsive={3} />
+          <div className={FloatLabel()}>
+            <div 
+              className={'label-background focus' + (userValue == '' ? '' : ' active')}
+              ref={userLabelBg}
+            />
+            <Input
+              className="form-user input"
+              id="username"
+              name="username"
+              type="text"
+              required
+              label="true"
+              onChange={event => setUserValue(event.target.value)}
+              onFocus={() => toggleClass(userLabelBg, 'focus')}
+              onBlur={() => toggleClass(userLabelBg, 'focus')}
+            />
+            <label 
+              className={'user-label' + (userValue !== '' ? ' active' : '')}
+              htmlFor="user"
+            >
+              Escreva seu usuário
+            </label>
+          </div>
+          <Spacer responsive={3} />
+          <div className={FloatLabel()}>
+            <div
+              className={'label-background focus' + (passwordValue == '' ? '' : ' active')}
+              ref={passwordLabelBg}
+            />
+            <Input
+              className="form-password input"
+              id="password"
+              name="password"
+              type="password"
+              required
+              label="true"
+              onChange={event => setPasswordValue(event.target.value)}
+              onFocus={() => toggleClass(passwordLabelBg, 'focus')}
+              onBlur={() => toggleClass(passwordLabelBg, 'focus')}
+            />
+            <label
+              className={'password-label' + (passwordValue !== '' ? ' active' : '')}
+              htmlFor="password"
+            >
+              Escreva sua senha
+            </label>
+          </div>
+          <Spacer responsive={3} />
+          <Button 
+            className="form-btn"
+            color="primary"
+            type="submit"
+            disabled={userValue === '' || passwordValue === ''}
           >
-            Escreva seu email
-          </label>
-        </div>
-        <Spacer responsive={3} />
-        <div className={FloatLabel()}>
-          <div
-            className={'label-background focus' + (passwordValue == '' ? '' : ' active')}
-            ref={passwordLabelBg}
-          />
-          <Input
-            className="form-password input"
-            id="password"
-            type="password"
-            label="true"
-            onChange={event => setPasswordValue(event.target.value)}
-            onFocus={() => passwordLabelBg.current.classList.add('focus')}
-            onBlur={() => passwordLabelBg.current.classList.remove('focus')}
-          />
-          <label
-            className={'password-label' + (passwordValue !== '' ? ' active' : '')}
-            htmlFor="password"
-          >
-            Escreva sua senha
-          </label>
-        </div>
-        <Spacer responsive={3} />
-        <Button className="form-btn" color="primary">
-          Entrar
-        </Button>
-      </form>
+            Entrar
+          </Button>
+        </form>
+      </>
     );
   };
+
+  const FormSection = css({
+    height: '60vh',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    '@media (min-width: 768px)': {
+      height: '52vh',
+    },
+  });
+
+  const ProvidersContainer = styled('div', {
+    width: '100%',
+    padding: '0 15%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    '.provider-btn': {
+      width: '100%',
+      height: '40px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '10px',
+
+      '@media (min-width: 1024px)': {
+        width: '50%',
+        height: '60px',
+      },
+    },
+
+    'hr': {
+      width: '100%',
+      height: '1px',
+      border: 'none',
+      backgroundColor: '#a2a2a2',
+      
+      '@media (min-width: 1024px)': {
+        width: '50%',
+      },
+    },
+  });
 
   return (
     <>
@@ -162,9 +214,36 @@ function Login({ router }) {
 
       <section className={FormSection()}>
         <Form />
+        <Spacer responsive={3} />
+        <ProvidersContainer>
+          <hr />
+          <Spacer responsive={3} />
+          <Button
+            className="provider-btn"
+            color="secondary"
+            onClick={() => signIn("github")}
+          >
+            <VscGithub /> Entrar com GitHub
+          </Button>
+        </ProvidersContainer>
       </section>
     </>
   )
 }
 
-export default Login;
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const session = await getSession({ req });
+
+  if (session) {
+    return {
+      redirect: { destination: "/" },
+    };
+  };
+
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  }
+}
