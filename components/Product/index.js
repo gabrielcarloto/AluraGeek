@@ -1,8 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { css } from "@stitches/react";
+import { useSession } from "next-auth/react";
+import { MdEdit, MdDelete } from "react-icons/md";
 
 function Product({ product }) {
+  const { data: session } = useSession();
+  const isAdmin = session 
+                  && session.user 
+                  && session.user.name === "Admin"
+                  && session.user.email === "nevergonna@giveyou.up";
+
+
+
   const Product = css({
     cursor: 'pointer',
     gridColumn: 'span 6',
@@ -56,6 +66,29 @@ function Product({ product }) {
         height: '100%',
         width: '100%',
         position: 'relative',
+        
+        '.admin-buttons': {
+          position: 'absolute',
+          zIndex: '1',
+          top: '5px',
+          right: '-2px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+
+          '.admin-button': {
+            width: '25px',
+            height: '25px',
+            margin: '0 5px',
+            color: '$white',
+            transition: 'all 200ms ease-in-out',
+
+            '&:hover': {
+              color: '$primary',
+              transform: 'scale(1.2)',
+            },
+          },
+        }
       },
     },
   
@@ -111,6 +144,19 @@ function Product({ product }) {
               layout="fill"
               objectFit="cover"
             />
+            <div className="admin-buttons">
+              {/* edit and delete button */}
+              { isAdmin && (
+                <>
+                  <Link passHref href="/products/[id]/edit" as={`/products/${product.id}/edit`}>
+                    <MdEdit className="admin-button" />
+                  </Link>
+                  <Link passHref href="/products/[id]/delete" as={`/products/${product.id}/delete`}>
+                    <MdDelete className="admin-button" />
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
         <div className="product-details">
