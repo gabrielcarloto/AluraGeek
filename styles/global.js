@@ -27,6 +27,7 @@ const globalStyles = globalCss({
     textDecoration: 'none',
     display: 'inline-block',
     position: 'relative',
+    cursor: 'pointer',
     transition: 'color 200ms ease-in-out',
     
     '&:visited': {
