@@ -1,4 +1,4 @@
-import { globalCss } from "@stitches/react";
+import { globalCss } from "./theme";
 import "@fontsource/raleway/variable.css"
 
 const globalStyles = globalCss({
@@ -13,18 +13,19 @@ const globalStyles = globalCss({
     position: 'relative',
     fontFamily: 'Raleway',
     fontWeight: '400',
-    color: '#464646',
+    color: '$text',
   },
 
   'html, body': {
     height: '100vh',
     width: '100vw',
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '$background',
     overflowX: 'hidden',
   },
 
   'a': {
     textDecoration: 'none',
+    color: '$text',
     display: 'inline-block',
     position: 'relative',
     cursor: 'pointer',
@@ -36,7 +37,7 @@ const globalStyles = globalCss({
     
     '@media (hover: hover) and (pointer: fine)': {
       '&:hover': {
-        color: '#2A7AE4',
+        color: '$primary',
       },
       
       '&::after': {
@@ -45,7 +46,7 @@ const globalStyles = globalCss({
         position: 'absolute',
         width: '0%',
         height: '2.5px',
-        backgroundColor: '#2A7AE4',
+        backgroundColor: '$primary',
         transition: 'all 200ms ease-in-out',
       },
   
