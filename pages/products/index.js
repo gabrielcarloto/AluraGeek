@@ -1,10 +1,10 @@
 import useSWR from "swr";
-import ProductsTitle from "../components/ProductsGallery/ProductsTitle";
-import Product from "../components/Product/index";
-import ProductSkeleton from "../components/Product/ProductSkeleton";
-import Container from "../components/utils/Container";
-import Grid from "../components/utils/Grid";
-import Spacer from "../components/utils/Spacer";
+import ProductsTitle from "../../components/ProductsGallery/ProductsTitle";
+import Product from "../../components/Product/index";
+import ProductSkeleton from "../../components/Product/ProductSkeleton";
+import Container from "../../components/utils/Container";
+import Grid from "../../components/utils/Grid";
+import Spacer from "../../components/utils/Spacer";
 
 export default function Products() {
   const fetcher = (url) => fetch(url).then((r) => r.json());
