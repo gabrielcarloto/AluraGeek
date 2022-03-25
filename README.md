@@ -14,6 +14,10 @@
 
 This project is being developed during the third Alura's Front-End Challenge. The main goal is to build a website based on a [Figma](https://www.figma.com) model, within four weeks.
 
+Top secret :shushing_face: : the admin login is 
+- User: peypey
+- Password: negoney
+
 ### :computer: Technologies
 
 - [Next.js](https://nextjs.org/)
