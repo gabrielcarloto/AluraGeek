@@ -15,6 +15,16 @@ const Fill = styled('div', {
   '@media (min-width: 1440px)': {
     height: 'calc(100vh - 464px - 115px)',
   },
+
+  variants: {
+    display: {
+      flex: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    },
+  },
 });
 
 export default Fill;
