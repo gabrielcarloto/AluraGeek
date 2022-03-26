@@ -43,6 +43,12 @@ export default NextAuth({
   ],
 
   callbacks: {
+    async signIn({ user, account, credentials }) {
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
