@@ -9,7 +9,7 @@ const Fill = styled('div', {
   },
 
   '@media (min-width: 1024px)': {
-    height: 'calc(100vh - 521px - 115px)',
+    height: '60vh',
   },
 
   '@media (min-width: 1440px)': {
@@ -22,6 +22,15 @@ const Fill = styled('div', {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+      },
+    },
+
+    flexDirection: {
+      column: {
+        flexDirection: 'column',
+      },
+      row: {
+        flexDirection: 'row',
       },
     },
   },
