@@ -1,5 +1,8 @@
 import { globalCss } from "./theme";
-import "@fontsource/raleway/variable.css"
+import "@fontsource/raleway/400.css"
+import "@fontsource/raleway/500.css"
+import "@fontsource/raleway/600.css"
+import "@fontsource/raleway/700.css"
 
 const globalStyles = globalCss({
   '*': {
