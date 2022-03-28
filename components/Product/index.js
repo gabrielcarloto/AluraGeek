@@ -131,7 +131,7 @@ function Product({ product }) {
   });
 
   return (
-    <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id}>
+    <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id} scroll={false}>
       <div className={Product()}>
         <div className="product-image-container">
           <div className="product-image">

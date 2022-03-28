@@ -23,7 +23,7 @@ const globalStyles = globalCss({
     height: '100vh',
     width: '100vw',
     backgroundColor: '$background',
-    overflowX: 'hidden',
+    overflowX: 'clip',
   },
 
   'a': {

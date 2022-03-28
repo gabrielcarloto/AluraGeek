@@ -338,7 +338,7 @@ function Header({ loginBtn }) {
     <header className={Header()}>
       <Container className="header-container">
         <div className="header-search--mobile" ref={headerSearchMobile} />
-        <Link passHref href="/" >
+        <Link passHref href="/" scroll={false}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img className="header-logo" src="/Logo.svg" alt="logo da empresa alurageek" tabIndex={0} />
         </Link>

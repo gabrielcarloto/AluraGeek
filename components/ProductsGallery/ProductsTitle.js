@@ -75,7 +75,7 @@ function ProductsTitle({ title, all }) {
     <div className={ProductsTitle()}>
       <h2>{title}</h2>
       {all && (
-        <Link passHref href="/products">
+        <Link passHref href="/products" scroll={false}>
           <div className="products-link">
             <a>Ver tudo</a>
             <div className="products-arrow">
@@ -85,7 +85,7 @@ function ProductsTitle({ title, all }) {
         </Link>
       )}
       {!all && isAdmin && (
-        <Link passHref href="/products/new">
+        <Link passHref href="/products/new" scroll={false}>
           <Button className="add-product-btn" color="primary">
             Adicionar produto
           </Button>
