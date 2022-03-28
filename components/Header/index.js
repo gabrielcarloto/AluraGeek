@@ -20,14 +20,14 @@ function Header({ loginBtn }) {
   
   const headerUserMenu = useOnClickOutside(() => {
     setIsOpen(false);
-    headerUser.current.classList.remove('active');
+    headerUser.current.childNodes[0].classList.remove('active');
   }, {
     ignoreClass: ["header-user-image", "header-user-icon"],
   });
 
   function toggleUserMenu() {
     setIsOpen(!isOpen);
-    headerUser.current.classList.toggle('active');
+    headerUser.current.childNodes[0].classList.toggle('active');
   };
 
 
@@ -94,7 +94,7 @@ function Header({ loginBtn }) {
         position: 'absolute',
         top: '-72px',
         left: '0',
-        zIndex: '1',
+        zIndex: '2',
         transition: 'all 200ms ease-in-out',
         
         '.header-search': {
@@ -175,6 +175,7 @@ function Header({ loginBtn }) {
       alignItems: 'center',
       justifyContent: 'center',
       position: 'relative',
+      zIndex: '1',
       
       '@media (min-width: 768px)': {
         width: '176px',
@@ -284,7 +285,7 @@ function Header({ loginBtn }) {
       position: 'absolute',
       top: '-72px',
       left: '0',
-      zIndex: '1',
+      zIndex: '2',
       backgroundColor: '$lightBackground',
       transition: 'all 200ms ease-in-out',
 
@@ -353,7 +354,7 @@ function Header({ loginBtn }) {
         )}
 
         { session && (
-          <div className="header-user">
+          <div className="header-user" ref={headerUser}>
             {session.user.image
               // eslint-disable-next-line @next/next/no-img-element
               ? <img
@@ -362,14 +363,12 @@ function Header({ loginBtn }) {
                   src={session.user.image}
                   alt={session.user.name}
                   tabIndex={0}
-                  ref={headerUser}
                   onClick={toggleUserMenu}
                 />
               : <FaRegUserCircle 
                   className="header-user-icon"
                   id="header-user"
                   tabIndex={0}
-                  ref={headerUser}
                   onClick={toggleUserMenu}
                 />
             }
