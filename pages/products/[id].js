@@ -27,7 +27,6 @@ export default function Product({ product, products }) {
     setZoom(!zoom);
   };
 
-  // check if is mobile
   const [ isMobile, setIsMobile ] = React.useState(false);
 
   React.useEffect(() => {
