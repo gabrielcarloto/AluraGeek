@@ -11,8 +11,6 @@ function Product({ product }) {
                   && session.user.name === "Admin"
                   && session.user.email === "nevergonna@giveyou.up";
 
-
-
   const Product = css({
     cursor: 'pointer',
     gridColumn: 'span 6',
@@ -69,7 +67,6 @@ function Product({ product }) {
         
         '.admin-buttons': {
           position: 'absolute',
-          zIndex: '1',
           top: '5px',
           right: '-2px',
           display: 'flex',
