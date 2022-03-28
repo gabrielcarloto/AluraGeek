@@ -59,6 +59,7 @@ function Header({ loginBtn }) {
   };
 
   const Header = css({
+    position: 'relative',
     display: 'flex',
     width: '100vw',
     height: '72px',
@@ -93,6 +94,7 @@ function Header({ loginBtn }) {
         position: 'absolute',
         top: '-72px',
         left: '0',
+        zIndex: '1',
         transition: 'all 200ms ease-in-out',
         
         '.header-search': {
@@ -282,6 +284,7 @@ function Header({ loginBtn }) {
       position: 'absolute',
       top: '-72px',
       left: '0',
+      zIndex: '1',
       backgroundColor: '$lightBackground',
       transition: 'all 200ms ease-in-out',
 
