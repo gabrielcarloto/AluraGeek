@@ -83,7 +83,7 @@ function Error({ queryError, error, state, setState }) {
       },
 
       'p': {
-        paddingBottom: '3%',
+        padding: '0 3% 4%',
         textAlign: 'center',
       },
     },
