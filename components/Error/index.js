@@ -51,8 +51,13 @@ function Error({ error, state, setState }) {
         gap: '8px',
 
         '.arrow': {
+          cursor: 'pointer',
           transition: 'transform 200ms ease-in-out',
           transform: `rotate(${isExpanded ? '90deg' : '-90deg'})`,
+        },
+
+        '.close': {
+          cursor: 'pointer',
         },
       },
     },
@@ -93,7 +98,7 @@ function Error({ error, state, setState }) {
               </div>
               <div className="error-header-buttons">
                 <MdClose
-                  className="error-header-icon"
+                  className="error-header-icon close"
                   id="error-close"
                   tabIndex={0}
                   onClick={() => toggleError()}
