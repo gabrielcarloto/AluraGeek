@@ -4,7 +4,6 @@ import Head from 'next/head'
 import { signIn, getCsrfToken, getSession } from "next-auth/react";
 import { css, styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
-import useCollapse from 'react-collapsed'
 import { VscGithub } from 'react-icons/vsc';
 import Input from '../components/Inputs/Input';
 import Button from '../components/Button/index';
@@ -14,9 +13,7 @@ import Error from '../components/Error/index';
 
 export default function Login({ csrfToken }) {
   const router = useRouter();
-  const { error } = router.query;  
-  // change error message depending on queryError
-  // const errorMessage = queryError === 'SessionRequired' ? 'É necessário estar logado para acessar esta página' : 'Erro não identificado';
+  const { error } = router.query;
 
   const [errorVisible, setErrorVisible] = React.useState(error);
 
@@ -240,7 +237,7 @@ export default function Login({ csrfToken }) {
       </section>
 
       <AnimatePresence>
-        { errorVisible && <Error error={error} state={errorVisible} setState={setErrorVisible} key="error" /> }
+        { errorVisible && <Error queryError={error} state={errorVisible} setState={setErrorVisible} key="error" /> }
       </AnimatePresence>
     </>
   )

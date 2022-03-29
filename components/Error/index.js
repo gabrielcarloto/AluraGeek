@@ -3,11 +3,24 @@ import { motion } from 'framer-motion';
 import { css } from '../../styles/theme';
 import { MdClose, MdErrorOutline, MdArrowBackIosNew } from 'react-icons/md';
 
-function Error({ error, state, setState }) {
+function Error({ queryError, error, state, setState }) {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   function toggleError() {
     setState(!state);
+  }
+
+  const queryErrors = {
+    Signin: "Tente logar com outra conta",
+    OAuthSignin: "Tente logar com outra conta",
+    OAuthCallback: "Tente logar com outra conta",
+    Callback: "Tente logar com outra conta",
+    SessionRequired: "Você precisa estar logado para acessar esta página",
+    OAuthAccountNotLinked:
+      "Para confirmar sua identidade, entre com a mesma conta que você usou originalmente",
+    CredentialsSignin:
+      "Por favor, verifique se os dados estão corretos e tente novamente",
+    default: "Não foi possível fazer login",
   }
 
   const Error = css({
@@ -116,7 +129,9 @@ function Error({ error, state, setState }) {
             </div>
           </div>
           <div className="error-content" {...getCollapseProps()}>
-            <p>{error || 'Erro não especificado'}</p>
+            <p>
+              {queryError ? queryErrors[queryError] : error}
+            </p>
           </div>
         </div>
       </motion.div>
