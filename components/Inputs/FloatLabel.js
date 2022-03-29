@@ -28,7 +28,7 @@ const FloatLabel = css({
     position: 'absolute',
     userSelect: 'none',
     cursor: 'text',
-    zIndex: '2',
+    zIndex: '1',
     transition: 'all 200ms ease-in-out',
   },
 });

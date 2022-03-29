@@ -29,7 +29,7 @@ function Error({ queryError, error, state, setState, close }) {;
     bottom: '2%',
     left: '50%',
     transform: 'translate(-50%, 0)',
-    zIndex: '1',
+    zIndex: '2',
     backgroundColor: '$error',
     color: '$white',
 
