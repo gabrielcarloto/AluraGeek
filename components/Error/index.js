@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { css } from '../../styles/theme';
 import { MdClose, MdErrorOutline, MdArrowBackIosNew } from 'react-icons/md';
 
-function Error({ queryError, error, state, setState }) {
+function Error({ queryError, error, state, setState, close }) {;
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   function toggleError() {
@@ -110,15 +110,19 @@ function Error({ queryError, error, state, setState }) {
                 <p>Erro</p>
               </div>
               <div className="error-header-buttons">
-                <MdClose
-                  className="error-header-icon close"
-                  id="error-close"
-                  tabIndex={0}
-                  onClick={() => toggleError()}
-                />
-                <label className="scr-only" htmlFor="error-close">
-                  Fechar
-                </label>
+                {close && (
+                  <>
+                    <MdClose
+                      className="error-header-icon close"
+                      id="error-close"
+                      tabIndex={0}
+                      onClick={() => toggleError()}
+                    />
+                    <label className="scr-only" htmlFor="error-close">
+                      Fechar
+                    </label>
+                  </>
+                )}
                 <MdArrowBackIosNew 
                   className="error-header-icon arrow"
                   id="error-collapse"

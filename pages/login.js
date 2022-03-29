@@ -237,7 +237,7 @@ export default function Login({ csrfToken }) {
       </section>
 
       <AnimatePresence>
-        { errorVisible && <Error queryError={error} state={errorVisible} setState={setErrorVisible} key="error" /> }
+        { errorVisible && <Error queryError={error} state={errorVisible} setState={setErrorVisible} close key="error" /> }
       </AnimatePresence>
     </>
   )
