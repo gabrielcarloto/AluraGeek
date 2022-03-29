@@ -20,12 +20,20 @@ function Error({ error, state, setState }) {
     backgroundColor: '$error',
     color: '$white',
 
+    '@media (min-width: 1024px)': {
+      width: '30%',
+    },
+
     '.error-header-content': {
       padding: '3%',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'space-between',
       fontSize: '20px',
+
+      '@media (min-width: 768px)': {
+        fontSize: '22px',
+      },
 
       '.error-header-title': {
         display: 'flex',
@@ -51,6 +59,10 @@ function Error({ error, state, setState }) {
 
     '.error-content': {
       fontSize: '16px',
+
+      '@media (min-width: 768px)': {
+        fontSize: '18px',
+      },
 
       'p': {
         paddingBottom: '3%',
