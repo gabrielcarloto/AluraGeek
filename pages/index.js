@@ -1,11 +1,13 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import React from 'react';
 import useSWR from 'swr';
-import Banner from '../components/Banner/index'
-import ProductsGallery from '../components/ProductsGallery/index'
-import Spacer from '../components/utils/Spacer'
+import Banner from '../components/Banner/index';
+import Error from '../components/Error/index';
+import ProductsGallery from '../components/ProductsGallery/index';
+import Spacer from '../components/utils/Spacer';
+import Fill from '../components/utils/Fill';
 
-const fetcher = (url) => fetch(url).then(res => res.json());
+const fetcher = (url) => fetch(url).then((r) => r.json());
 
 export default function Home() {
   // check if is small/medium screen
@@ -26,18 +28,26 @@ export default function Home() {
   }, []);
 
   // get products from api
-  const data = useSWR('/api/products', fetcher);
-  const products = data.data;
+  const { data, error } = useSWR('/api/products', fetcher);
 
+  if (error) return (
+    <>
+      <Fill />
+      <Error error="Ocorreu um erro. Atualize a página" />
+    </>
+  );
+  
+  const products = data;
+  
   // filter products by category
   function filter(category) {
     return products ? products.filter(product => product.category === category) : [];
   }
-
+  
   const starWars = filter('star wars');
   const consoles = filter('consoles');
   const others = filter('outros');
-
+  
   return (
     <>
       <Head>
