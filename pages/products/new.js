@@ -1,13 +1,18 @@
 import React from 'react';
 import { css } from '../../styles/theme';
 import { MdAdd, MdImage } from 'react-icons/md';
+import { AnimatePresence } from 'framer-motion';
 import Input from '../../components/Inputs/Input';
+import Textarea from '../../components/Inputs/Textarea';
 import Button from '../../components/Button/index';
 import FloatLabel from '../../components/Inputs/FloatLabel';
 import Container from '../../components/utils/Container';
 import Spacer from '../../components/utils/Spacer';
+import Error from '../../components/Error';
 
 export default function NewProduct() {
+  const [error, setError] = React.useState(false);
+
   const NewProductContainer = css({
     '@media (min-width: 1024px)': {
       padding: '0 30%',
@@ -95,6 +100,22 @@ export default function NewProduct() {
           transform: 'translate(-10px, -2px) scale(1)',
         },
 
+        '&.image-label': {
+          left: '22px',
+
+          '&.active': {
+            transform: 'translate(-11px, -2px) scale(1)',
+          },
+        },
+
+        '&.category-label': {
+          left: '25px',
+
+          '&.active': {
+            transform: 'translate(-14px, -2px) scale(1)',
+          },
+        },
+
         '&.desc-label': {
           left: '23px',
 
@@ -132,10 +153,14 @@ export default function NewProduct() {
 
   function Form() {
     const [nameValue, setNameValue] = React.useState('');
+    const [imageValue, setImageValue] = React.useState('');
+    const [categoryValue, setCategoryValue] = React.useState('');
     const [priceValue, setPriceValue] = React.useState('');
     const [descValue, setDescValue] = React.useState('');
 
     const nameLabelBg = React.useRef(null);
+    const imageLabelBg = React.useRef(null);
+    const categoryLabelBg = React.useRef(null);
     const priceLabelBg = React.useRef(null);
     const descLabelBg = React.useRef(null);
 
@@ -143,8 +168,22 @@ export default function NewProduct() {
       ref.current.classList.toggle(className);
     }
 
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      if (nameValue == '' || imageValue == '' || categoryValue == '' || priceValue == '' || descValue == '') {
+        setError('Preencha todos os campos');
+        return;
+      } else if (priceValue < 0) {
+        setError('O preço não pode ser negativo');
+        return;
+      }
+
+      setError(false);
+    };
+
     return (
-      <form className="new-product-form">
+      <form className="new-product-form" onSubmit={handleSubmit}>
         <div className="new-product-file-container">
           <div className="new-product-file">
             <MdImage className="new-product-file-icon desktop" />
@@ -173,6 +212,7 @@ export default function NewProduct() {
           <Input 
             type="text"
             id="name"
+            maxLength="20"
             label="true"
             onChange={event => setNameValue(event.target.value)}
             onFocus={() => toggleClass(nameLabelBg, 'focus')}
@@ -183,6 +223,47 @@ export default function NewProduct() {
             htmlFor="name"
           >
             Nome do produto
+          </label>
+        </div>
+        <div className={FloatLabel()}>
+          <div
+            className={'label-background focus' + (imageValue == '' ? '' : ' active')}
+            ref={imageLabelBg}
+          />
+          <Input 
+            type="url"
+            id="image-url"
+            label="true"
+            onChange={event => setImageValue(event.target.value)}
+            onFocus={() => toggleClass(imageLabelBg, 'focus')}
+            onBlur={() => toggleClass(imageLabelBg, 'focus')}
+          />
+          <label 
+            className={'image-label float-label' + (imageValue !== '' ? ' active' : '')}
+            htmlFor="image-url"
+          >
+            Imagem do produto
+          </label>
+        </div>
+        <div className={FloatLabel()}>
+          <div
+            className={'label-background focus' + (categoryValue == '' ? '' : ' active')}
+            ref={categoryLabelBg}
+          />
+          <Input 
+            type="text"
+            id="category"
+            maxLength="20"
+            label="true"
+            onChange={event => setCategoryValue(event.target.value)}
+            onFocus={() => toggleClass(categoryLabelBg, 'focus')}
+            onBlur={() => toggleClass(categoryLabelBg, 'focus')}
+          />
+          <label 
+            className={'category-label float-label' + (categoryValue !== '' ? ' active' : '')}
+            htmlFor="category"
+          >
+            Categoria do produto
           </label>
         </div>
         <div className={FloatLabel()}>
@@ -200,7 +281,7 @@ export default function NewProduct() {
           />
           <label 
             className={'price-label float-label' + (priceValue !== '' ? ' active' : '')}
-            htmlFor="description"
+            htmlFor="price"
           >
             Preço do produto
           </label>
@@ -210,9 +291,9 @@ export default function NewProduct() {
             className={'label-background focus' + (descValue == '' ? '' : ' active')}
             ref={descLabelBg}
           />
-          <Input
-            type="text"
+          <Textarea
             id="description"
+            maxLength="150"
             label="true"
             onChange={event => setDescValue(event.target.value)}
             onFocus={() => toggleClass(descLabelBg, 'focus')}
@@ -240,6 +321,11 @@ export default function NewProduct() {
         <Form />
       </Container>
       <Spacer responsive={1} />
+      <AnimatePresence>
+        {error && (
+          <Error error={error} state={error} setState={setError} close />
+        )}
+      </AnimatePresence>
     </>
   )
 }
