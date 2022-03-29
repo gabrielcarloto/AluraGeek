@@ -177,6 +177,9 @@ export default function NewProduct() {
       } else if (priceValue < 0) {
         setError('O preço não pode ser negativo');
         return;
+      } else if (!imageValue.includes('http')) {
+        setError('Insira uma URL válida para a imagem');
+        return;
       }
 
       setError(false);
