@@ -67,7 +67,21 @@ const globalStyles = globalCss({
     clipPath: 'polygon(0px 0px, 0px 0px, 0px 0px)',
     '-webkit-clip-path': 'polygon(0px 0px, 0px 0px, 0px 0px)',
     overflow: 'hidden !important',
-  }
+  },
+
+  '#nprogress': {
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    right: '0',
+    zIndex: '9999',
+    pointerEvents: 'none',
+  },
+
+  '#nprogress .bar': {
+    background: '$primary',
+    height: '3px',
+  },
 });
 
 export default globalStyles;

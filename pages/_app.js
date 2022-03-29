@@ -1,11 +1,29 @@
-import { useRouter } from "next/router";
+import { Router } from 'next/dist/client/router';
 import { SessionProvider, useSession } from "next-auth/react"
 import { AnimatePresence, motion } from "framer-motion";
+import NProgress from "nprogress";
 import globalStyles from "../styles/global"
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Fill from "../components/utils/Fill";
 import NotFound from "../components/NotFound";
+
+NProgress.configure({
+  showSpinner: false,
+});
+
+Router.events.on('routeChangeStart', () => {
+  NProgress.start();
+});
+
+Router.events.on('routeChangeComplete', () => {
+  NProgress.done();
+});
+
+Router.events.on('routeChangeError', () => {
+  NProgress.done();
+});
+
 
 const transitionVariants = {
   initial: {
@@ -70,7 +88,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
 export default MyApp
 
 function Auth({ children }) {
-  const router = useRouter()
   const { data: session, status } = useSession({ required: true })
   const isAdmin = session 
                 && session.user
@@ -86,7 +103,7 @@ function Auth({ children }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
-          key={router.route}
+          key={Router.route}
         >
           <Fill display="flex">
             <h1>Carregando...</h1>
@@ -102,7 +119,7 @@ function Auth({ children }) {
           animate="animate"
           exit="exit" 
           variants={transitionVariants}
-          key={router.route}
+          key={Router.route}
         >
           {children}
         </motion.div>
