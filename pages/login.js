@@ -3,19 +3,22 @@ import { useRouter } from 'next/router';
 import Head from 'next/head'
 import { signIn, getCsrfToken, getSession } from "next-auth/react";
 import { css, styled } from '@stitches/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
+import useCollapse from 'react-collapsed'
 import { VscGithub } from 'react-icons/vsc';
-import { MdClose } from 'react-icons/md';
 import Input from '../components/Inputs/Input';
 import Button from '../components/Button/index';
 import Spacer from '../components/utils/Spacer';
 import FloatLabel from '../components/Inputs/FloatLabel';
+import Error from '../components/Error/index';
 
 export default function Login({ csrfToken }) {
   const router = useRouter();
   const { error } = router.query;  
+  // change error message depending on queryError
+  // const errorMessage = queryError === 'SessionRequired' ? 'É necessário estar logado para acessar esta página' : 'Erro não identificado';
 
-  const [errorModal, setErrorModal] = React.useState(error);
+  const [errorVisible, setErrorVisible] = React.useState(error);
 
   function Form() {
     const [userValue, setUserValue] = React.useState('');
@@ -167,147 +170,6 @@ export default function Login({ csrfToken }) {
     );
   };
 
-  function ErrorModal() {
-    function toggleModal() {
-      setErrorModal(!errorModal);
-    }
-
-    const ErrorModal = css({
-      position: 'fixed',
-      top: '0',
-      left: '0',
-      zIndex: '5',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '100vw',
-      height: '100vh',
-      backgroundColor: 'rgba(255, 255, 255, 0.8)',
-
-      '.modal-content': {
-        width: '70%',
-        height: '200px',
-        position: 'relative',
-        backgroundColor: '$error',
-        color: '$white',
-
-        '@media (min-width: 1024px)': {
-          width: '30%',
-        },
-
-        '.modal-header': {
-          width: '100%',
-          height: '50px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-
-          '@media (min-width: 1024px)': {
-            height: '60px',
-          },
-
-          '.modal-title': {
-            fontSize: '22px',
-            fontWeight: '700',
-
-            '@media (min-width: 1024px)': {
-              fontSize: '32px',
-            },
-          },
-
-          '.modal-close': {
-            position: 'absolute',
-            top: '0',
-            right: '0',
-            margin: '12px',
-            width: '25px',
-            height: '25px',
-            cursor: 'pointer',
-            backgroundColor: 'transparent',
-
-            '@media (min-width: 1024px)': {
-              margin: '15px',
-            },
-
-            '&:focus-visible': {
-              outline: '2px solid #000',
-            },
-          },
-        },
-
-        '.modal-body': {
-          width: '100%',
-          height: '150px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-
-          '@media (min-width: 1024px)': {
-            height: '140px',
-          },
-
-          '.modal-text': {
-            fontSize: '16px',
-            fontWeight: '500',
-            marginBottom: '40px',
-            
-            '@media (min-width: 1024px)': {
-              fontSize: '18px',
-            },
-          },
-        },
-      },
-    });
-
-    return (
-      <>
-        <motion.div 
-          className={ErrorModal()}
-          animate={{ opacity: 1 }}
-          exit={{
-            opacity: 0,
-          }}
-          key="error-modal"
-        >
-          <motion.div 
-            className="modal-content"
-            animate={{
-              opacity: 1,
-              y: 0,
-              scale: 1,
-            }}
-            exit={{
-              opacity: 0,
-              y: 100,
-              scale: 0.9,
-            }}
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
-          >
-            <div className="modal-header">
-              <h2 className="modal-title">
-                Erro
-              </h2>
-              <MdClose
-                className="modal-close"
-                id="modal-close"
-                tabIndex={0}
-                onClick={toggleModal}
-              />
-              <label className="scr-only" htmlFor="modal-close">
-                Fechar
-              </label>
-            </div>
-            <div className="modal-body">
-              <p className="modal-text">
-                { error === 'CredentialsSignin' ? 'Usuário ou senha inválidos.' : error }
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
-      </>
-    );
-  };
-
   const FormSection = css({
     height: '60vh',
     display: 'flex',
@@ -378,7 +240,7 @@ export default function Login({ csrfToken }) {
       </section>
 
       <AnimatePresence>
-        { errorModal && <ErrorModal /> }
+        { errorVisible && <Error error={error} state={errorVisible} setState={setErrorVisible} key="error" /> }
       </AnimatePresence>
     </>
   )
