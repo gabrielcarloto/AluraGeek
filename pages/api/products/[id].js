@@ -1,21 +1,26 @@
-import { products } from "../../../data/products";
+import { PrismaClient } from "@prisma/client";
 
-export default function productHandler(req, res) {
+const prisma = new PrismaClient();
+
+export default async function productHandler(req, res) {
   const {
     query: { id },
     method,
   } = req;
   
-  const filtered = products.filter(product => product.id === id);
+  const productId = parseInt(id);
+
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+  });
 
   if (method === 'GET') {
-    if (filtered.length === 0) {
-      res.statusCode = 404;
-      res.end("Product not found");
-    } else {
-      res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify(filtered[0]));
-    };
+    if (!product) {
+      res.status(404).json({ error: "Product not found" });
+      return;
+    }
+
+    res.status(200).json(product);
   } else {
     res.statusCode = 405;
     res.setHeader("Allow", "GET");

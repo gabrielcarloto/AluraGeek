@@ -9,7 +9,8 @@ import ProductsGallery from '../../components/ProductsGallery/index';
 import ImageZoom from '../../components/ImageZoom';
 
 const fetcher = (url) => fetch(url).then(res => res.json());
-const baseURL = 'https://alura-geek-mocha.vercel.app/api'
+const dev = process.env.NODE_ENV !== 'production';
+const baseURL = dev ? 'http://localhost:3000/api' : 'https://alura-geek-mocha.vercel.app/api';
 
 export default function Product({ product, products }) {
   // similar products:
@@ -227,7 +228,7 @@ export async function getStaticPaths() {
   const res = await fetcher(`${baseURL}/products`);
 
   return {
-    paths: res.map(product => ({ params: { id: product.id } })),
+    paths: res.map(product => ({ params: { id: JSON.stringify(product.id) } })),
     fallback: false,
   }
 }

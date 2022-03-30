@@ -7,7 +7,7 @@ import ProductsGallery from '../components/ProductsGallery/index';
 import Spacer from '../components/utils/Spacer';
 import Fill from '../components/utils/Fill';
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const fetcher = (url) => fetch(url).then(r => r.json());
 
 export default function Home() {
   // check if is small/medium screen
@@ -34,6 +34,14 @@ export default function Home() {
     <>
       <Fill />
       <Error error="Ocorreu um erro. Atualize a página" />
+    </>
+  );
+
+  if (!data) return (
+    <>
+      <Fill display="flex">
+        <h1>Carregando...</h1>
+      </Fill>
     </>
   );
   

@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from '../../styles/theme';
 import { MdAdd, MdImage } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
+import NProgress from 'nprogress';
 import Input from '../../components/Inputs/Input';
 import Textarea from '../../components/Inputs/Textarea';
 import Button from '../../components/Button/index';
@@ -168,21 +169,48 @@ export default function NewProduct() {
       ref.current.classList.toggle(className);
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
       e.preventDefault();
       
-      if (nameValue == '' || imageValue == '' || categoryValue == '' || priceValue == '' || descValue == '') {
+      if (nameValue == '' || imageValue == '' || categoryValue == '' || priceValue == '') {
         setError('Preencha todos os campos');
-        return;
-      } else if (priceValue < 0) {
-        setError('O preço não pode ser negativo');
         return;
       } else if (!imageValue.includes('http')) {
         setError('Insira uma URL válida para a imagem');
         return;
+      } else if (priceValue < 0) {
+        setError('O preço não pode ser negativo');
+        return;
       }
 
+      NProgress.start();
       setError(false);
+
+      const productData = {
+        name: nameValue,
+        alt: nameValue,
+        image: imageValue,
+        category: categoryValue,
+        // convert priceValue to int
+        price: parseInt(priceValue),
+        description: descValue,
+      };
+
+      await saveProduct(productData);
+    };
+
+    async function saveProduct(data) {
+      const response = await fetch('/api/products', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+
+      NProgress.done();
+
+      if (!response.ok) {
+        setError('Erro ao salvar produto');
+        return;
+      };
     };
 
     return (
@@ -234,7 +262,7 @@ export default function NewProduct() {
             ref={imageLabelBg}
           />
           <Input 
-            type="url"
+            type="text"
             id="image-url"
             label="true"
             onChange={event => setImageValue(event.target.value)}
@@ -275,7 +303,7 @@ export default function NewProduct() {
             ref={priceLabelBg}
           />
           <Input 
-            type="text"
+            type="number"
             id="price"
             label="true"
             onChange={event => setPriceValue(event.target.value)}
