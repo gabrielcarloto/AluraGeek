@@ -10,6 +10,7 @@ export const { styled, css, globalCss } = createStitches({
       text: "$darkGray",
       lightText: "$gray",
       border: "$lightGray",
+      info: "$primary",
       error: "$red",
       success: "$green",
       warning: "$yellow",
@@ -22,8 +23,8 @@ export const { styled, css, globalCss } = createStitches({
       redHover: "#FF4242",
       green: "#4CAF50",
       greenHover: "#3E8E41",
-      yellow: "#FFC107",
-      yellowHover: "#FFA000",
+      yellow: "#FFA000",
+      yellowHover: "#FFB100",
     },
   }
 });
