@@ -1,6 +1,7 @@
 import useCollapse from 'react-collapsed';
 import { motion } from 'framer-motion';
 import { css } from '../../styles/theme';
+import Dialog from '../Dialog/index';
 import { MdClose, MdErrorOutline, MdArrowBackIosNew } from 'react-icons/md';
 
 function Error({ queryError, error, state, setState, close }) {;
@@ -23,70 +24,10 @@ function Error({ queryError, error, state, setState, close }) {;
     default: "Não foi possível fazer login",
   }
 
-  const Error = css({
-    width: '90%',
-    position: 'fixed',
-    bottom: '2%',
-    left: '50%',
-    transform: 'translate(-50%, 0)',
-    zIndex: '2',
-    backgroundColor: '$error',
-    color: '$white',
-
-    '@media (min-width: 1024px)': {
-      width: '30%',
-    },
-
-    '.error-header-content': {
-      padding: '3%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      fontSize: '20px',
-
-      '@media (min-width: 768px)': {
-        fontSize: '22px',
-      },
-
-      '.error-header-title': {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '8px',
-
-        'p': {
-          fontWeight: '700',
-        },
-      },
-
-      '.error-header-buttons': {
-        display: 'flex',
-        gap: '8px',
-
-        '.arrow': {
-          cursor: 'pointer',
-          transition: 'transform 200ms ease-in-out',
-          transform: `rotate(${isExpanded ? '90deg' : '-90deg'})`,
-        },
-
-        '.close': {
-          cursor: 'pointer',
-        },
-      },
-    },
-
-    '.error-content': {
-      fontSize: '16px',
-
-      '@media (min-width: 768px)': {
-        fontSize: '18px',
-      },
-
-      'p': {
-        padding: '0 3% 4%',
-        textAlign: 'center',
-      },
-    },
+  const Arrow = css({
+    cursor: 'pointer',
+    transition: 'transform 200ms ease-in-out',
+    transform: `rotate(${isExpanded ? '90deg' : '-90deg'})`,
   });
 
   return (
@@ -97,24 +38,25 @@ function Error({ queryError, error, state, setState, close }) {;
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-        <div 
-          className={Error()} 
+        <Dialog
+          color="error"
+          expanded={isExpanded}
           key="error" 
           tabIndex={0}
         >
           <div
-            className="error-header"
+            className="dialog-header"
           >
-            <div className="error-header-content">
-              <div className="error-header-title">
-                <MdErrorOutline className="error-header-icon" /> 
+            <div className="dialog-header-content">
+              <div className="dialog-header-title">
+                <MdErrorOutline className="dialog-header-icon" /> 
                 <p>Erro</p>
               </div>
-              <div className="error-header-buttons">
+              <div className="dialog-header-buttons">
                 {close && (
                   <>
                     <MdClose
-                      className="error-header-icon close"
+                      className="dialog-header-icon close"
                       id="error-close"
                       tabIndex={0}
                       onClick={() => toggleError()}
@@ -125,20 +67,20 @@ function Error({ queryError, error, state, setState, close }) {;
                   </>
                 )}
                 <MdArrowBackIosNew 
-                  className="error-header-icon arrow"
-                  id="error-collapse"
+                  className={Arrow()}
+                  id="dialog-collapse"
                   tabIndex={0}
                   {...getToggleProps()}
                 />
               </div>
             </div>
           </div>
-          <div className="error-content" {...getCollapseProps()}>
+          <div className="dialog-content" {...getCollapseProps()}>
             <p>
               {queryError ? queryErrors[queryError] : error}
             </p>
           </div>
-        </div>
+        </Dialog>
       </motion.div>
     </>
   );
