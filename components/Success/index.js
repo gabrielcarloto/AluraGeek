@@ -4,7 +4,7 @@ import { css } from '../../styles/theme';
 import Dialog from '../Dialog/index';
 import { MdClose, MdCheckCircleOutline, MdArrowBackIosNew } from 'react-icons/md';
 
-function Error({ text, state, setState }) {;
+function Success({ text, state, setState }) {;
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   function toggleError() {
@@ -77,4 +77,4 @@ function Error({ text, state, setState }) {;
   );
 };
 
-export default Error;
+export default Success;
