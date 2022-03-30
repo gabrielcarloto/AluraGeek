@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import { css } from '../../styles/theme';
 import { MdAdd, MdImage } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
@@ -10,9 +11,11 @@ import FloatLabel from '../../components/Inputs/FloatLabel';
 import Container from '../../components/utils/Container';
 import Spacer from '../../components/utils/Spacer';
 import Error from '../../components/Error';
+import Success from '../../components/Success';
 
 export default function NewProduct() {
   const [error, setError] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
 
   const NewProductContainer = css({
     '@media (min-width: 1024px)': {
@@ -191,7 +194,6 @@ export default function NewProduct() {
         alt: nameValue,
         image: imageValue,
         category: categoryValue,
-        // convert priceValue to int
         price: parseInt(priceValue),
         description: descValue,
       };
@@ -211,6 +213,8 @@ export default function NewProduct() {
         setError('Erro ao salvar produto');
         return;
       };
+
+      setSuccess(true);
     };
 
     return (
@@ -355,6 +359,12 @@ export default function NewProduct() {
       <AnimatePresence>
         {error && (
           <Error error={error} state={error} setState={setError} close />
+        )}
+        {success && (
+          <Success 
+            state={success} 
+            setState={setSuccess}
+          />
         )}
       </AnimatePresence>
     </>
