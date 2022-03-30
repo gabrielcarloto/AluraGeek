@@ -3,8 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { css } from "@stitches/react";
 import { useSession } from "next-auth/react";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { AnimatePresence } from "framer-motion";
 import NProgress from "nprogress";
+import { MdEdit, MdDelete } from "react-icons/md";
 import Error from "../Error";
 import Success from "../Success";
 
@@ -190,8 +191,23 @@ function Product({ product }) {
           </div>
         </div>
       </Link>
-      { error && <Error error={error} /> }
-      { success && <Success text="Produto deletado com sucesso" expanded /> }
+      <AnimatePresence>
+        { error && (
+          <Error
+            error={error}
+            state={error}
+            setState={setError}
+          />
+        )}
+        { success && (
+          <Success
+            text="Produto deletado com sucesso"
+            state={success}
+            setState={setSuccess}
+            expanded
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 };
