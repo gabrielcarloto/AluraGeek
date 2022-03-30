@@ -18,7 +18,8 @@ function Product({ product }) {
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(null);
 
-  async function deleteProduct() {
+  async function deleteProduct(e) {
+    e.preventDefault();
     NProgress.start();
 
     const response = await fetch(`/api/products/${product.id}`, {
