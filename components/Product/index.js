@@ -1,8 +1,12 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { css } from "@stitches/react";
 import { useSession } from "next-auth/react";
 import { MdEdit, MdDelete } from "react-icons/md";
+import NProgress from "nprogress";
+import Error from "../Error";
+import Success from "../Success";
 
 function Product({ product }) {
   const { data: session } = useSession();
@@ -10,6 +14,26 @@ function Product({ product }) {
                   && session.user 
                   && session.user.name === "Admin"
                   && session.user.email === "nevergonna@giveyou.up";
+
+  const [error, setError] = React.useState(null);
+  const [success, setSuccess] = React.useState(null);
+
+  async function deleteProduct() {
+    NProgress.start();
+
+    const response = await fetch(`/api/products/${product.id}`, {
+      method: "DELETE",
+    });
+
+    NProgress.done();
+
+    if (!response.ok) {
+      setError('Erro ao deletar o produto');
+      return;
+    };
+
+    setSuccess(true);
+  };
 
   const Product = css({
     cursor: 'pointer',
@@ -131,37 +155,43 @@ function Product({ product }) {
   });
 
   return (
-    <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id} scroll={false}>
-      <div className={Product()}>
-        <div className="product-image-container">
-          <div className="product-image">
-            <Image 
-              src={product.image}
-              alt={product.alt}
-              layout="fill"
-              objectFit="cover"
-            />
-            { isAdmin && (
-              <>
-                <div className="admin-buttons">
-                  <Link passHref href="/products/[id]/edit" as={`/products/${product.id}/edit`}>
-                    <MdEdit className="admin-button" />
-                  </Link>
-                  <Link passHref href="/products/[id]/delete" as={`/products/${product.id}/delete`}>
-                    <MdDelete className="admin-button" />
-                  </Link>
-                </div>
-              </>
-            )}
+    <>
+      <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id} scroll={false}>
+        <div className={Product()}>
+          <div className="product-image-container">
+            <div className="product-image">
+              <Image 
+                src={product.image}
+                alt={product.alt}
+                layout="fill"
+                objectFit="cover"
+              />
+              { isAdmin && (
+                <>
+                  <div className="admin-buttons">
+                    <Link passHref href="/products/[id]/edit" as={`/products/${product.id}/edit`}>
+                      <div>
+                        <MdEdit className="admin-button" />
+                      </div>
+                    </Link>
+                    <div onClick={deleteProduct}>
+                      <MdDelete className="admin-button" />
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+          <div className="product-details">
+            <h3 className="product-name">{product.name}</h3>
+            <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+            <a className="product-link">Ver produto</a>
           </div>
         </div>
-        <div className="product-details">
-          <h3 className="product-name">{product.name}</h3>
-          <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
-          <a className="product-link">Ver produto</a>
-        </div>
-      </div>
-    </Link>
+      </Link>
+      { error && <Error error={error} /> }
+      { success && <Success text="Produto deletado com sucesso" expanded /> }
+    </>
   );
 };
 

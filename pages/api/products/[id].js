@@ -21,9 +21,20 @@ export default async function productHandler(req, res) {
     }
 
     res.status(200).json(product);
+  } else if (method === 'DELETE') {
+    if (!product) {
+      res.status(404).json({ error: "Product not found" });
+      return;
+    }
+
+    await prisma.product.delete({
+      where: { id: productId },
+    });
+
+    res.status(200).json({ success: true });
   } else {
     res.statusCode = 405;
-    res.setHeader("Allow", "GET");
+    res.setHeader("Allow", "GET", "DELETE");
     res.end("Method Not Allowed");
-  };
+  }
 };
