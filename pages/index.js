@@ -36,14 +36,6 @@ export default function Home() {
       <Error error="Ocorreu um erro. Atualize a página" />
     </>
   );
-
-  if (!data) return (
-    <>
-      <Fill display="flex">
-        <h1>Carregando...</h1>
-      </Fill>
-    </>
-  );
   
   const products = data;
   
