@@ -24,7 +24,6 @@ Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
 
-
 const transitionVariants = {
   initial: {
     opacity: 0,
@@ -52,7 +51,7 @@ const transitionVariants = {
   },
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   globalStyles();
   return (
     <>
@@ -68,7 +67,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
             animate="animate"
             exit="exit" 
             variants={transitionVariants}
-            key={router.route}
+            key={Math.random()}
           >
             {Component.auth ? (
               <Auth>
