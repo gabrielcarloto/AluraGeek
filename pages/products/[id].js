@@ -226,9 +226,10 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const res = await fetcher(`${baseURL}/products`);
+  const paths = res.map(product => ({ params: { id: product.id.toString() } }));
 
   return {
-    paths: res.map(product => ({ params: { id: JSON.stringify(product.id) } })),
+    paths,
     fallback: false,
   }
 }
