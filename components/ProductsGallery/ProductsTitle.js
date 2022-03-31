@@ -23,6 +23,7 @@ function ProductsTitle({ title, all }) {
       fontSize: '22px',
       fontWeight: '700',
       lineHeight: '26px',
+      textTransform: `${title === 'Todos os produtos' ? 'none' : 'capitalize'}`,
       color: '#464646',
 
       '@media (min-width: 1024px)': {
