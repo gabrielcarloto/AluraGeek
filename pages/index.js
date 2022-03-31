@@ -59,7 +59,7 @@ export default function Home() {
       <Spacer responsive={1} />
       <ProductsGallery title="Star Wars" isSmall={isSmall} products={starWars.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="Console" isSmall={isSmall} products={consoles.slice(0, isSmall ? 4 : 6)} />
+      <ProductsGallery title="Consoles" isSmall={isSmall} products={consoles.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={2} />
       <ProductsGallery title="Outros" isSmall={isSmall} products={others.slice(0, isSmall ? 4 : 6)} />
       <Spacer responsive={1} />
