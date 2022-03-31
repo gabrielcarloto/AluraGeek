@@ -76,7 +76,7 @@ function ProductsTitle({ title, all }) {
     <div className={ProductsTitle()}>
       <h2>{title}</h2>
       {all && (
-        <Link passHref href="/products" scroll={false}>
+        <Link passHref href={`/products/category?q=${title.toLowerCase()}`} scroll={false}>
           <div className="products-link">
             <a>Ver tudo</a>
             <div className="products-arrow">
