@@ -12,7 +12,7 @@ function ProductsGallery({ title, isSmall, products }) {
   return (
     <section>
       <Container>
-        <ProductsTitle title={title} all />
+        <ProductsTitle title={title} categoryAll />
         <Grid>
           { products.length > 0 
             ? products.map(product => <Product product={product} key={product.id} />)

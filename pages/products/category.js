@@ -30,7 +30,7 @@ export default function Category() {
     <>
       <Spacer responsive={1} />
       <Container>
-        <ProductsTitle title={category} />
+        <ProductsTitle title={category} all />
         <Grid>
           { products.length > 0 
             ? products.map(product => <Product product={product} key={product.id} />)

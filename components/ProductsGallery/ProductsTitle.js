@@ -4,14 +4,14 @@ import { css } from "@stitches/react";
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';
 
-function ProductsTitle({ title, all }) {
+function ProductsTitle({ title, all, categoryAll }) {
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user 
                   && session.user.name === "Admin"
                   && session.user.email === "nevergonna@giveyou.up";
 
-
+  const isAll = all || categoryAll;
 
   const ProductsTitle = css({
     display: 'flex',
@@ -76,6 +76,16 @@ function ProductsTitle({ title, all }) {
     <div className={ProductsTitle()}>
       <h2>{title}</h2>
       {all && (
+        <Link passHref href="/products" scroll={false}>
+          <div className="products-link">
+            <a>Ver todos os produtos</a>
+            <div className="products-arrow">
+              <Image src="/arrow.svg" width="20px" height="20px" layout="responsive" alt="seta" />
+            </div>
+          </div>
+        </Link>
+      )}
+      {categoryAll && (
         <Link passHref href={`/products/category?q=${title.toLowerCase()}`} scroll={false}>
           <div className="products-link">
             <a>Ver tudo</a>
@@ -85,7 +95,7 @@ function ProductsTitle({ title, all }) {
           </div>
         </Link>
       )}
-      {!all && isAdmin && (
+      {!isAll && isAdmin && (
         <Link passHref href="/products/new" scroll={false}>
           <Button className="add-product-btn" color="primary">
             Adicionar produto
