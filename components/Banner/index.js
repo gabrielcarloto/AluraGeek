@@ -80,7 +80,7 @@ function Banner() {
           Produtos selecionados com 33% de desconto
         </h2>
         <div>
-          <Link passHref href="/">
+          <Link passHref href="/products/category?q=consoles">
             <Button color="primary" className="banner-btn">
               Ver Consoles
             </Button>
