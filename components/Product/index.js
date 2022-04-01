@@ -21,10 +21,17 @@ function Product({ product }) {
 
   async function deleteProduct(e) {
     e.preventDefault();
+
+    const pwrd = prompt("Insira a senha para deletar o produto:");
+
     NProgress.start();
 
     const response = await fetch(`/api/products/${product.id}`, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `${pwrd}`,
+      },
     });
 
     NProgress.done();

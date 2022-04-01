@@ -186,6 +186,8 @@ export default function NewProduct() {
         return;
       }
 
+      const pwrd = prompt("Insira a senha para deletar o produto:");
+
       NProgress.start();
       setError(false);
 
@@ -198,12 +200,15 @@ export default function NewProduct() {
         description: descValue,
       };
 
-      await saveProduct(productData);
+      await saveProduct(productData, pwrd);
     };
 
-    async function saveProduct(data) {
+    async function saveProduct(data, pass) {
       const response = await fetch('/api/products', {
         method: 'POST',
+        headers: {
+          Authorization: `${pass}`,
+        },
         body: JSON.stringify(data),
       });
 
