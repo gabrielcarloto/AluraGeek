@@ -51,7 +51,10 @@ const transitionVariants = {
   },
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+
+function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
+  const isSearch = (path) => path.includes('/search')
+
   globalStyles();
   return (
     <>
@@ -67,7 +70,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             animate="animate"
             exit="exit" 
             variants={transitionVariants}
-            key={Math.random()}
+            key={isSearch(router.route) ? 'search' : Math.random()}
           >
             {Component.auth ? (
               <Auth>
