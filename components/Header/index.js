@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from "next-auth/react"
 import { css } from '../../styles/theme';
 import { FaRegUserCircle, FaSignOutAlt } from 'react-icons/fa';
@@ -9,7 +10,9 @@ import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
 
+
 function Header({ loginBtn }) {
+  const router = useRouter();
   const { data: session } = useSession();
   
   const headerSearchMobile = React.useRef(null);
@@ -29,7 +32,6 @@ function Header({ loginBtn }) {
     setIsOpen(!isOpen);
     headerUser.current.childNodes[0].classList.toggle('active');
   };
-
 
   const userMenuVariants = {
     initial: {
@@ -301,12 +303,23 @@ function Header({ loginBtn }) {
       headerForm.current.classList.toggle('active');
     }
 
+    function handleSubmit(e) {
+      e.preventDefault();
+      
+      const search = e.target.search.value;
+      
+      if (search) {
+        router.push(`/search?q=${search}`);
+      };
+    };
+
     return (
       <>
-        <form className="header-form" ref={headerForm}>
+        <form className="header-form" ref={headerForm} onSubmit={handleSubmit}>
           <label className="scr-only" htmlFor="header-search">O que deseja encontrar?</label>
           <Input 
             className="header-search"
+            name="search"
             id="header-search"
             color="grey"
             type="text"
