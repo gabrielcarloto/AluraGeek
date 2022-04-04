@@ -25,7 +25,7 @@ export default function Login({ csrfToken }) {
 
     function toggleClass(element, name) {
       element.current.classList.toggle(name);
-    }
+    };
 
     const Form = css({
       width: '100%',
@@ -50,6 +50,10 @@ export default function Login({ csrfToken }) {
         '@media (min-width: 1024px)': {
           height: '60px',
           fontSize: '16px',
+        },
+
+        '&:user-invalid': {
+          border: '1px solid $error',
         },
       },
 
@@ -158,7 +162,6 @@ export default function Login({ csrfToken }) {
             className="form-btn"
             color="primary"
             type="submit"
-            disabled={userValue === '' || passwordValue === ''}
           >
             Entrar
           </Button>
