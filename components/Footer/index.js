@@ -117,7 +117,7 @@ function Footer() {
       <div className="dev">
         <Spacer y={32} />
         <p>
-          Desenvolvido por <a href="https://github.com/gabrielcarloto/AluraGeek" target="_blank" rel="noreferrer">Gabriel Carloto</a>
+          Desenvolvido com <span role="img" aria-label="heart">❤️</span> por <a href="https://github.com/gabrielcarloto/AluraGeek" target="_blank" rel="noreferrer">Gabriel Carloto</a>
         </p>
         <p>
           2022
