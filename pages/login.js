@@ -87,16 +87,20 @@ export default function Login({ csrfToken }) {
           fontSize: '12px',
           transform: 'translate(22px, 12px) scale(1.2)',
           
+          '@media (min-width: 1024px)': {
+            fontSize: '14px',
+            transform: 'translate(23px, 21px) scale(1.2)',
+
+            '&.user-label': {
+              transform: 'translate(24px, 21px) scale(1.2)',
+            },
+          },
+
           '&.active': {
             color: '#464646',
             fontWeight: '500',
             background: 'linear-gradient(#F5F5F5, #FFFFFF)',
             transform: 'translate(22px, 10px) scale(1.2)',
-          },
-
-          '@media (min-width: 1024px)': {
-            fontSize: '14px',
-            transform: 'translate(23px, 22px) scale(1.2)',
           },
         },
       },
