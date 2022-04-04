@@ -10,14 +10,13 @@ import Fill from '../components/utils/Fill';
 const fetcher = (url) => fetch(url).then(r => r.json());
 
 export default function Home() {
-  // check if is small/medium screen
-  const [ isSmall, setIsSmall ] = React.useState(false);
+  const [ isSmallScreen, setIsSmallScreen ] = React.useState(false);
 
   React.useEffect(() => {
     const screen = window.matchMedia('(max-width: 1400px)');
     
     const handleChange = (e) => {
-      setIsSmall(e.matches);
+      setIsSmallScreen(e.matches);
     };
     
     screen.addEventListener('change', handleChange(screen));
@@ -57,11 +56,11 @@ export default function Home() {
 
       <Banner />
       <Spacer responsive={1} />
-      <ProductsGallery title="star wars" isSmall={isSmall} products={starWars.slice(0, isSmall ? 4 : 6)} />
+      <ProductsGallery title="star wars" isSmall={isSmallScreen} products={starWars.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="consoles" isSmall={isSmall} products={consoles.slice(0, isSmall ? 4 : 6)} />
+      <ProductsGallery title="consoles" isSmall={isSmallScreen} products={consoles.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="outros" isSmall={isSmall} products={others.slice(0, isSmall ? 4 : 6)} />
+      <ProductsGallery title="outros" isSmall={isSmallScreen} products={others.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={1} />
     </>
   );
