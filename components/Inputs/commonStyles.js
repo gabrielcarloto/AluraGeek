@@ -10,7 +10,8 @@ const commonStyles = {
   transition: 'outline 200ms ease-in-out',
 
   '&:user-invalid': {
-    border: '1px solid $error',
+    outline: '1px solid $error',
+    borderBottom: '0',
   },
 
   '&:focus': {
