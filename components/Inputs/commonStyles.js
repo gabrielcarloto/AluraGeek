@@ -9,6 +9,10 @@ const commonStyles = {
   fontWeight: '400',
   transition: 'outline 200ms ease-in-out',
 
+  '&:user-invalid': {
+    border: '1px solid $error',
+  },
+
   '&:focus': {
     outlineColor: '#C8C8C8',
     outlineStyle: 'solid',

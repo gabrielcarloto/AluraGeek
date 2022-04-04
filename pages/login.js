@@ -51,10 +51,6 @@ export default function Login({ csrfToken }) {
           height: '60px',
           fontSize: '16px',
         },
-
-        '&:user-invalid': {
-          border: '1px solid $error',
-        },
       },
 
       '.form-btn': {
