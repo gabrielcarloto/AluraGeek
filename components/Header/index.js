@@ -3,7 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from "next-auth/react"
 import { css } from '../../styles/theme';
-import { FaRegUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import {
+  FaRegUserCircle,
+  FaSignOutAlt,
+  FaPlusCircle,
+  FaShoppingCart,
+} from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 import useOnClickOutside from "react-cool-onclickoutside";
 import Button from "../Button/index";
@@ -14,6 +19,10 @@ import Input from '../Inputs/Input';
 function Header({ loginBtn }) {
   const router = useRouter();
   const { data: session } = useSession();
+  const isAdmin = session 
+                  && session.user
+                  && session.user.name === 'Admin'
+                  && session.user.email === 'nevergonna@giveyou.up';
   
   const headerSearchMobile = React.useRef(null);
   const headerForm = React.useRef(null);
@@ -257,6 +266,17 @@ function Header({ loginBtn }) {
             '@media (min-width: 768px)': {
               fontSize: '16px',
             },
+
+            'p': {
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+
+              '.list-icon': {
+                fontSize: '16px',
+                marginRight: '5px',
+              },
+            },
           },
 
           '.header-user-menu-signout': {
@@ -398,11 +418,31 @@ function Header({ loginBtn }) {
                   ref={headerUserMenu}
                 >
                   <ul>
-                    <li tabIndex={0}>
-                      <Link passHref href="/profile">
-                        <p>{session.user.name}</p>
-                      </Link>
-                    </li>
+                    {isAdmin
+                    ? <li tabIndex={0}>
+                        <Link passHref href="/products/new">
+                          <p>
+                            <FaPlusCircle className="list-icon" />
+                            <span>Cadastrar produto</span>
+                          </p>
+                        </Link>
+                      </li>
+                    : <>
+                        <li tabIndex={0}>
+                          <Link passHref href="/profile">
+                            <p>{session.user.name}</p>
+                          </Link>
+                        </li>
+                        <li tabIndex={0}>
+                          <Link passHref href="/cart">
+                            <p>
+                              <FaShoppingCart className="list-icon" />
+                              <span>Carrinho</span>
+                            </p>
+                          </Link>
+                        </li>
+                      </>
+                    }
                     <hr />
                     <li className="header-user-menu-signout" tabIndex={0} onClick={() => signOut()}>
                       Sair <FaSignOutAlt />
