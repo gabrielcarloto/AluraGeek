@@ -60,13 +60,11 @@ function Form() {
     
     '.message-label': {
       transform: 'translate(24px, 10px) scale(1.2)',
-    },
-
-    
+    },    
   });
 
   return (
-    <form className={Form()}>
+    <form className={Form()} onSubmit={e => e.preventDefault()}>
       <h3 className="form-title">
         Fale conosco
       </h3>
@@ -77,6 +75,8 @@ function Form() {
           id="name"
           type="text"
           label="true"
+          required
+          maxLength="40"
           onChange={event => setNameValue(event.target.value)}
           onFocus={() => nameLabelBg.current.classList.add('focus')}
           onBlur={() => nameLabelBg.current.classList.remove('focus')}
@@ -97,6 +97,8 @@ function Form() {
         <Textarea
           className="form-input message"
           id="message"
+          required
+          maxLength="120"
           onChange={e => setMessageValue(e.target.value)}
           onFocus={() => messageLabelBg.current.classList.add('focus')}
           onBlur={() => messageLabelBg.current.classList.remove('focus')}
