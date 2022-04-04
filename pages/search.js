@@ -9,6 +9,7 @@ import Grid from "../components/utils/Grid";
 import Spacer from "../components/utils/Spacer";
 import Fill from "../components/utils/Fill";
 import Error from "../components/Error";
+import NotFound from "../components/NotFound";
 
 
 export default function Search() {
@@ -17,6 +18,10 @@ export default function Search() {
 
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(`/api/products`, fetcher);
+
+  if (!search) {
+    return <NotFound />;
+  };
 
   if (error) return (
     <>
