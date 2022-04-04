@@ -24,7 +24,7 @@ export default function Product({ product, products }) {
 
   // image zoom
   const [zoom, setZoom] = React.useState(false);
-  const handleClick = () => {
+  function handleClick() {
     setZoom(!zoom);
   };
 
@@ -43,6 +43,32 @@ export default function Product({ product, products }) {
       mobile.removeEventListener('change', handleMobile(mobile));
     };
   }, []);
+
+  function addToCart() {
+    const data = [{
+      productId: product.id,
+      quantity: 1,
+    }];
+
+    const cart = localStorage.getItem('cart');
+
+    if (!cart) {
+      localStorage.setItem('cart', JSON.stringify(data));
+    } else {
+      const cartData = JSON.parse(cart);
+      const currentProduct = cartData.filter(p => p.productId === product.id);
+
+      if (currentProduct) {
+        currentProduct[0].quantity += 1;
+        const newCart = cartData.map(p => p.productId === product.id ? currentProduct[0] : p);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+      } else {
+        const newCart = JSON.parse(cart);
+        newCart.push(data);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+      };
+    };
+  };
 
   const Product = styled('main', {
     display: 'flex',
@@ -200,7 +226,7 @@ export default function Product({ product, products }) {
           irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
           anim id est laborum.`}</p>
-          <Button className="product-button" color="primary">
+          <Button className="product-button" color="primary" onClick={addToCart}>
             Adicionar ao carrinho
           </Button>
         </article>
