@@ -45,29 +45,43 @@ export default function Product({ product, products }) {
   }, []);
 
   function addToCart() {
-    const data = [{
-      productId: product.id,
-      quantity: 1,
-    }];
+    let data;
+    let isAdded = false;
 
     const cart = localStorage.getItem('cart');
 
     if (!cart) {
-      localStorage.setItem('cart', JSON.stringify(data));
+      data = {
+        products: [{
+          id: product.id,
+          quantity: 1,
+        }],
+      };
     } else {
-      const cartData = JSON.parse(cart);
-      const currentProduct = cartData.filter(p => p.productId === product.id);
+      data = JSON.parse(cart);
+      
+      data.products = data.products.map(p => {
+        if (p.id === product.id) {
+          isAdded = true;
 
-      if (currentProduct) {
-        currentProduct[0].quantity += 1;
-        const newCart = cartData.map(p => p.productId === product.id ? currentProduct[0] : p);
-        localStorage.setItem('cart', JSON.stringify(newCart));
-      } else {
-        const newCart = JSON.parse(cart);
-        newCart.push(data);
-        localStorage.setItem('cart', JSON.stringify(newCart));
+          return {
+            id: product.id,
+            quantity: p.quantity + 1,
+          };
+        } else {
+          return p;
+        };
+      });
+
+      if (!isAdded) {
+        data.products.push({
+          id: product.id,
+          quantity: 1,
+        });
       };
     };
+
+    localStorage.setItem('cart', JSON.stringify(data));
   };
 
   const Product = styled('main', {
