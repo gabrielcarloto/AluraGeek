@@ -1,14 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import { FaShoppingCart, FaPlus, FaMinus, FaTrashAlt } from "react-icons/fa";
+import Link from "next/link";
 import { css } from "../styles/theme";
+import { AnimatePresence, motion } from "framer-motion";
+import { FaShoppingCart, FaPlus, FaMinus, FaTrashAlt } from "react-icons/fa";
 import Input from "../components/Inputs/Input";
 import Button from "../components/Button";
 import Container from "../components/utils/Container";
 import Spacer from "../components/utils/Spacer";
 import Fill from "../components/utils/Fill";
 import Grid from "../components/utils/Grid";
-import Link from "next/link";
 
 const fetcher = (url) => fetch(url).then(r => r.json());
 const dev = process.env.NODE_ENV !== 'production';
@@ -376,49 +377,76 @@ export default function Cart({ products }) {
             <Spacer y={16} />
             <div className="cart-container">
               <section className="cart-products">
-                {cartItems.map(item => (
-                  <div className="cart-product" key={item.id}>
-                    <Link passHref href={`/products/${item.id}`}>
-                      <div className="cart-product-image">
-                        <Image
-                          src={item.image}
-                          layout="fill"
-                          objectFit="cover"
-                          alt={item.alt}
-                        />
-                      </div>
-                    </Link>
-                    <Grid className="cart-product-details">
+                <AnimatePresence>
+                  {cartItems.map((item, i) => (
+                    <motion.li 
+                      className="cart-product"
+                      key={item.id}
+                      initial={{
+                        opacity: 0,
+                        translateX: 100,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        translateX: 0,
+                        transition: {
+                          duration: 0.35,
+                          ease: [0.18, 0.81, 0.38, 0.89],
+                          delay: i * 0.2,
+                        }
+                      }}
+                      exit={{
+                        opacity: 0,
+                        translateX: -100,
+                        transition: {
+                          duration: 0.2,
+                          ease: [0.59, 0.14, 0.77, 0.49],
+                        }
+                      }}
+                      layout
+                    >
                       <Link passHref href={`/products/${item.id}`}>
-                        <h3 className="cart-product-name">
-                          <a>{item.name}</a>
-                        </h3>
+                        <div className="cart-product-image">
+                          <Image
+                            src={item.image}
+                            layout="fill"
+                            objectFit="cover"
+                            alt={item.alt}
+                          />
+                        </div>
                       </Link>
-                      <div className="cart-product-price">
-                        <span>
-                          <strong>{parseInt(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
-                          cada
-                        </span>
-                        <span>
-                          <strong>{parseInt(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
-                          no total
-                        </span>
-                      </div>
-                      <div className="cart-product-quantity">
-                        <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'subtract')}>
-                          <FaMinus />
-                        </button>
-                        <span>{item.quantity}</span>
-                        <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'add')}>
-                          <FaPlus />
-                        </button>
-                        <button className="cart-product-quantity-button remove" onClick={() => removeFromCart(item.id)}>
-                          <FaTrashAlt />
-                        </button>
-                      </div>
-                    </Grid>
-                  </div>
-                ))}
+                      <Grid className="cart-product-details">
+                        <Link passHref href={`/products/${item.id}`}>
+                          <h3 className="cart-product-name">
+                            <a>{item.name}</a>
+                          </h3>
+                        </Link>
+                        <div className="cart-product-price">
+                          <span>
+                            <strong>{parseInt(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                            cada
+                          </span>
+                          <span>
+                            <strong>{parseInt(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                            no total
+                          </span>
+                        </div>
+                        <div className="cart-product-quantity">
+                          <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'subtract')}>
+                            <FaMinus />
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'add')}>
+                            <FaPlus />
+                          </button>
+                          <button className="cart-product-quantity-button remove" onClick={() => removeFromCart(item.id)}>
+                            <FaTrashAlt />
+                          </button>
+                        </div>
+                      </Grid>
+                    </motion.li>
+                  ))}
+                </AnimatePresence>
                 <hr className="divider" />
                 <div className="cart-total-items">
                   <span>Produtos: {cartItems.length}</span>
