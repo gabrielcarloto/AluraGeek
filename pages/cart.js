@@ -34,7 +34,7 @@ export default function Cart({ products }) {
 
     const cart = JSON.parse(lsCart);
 
-    if (cart.products.length == 0) {
+    if (!cart || cart.products.length == 0) {
       setIsEmpty(true);
       return;
     };
