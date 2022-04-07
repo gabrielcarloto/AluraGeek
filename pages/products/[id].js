@@ -246,7 +246,7 @@ export default function Product({ product, products }) {
         </article>
       </Product>
       <Spacer responsive="2" />
-      <ProductsGallery title="Produtos similares" products={similarProducts.slice(0, isMobile ? 4 : 6)} />
+      <ProductsGallery title="Produtos similares" link={product.category} products={similarProducts.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive="1" />
     </>
   );

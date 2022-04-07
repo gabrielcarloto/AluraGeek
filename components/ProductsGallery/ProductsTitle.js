@@ -4,7 +4,7 @@ import { css } from "@stitches/react";
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';
 
-function ProductsTitle({ title, all, categoryAll }) {
+function ProductsTitle({ title, all, categoryAll, link }) {
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user 
@@ -86,7 +86,7 @@ function ProductsTitle({ title, all, categoryAll }) {
         </Link>
       )}
       {categoryAll && (
-        <Link passHref href={`/products/category?q=${title.toLowerCase()}`} scroll={false}>
+        <Link passHref href={`/products/category?q=${link || title.toLowerCase()}`} scroll={false}>
           <div className="products-link">
             <a>Ver tudo</a>
             <div className="products-arrow">
