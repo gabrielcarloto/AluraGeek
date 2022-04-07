@@ -4,7 +4,7 @@ import { css } from "@stitches/react";
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';
 
-function ProductsTitle({ title, all, categoryAll, link }) {
+function ProductsTitle({ title, search, all, categoryAll, link }) {
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user 
@@ -23,7 +23,7 @@ function ProductsTitle({ title, all, categoryAll, link }) {
       fontSize: '22px',
       fontWeight: '700',
       lineHeight: '26px',
-      textTransform: `${title === 'Todos os produtos' ? 'none' : 'capitalize'}`,
+      textTransform: `${title === 'Todos os produtos' || search  ? 'none' : 'capitalize'}`,
       color: '#464646',
 
       '@media (min-width: 1024px)': {
