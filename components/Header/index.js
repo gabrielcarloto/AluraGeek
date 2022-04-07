@@ -6,18 +6,20 @@ import { css } from '../../styles/theme';
 import {
   FaRegUserCircle,
   FaSignOutAlt,
+  FaSignInAlt,
   FaPlusCircle,
   FaShoppingCart,
 } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 import useOnClickOutside from "react-cool-onclickoutside";
-import Button from "../Button/index";
 import Container from '../utils/Container';
 import Input from '../Inputs/Input';
 
 
-function Header({ loginBtn }) {
+function Header() {
   const router = useRouter();
+  const isLoginPage = router.pathname === '/login';
+
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user
@@ -35,6 +37,8 @@ function Header({ loginBtn }) {
   });
   
   const headerUserMenu = useOnClickOutside(() => {
+    if (isLoginPage) return;
+
     setIsOpen(false);
     headerUser.current.childNodes[0].classList.remove('active');
   }, {
@@ -283,21 +287,39 @@ function Header({ loginBtn }) {
             },
           },
 
-          '.header-user-menu-signout': {
+          '.header-user-menu-button': {
             width: '100%',
-            padding: '5px',
+            padding: '6px',
+            border: 'none',
             borderRadius: '4px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             gap: '5px',
-            backgroundColor: '$red',
+            fontFamily: 'RaleWay',
+            fontSize: '14px',
+            fontWeight: '500',
             color: '$white',
+            cursor: 'pointer',
             transition: 'all 200ms ease-out',
 
-            '@media (hover: hover) and (pointer: fine)': {
-              '&:hover': {
-                backgroundColor: '$redHover',
+            '&.login': {
+              backgroundColor: '$primary',
+
+              '@media (hover: hover) and (pointer: fine)': {
+                '&:hover': {
+                  backgroundColor: '$primaryHover',
+                },
+              },
+            },
+
+            '&.signout': {
+              backgroundColor: '$red',
+
+              '@media (hover: hover) and (pointer: fine)': {
+                '&:hover': {
+                  backgroundColor: '$redHover',
+                },
               },
             },
           },
@@ -381,13 +403,47 @@ function Header({ loginBtn }) {
         </Link>
         <Form />
         { !session && (
-          <Button 
-            className="header-login"
-            color="secondary"
-            onClick={signIn}
-          >
-            Login
-          </Button>
+          !isLoginPage && (
+            <div className="header-user" ref={headerUser}>
+              <FaRegUserCircle 
+                className="header-user-icon"
+                id="header-user"
+                tabIndex={0}
+                onClick={toggleUserMenu}
+              />
+              <label className="scr-only" htmlFor="header-user">Clique para abrir o menu do usuário</label>
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div 
+                    className="header-user-menu"
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    variants={userMenuVariants}
+                    key="user-menu"
+                    ref={headerUserMenu}
+                  >
+                    <ul>
+                      <li tabIndex={0}>
+                        <Link passHref href="/cart">
+                          <p>
+                            <FaShoppingCart className="list-icon" />
+                            <span>Carrinho</span>
+                          </p>
+                        </Link>
+                      </li>
+                      <hr />
+                      <Link passHref href="/login">
+                        <button className="header-user-menu-button login" type="button" tabIndex={0}>
+                          Login <FaSignInAlt />
+                        </button>
+                      </Link>
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )
         )}
 
         { session && (
@@ -448,9 +504,9 @@ function Header({ loginBtn }) {
                       </>
                     }
                     <hr />
-                    <li className="header-user-menu-signout" tabIndex={0} onClick={() => signOut()}>
+                    <button className="header-user-menu-button signout" type="button" tabIndex={0} onClick={() => signOut()}>
                       Sair <FaSignOutAlt />
-                    </li>
+                    </button>
                   </ul>
                 </motion.div>
               )}
