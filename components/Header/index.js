@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import { signIn, signOut, useSession } from "next-auth/react"
 import { css } from '../../styles/theme';
 import {
@@ -29,6 +29,10 @@ function Header({ loginBtn }) {
   const headerUser = React.useRef(null);
   
   const [isOpen, setIsOpen] = React.useState(false);
+
+  Router.events.on('routeChangeComplete', () => {
+    setIsOpen(false);
+  });
   
   const headerUserMenu = useOnClickOutside(() => {
     setIsOpen(false);
