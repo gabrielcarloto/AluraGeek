@@ -50,7 +50,7 @@ export default function Cart({ products }) {
     });
 
     setCartItems(items);
-  }, [cartItems, products, setAnimationEnded]);
+  }, [products]);
 
   setTimeout(() => {
     setAnimationEnded(true);
@@ -98,6 +98,18 @@ export default function Cart({ products }) {
       '.cart-container': {
         display: 'flex',
         flexDirection: 'row',
+      },
+    },
+
+    '.cart-fill': {
+      height: '50vh',
+
+      '@media (min-width: 1024px)': {
+        height: '65vh',
+      },
+
+      '@media (min-width: 1440px)': {
+        height: '58vh',
       },
     },
 
@@ -369,16 +381,54 @@ export default function Cart({ products }) {
     },
   });
 
+  const mainVariants = {
+    initial: {
+      opacity: 0,
+      translateY: -20,
+    },
+    animate: {
+      opacity: 1,
+      translateY: 0,
+      transition: {
+        ease: [0.28, 0.63, 0.31, 0.95],
+      }
+    },
+    exit: {
+      opacity: 0,
+      translateY: 20,
+      transition: {
+        ease: [0.43, 0.21, 0.86, 0.43],
+      }
+    },
+    transition: {
+      duration: 0.3,
+    }
+  }
+
   return (
-    <main className={Cart()}>
+    <AnimatePresence exitBeforeEnter>
       {isEmpty ? (
-        <Fill>
-          <div className="cart-title empty">
-            <h1>Seu carrinho está vazio</h1>
-          </div>
-        </Fill>
+        <motion.main className={Cart()}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={mainVariants}
+          key="empty"
+        >
+          <Fill className="cart-fill">
+            <div className="cart-title empty">
+              <h1>Seu carrinho está vazio</h1>
+            </div>
+          </Fill>
+        </motion.main>
       ) : (
-        <>
+        <motion.main className={Cart()}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={mainVariants}
+          key="full"
+        >
           <Spacer responsive={1} />
           <Container>
             <div className="cart-title">
@@ -496,9 +546,9 @@ export default function Cart({ products }) {
             </div>
           </Container>
           <Spacer responsive={1} />
-        </>
+        </motion.main>
       )}
-    </main>
+    </AnimatePresence>
   )
 };
 
