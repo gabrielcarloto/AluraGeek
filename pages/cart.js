@@ -376,23 +376,11 @@ export default function Cart({ products }) {
   });
 
   const mainVariants = {
-    initial: {
+    hidden: {
       opacity: 0,
-      translateY: -20,
     },
-    animate: {
+    visible: {
       opacity: 1,
-      translateY: 0,
-      transition: {
-        ease: [0.28, 0.63, 0.31, 0.95],
-      }
-    },
-    exit: {
-      opacity: 0,
-      translateY: 20,
-      transition: {
-        ease: [0.43, 0.21, 0.86, 0.43],
-      }
     },
     transition: {
       duration: 0.3,
@@ -403,9 +391,9 @@ export default function Cart({ products }) {
     <AnimatePresence exitBeforeEnter>
       {isEmpty ? (
         <motion.main className={Cart()}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
           variants={mainVariants}
           key="empty"
         >
@@ -415,9 +403,9 @@ export default function Cart({ products }) {
         </motion.main>
       ) : (
         <motion.main className={Cart()}
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
           variants={mainVariants}
           key="full"
         >
