@@ -11,7 +11,6 @@ import Fill from "../components/utils/Fill";
 import Error from "../components/Error";
 import NotFound from "../components/NotFound";
 
-
 export default function Search() {
   const router = useRouter();
   const { q: search } = router.query;
@@ -40,8 +39,14 @@ export default function Search() {
   if (filteredProducts.length === 0) {
     return (
       <>
-        <Fill />
-        <Error error="Nenhum produto encontrado" />
+        <Fill display="flex" alignItems="center" justifyContent="center">
+          <Container>
+            <Spacer responsive={1} />
+            <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} search />
+              <p><i>Não encontramos nada, apenas o vazio do espaço...</i> 🌌</p>
+            <Spacer responsive={1} />
+          </Container>
+        </Fill>
       </>
     );
   };
