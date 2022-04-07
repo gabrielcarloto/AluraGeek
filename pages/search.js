@@ -50,7 +50,7 @@ export default function Search() {
     <>
       <Spacer responsive={1} />
       <Container>
-        <ProductsTitle title="resultados" all />
+        <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} search all />
         <Grid>
           { filteredProducts.length > 0 
             ? filteredProducts.map(product => <Product product={product} key={product.id} />)
