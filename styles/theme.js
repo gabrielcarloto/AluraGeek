@@ -4,7 +4,9 @@ export const { styled, css, globalCss } = createStitches({
   theme: {
     colors: {
       primary: "#2A7AE4",
+      primaryHover: "#5595E9",
       secondary: "#EAF2FD",
+      secondaryHover: "#D4E4FA",
       background: "#F5F5F5",
       lightBackground: "$white",
       text: "$darkGray",
