@@ -120,12 +120,6 @@ export default function Cart({ products }) {
       justifyContent: 'flex-start',
       gap: '10px',
 
-      '&.empty': {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-      },
-
       'h1': {
         fontSize: '22px',
       },
@@ -415,10 +409,8 @@ export default function Cart({ products }) {
           variants={mainVariants}
           key="empty"
         >
-          <Fill className="cart-fill">
-            <div className="cart-title empty">
-              <h1>Seu carrinho está vazio</h1>
-            </div>
+          <Fill className="cart-fill" display="flex" alignItems="center" justifyContent="center">
+            <h1 className="cart-title">Seu carrinho está vazio</h1>
           </Fill>
         </motion.main>
       ) : (
