@@ -31,6 +31,21 @@ export default function Product({ product, products }) {
   };
 
   const [addedToCart, setAddedToCart] = React.useState(false);
+  const [totalProducts, setTotalProducts] = React.useState(1);
+
+  React.useEffect(() => {
+    const cart = localStorage.getItem('cart');
+
+    if (!cart) return; 
+
+    const data = JSON.parse(cart);
+
+    data.products.map(p => {
+      if (p.id === product.id) {
+        setTotalProducts(p.quantity);
+      };
+    });
+  }, [product]);
 
   const [ isMobile, setIsMobile ] = React.useState(false);
 
@@ -67,6 +82,7 @@ export default function Product({ product, products }) {
       data.products = data.products.map(p => {
         if (p.id === product.id) {
           isAdded = true;
+          setTotalProducts(totalProducts + 1);
 
           return {
             id: product.id,
@@ -249,7 +265,7 @@ export default function Product({ product, products }) {
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
           anim id est laborum.`}</p>
           <Button className="product-button" color="primary" onClick={addToCart}>
-            Adicionar ao carrinho
+            Adicionar ao carrinho {totalProducts > 1 && `(${totalProducts})`}
           </Button>
         </article>
       </Product>
