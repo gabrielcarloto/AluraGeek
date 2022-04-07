@@ -7,6 +7,8 @@ import Spacer from '../../components/utils/Spacer';
 import Button from '../../components/Button/index';
 import ProductsGallery from '../../components/ProductsGallery/index';
 import ImageZoom from '../../components/ImageZoom';
+import Info from '../../components/Info';
+import { AnimatePresence } from 'framer-motion';
 
 const fetcher = (url) => fetch(url).then(res => res.json());
 const dev = process.env.NODE_ENV !== 'production';
@@ -27,6 +29,8 @@ export default function Product({ product, products }) {
   function handleClick() {
     setZoom(!zoom);
   };
+
+  const [addedToCart, setAddedToCart] = React.useState(false);
 
   const [ isMobile, setIsMobile ] = React.useState(false);
 
@@ -82,6 +86,10 @@ export default function Product({ product, products }) {
     };
 
     localStorage.setItem('cart', JSON.stringify(data));
+
+    if(!isAdded) {
+      setAddedToCart(true);
+    };
   };
 
   const Product = styled('main', {
@@ -248,6 +256,17 @@ export default function Product({ product, products }) {
       <Spacer responsive="2" />
       <ProductsGallery title="Produtos similares" link={product.category} products={similarProducts.slice(0, isMobile ? 4 : 6)} />
       <Spacer responsive="1" />
+      <AnimatePresence>
+        {addedToCart && (
+          <Info title="Produto adicionado ao carrinho" state={addedToCart} setState={setAddedToCart} close>
+            Para finalizar a compra, <Link passHref href="/cart">
+              <span style={{ cursor: 'pointer' }}>
+                vá até o carrinho
+              </span>
+            </Link>.
+          </Info>
+        )}
+      </AnimatePresence>
     </>
   );
 }
