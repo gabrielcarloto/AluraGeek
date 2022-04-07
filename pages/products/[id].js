@@ -31,7 +31,7 @@ export default function Product({ product, products }) {
   };
 
   const [addedToCart, setAddedToCart] = React.useState(false);
-  const [totalProducts, setTotalProducts] = React.useState(1);
+  const [totalProducts, setTotalProducts] = React.useState(0);
 
   React.useEffect(() => {
     const cart = localStorage.getItem('cart');
@@ -105,6 +105,7 @@ export default function Product({ product, products }) {
 
     if(!isAdded) {
       setAddedToCart(true);
+      setTotalProducts(1);
     };
   };
 
@@ -265,7 +266,7 @@ export default function Product({ product, products }) {
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
           anim id est laborum.`}</p>
           <Button className="product-button" color="primary" onClick={addToCart}>
-            Adicionar ao carrinho {totalProducts > 1 && `(${totalProducts})`}
+            Adicionar ao carrinho {totalProducts > 0 && `(${totalProducts})`}
           </Button>
         </article>
       </Product>
