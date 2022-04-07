@@ -19,6 +19,7 @@ export default function Cart({ products }) {
   const [cartItems, setCartItems] = React.useState([]);
   const [isEmpty, setIsEmpty] = React.useState(false);
   const [total, setTotal] = React.useState(0);
+  const [animationEnded, setAnimationEnded] = React.useState(false);
 
   React.useEffect(() => {
     if (cartItems.length == 0) return
@@ -49,7 +50,11 @@ export default function Cart({ products }) {
     });
 
     setCartItems(items);
-  }, [products]);
+  }, [cartItems, products, setAnimationEnded]);
+
+  setTimeout(() => {
+    setAnimationEnded(true);
+  }, cartItems.length * 200);
 
   function handleAddOrSubtract(id, method) {
     const newCart = cartItems.map(item => {
@@ -163,7 +168,7 @@ export default function Cart({ products }) {
 
         '.products': {
           height: cartItems.length * 168.5 + 'px',
-          transition: 'height 300ms ease-in-out',
+          transition: animationEnded ? 'height 300ms ease-in-out' : 'none',
           transitionDelay: '300ms',
         },
         
