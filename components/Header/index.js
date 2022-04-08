@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link'
 import Router, { useRouter } from 'next/router'
-import { signIn, signOut, useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import { css } from '../../styles/theme';
 import {
   FaRegUserCircle,
@@ -34,6 +34,8 @@ function Header() {
 
   Router.events.on('routeChangeComplete', () => {
     setIsOpen(false);
+    headerSearchMobile.current.classList.remove('active');
+    headerForm.current.classList.remove('active');
   });
   
   const headerUserMenu = useOnClickOutside(() => {
