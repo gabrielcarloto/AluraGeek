@@ -31,14 +31,29 @@ function Header() {
   const headerUser = React.useRef(null);
   
   const [isOpen, setIsOpen] = React.useState(false);
+  const [ isSmallScreen, setIsSmallScreen ] = React.useState(false);
+
+  React.useEffect(() => {
+    const screen = window.matchMedia('(max-width: 728px)');
+    
+    const handleChange = (e) => {
+      setIsSmallScreen(e.matches);
+    };
+    
+    screen.addEventListener('change', handleChange(screen));
+
+    return () => {
+      screen.removeEventListener('change', handleChange(screen));
+    };
+  }, []);
 
   Router.events.on('routeChangeComplete', () => {
     setIsOpen(false);
     
-    if (!headerSearchMobile) return;
-    
-    headerSearchMobile.current.classList.remove('active');
-    headerForm.current.classList.remove('active');
+    if (isSmallScreen) {
+      headerSearchMobile.current.classList.remove('active');
+      headerForm.current.classList.remove('active');
+    };
   });
   
   const headerUserMenu = useOnClickOutside(() => {
