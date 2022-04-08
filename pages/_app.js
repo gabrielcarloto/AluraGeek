@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { Router } from 'next/dist/client/router';
 import { SessionProvider, useSession } from "next-auth/react"
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,6 +59,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
   globalStyles();
   return (
     <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      
       <SessionProvider session={session}>
         <Header />
         <AnimatePresence
