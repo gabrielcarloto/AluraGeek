@@ -6,12 +6,10 @@ import Grid from '../utils/Grid';
 import ProductSkeleton from '../Product/ProductSkeleton';
 
 function ProductsGallery({ title, isSmall, products, link }) {
-  const category = products[0].category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
-
   return (
     <section>
       <Container>
-        <ProductsTitle title={title || category} link={link} categoryAll />
+        <ProductsTitle title={title} link={link} categoryAll />
         <Grid>
           { products.length > 0 
             ? products.map(product => <Product product={product} key={product.id} />)
