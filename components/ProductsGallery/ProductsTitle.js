@@ -4,7 +4,7 @@ import { css } from "@stitches/react";
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';
 
-function ProductsTitle({ title, search, all, categoryAll, link }) {
+function ProductsTitle({ title, all, categoryAll, link }) {
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user 
@@ -17,13 +17,17 @@ function ProductsTitle({ title, search, all, categoryAll, link }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexDirection: 'column',
     marginBottom: '16px',
+
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+    },
 
     'h2': {
       fontSize: '22px',
       fontWeight: '700',
       lineHeight: '26px',
-      // textTransform: `${title === 'Todos os produtos' || search  ? 'none' : 'capitalize'}`,
       color: '#464646',
 
       '@media (min-width: 1024px)': {
@@ -37,6 +41,7 @@ function ProductsTitle({ title, search, all, categoryAll, link }) {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
+      alignSelf: 'flex-end',
 
       'a': {
         fontSize: '14px',
@@ -65,6 +70,7 @@ function ProductsTitle({ title, search, all, categoryAll, link }) {
 
     '.add-product-btn': {
       width: '150px',
+      alignSelf: 'flex-end',
 
       '@media (min-width: 768px)': {
         width: '165px',
