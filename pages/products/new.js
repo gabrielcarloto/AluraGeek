@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Head from 'next/head';
 import { css } from '../../styles/theme';
 import { MdAdd, MdImage } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
@@ -355,6 +355,9 @@ export default function NewProduct() {
 
   return (
     <>
+      <Head>
+        <title>Adicionar produto | AluraGeek</title>
+      </Head>
       <Spacer responsive={1} />
       <Container className={NewProductContainer()}>
         <h1 className="new-product-title">Adicionar produto</h1>

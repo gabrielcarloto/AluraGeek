@@ -1,3 +1,4 @@
+import Head from "next/head";
 import useSWR from "swr";
 import ProductsTitle from "../../components/ProductsGallery/ProductsTitle";
 import Product from "../../components/Product/index";
@@ -23,6 +24,9 @@ export default function Products() {
 
   return (
     <>
+      <Head>
+        <title>Todos os produtos | AluraGeek</title>
+      </Head>
       <Spacer responsive={1} />
       <Container>
         <ProductsTitle title="Todos os produtos" />

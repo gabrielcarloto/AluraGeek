@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import ProductsTitle from "../components/ProductsGallery/ProductsTitle";
@@ -39,6 +40,9 @@ export default function Search() {
   if (filteredProducts.length === 0) {
     return (
       <>
+        <Head>
+          <title>Pesquisa: &quot;{search}&quot; | AluraGeek</title>
+        </Head>
         <Fill display="flex" alignItems="center" justifyContent="center">
           <Container>
             <Spacer responsive={1} />
@@ -53,6 +57,9 @@ export default function Search() {
 
   return (
     <>
+      <Head>
+        <title>Pesquisa: &quot;{search}&quot; | AluraGeek</title>
+      </Head>
       <Spacer responsive={1} />
       <Container>
         <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} search all />

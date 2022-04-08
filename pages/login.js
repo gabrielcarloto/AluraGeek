@@ -219,8 +219,7 @@ export default function Login({ csrfToken }) {
   return (
     <>
       <Head>
-        <title>AluraGeek | Login</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Login | AluraGeek</title>
       </Head>
 
       <section className={FormSection()}>

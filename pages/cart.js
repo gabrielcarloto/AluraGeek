@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { css } from "../styles/theme";
@@ -388,147 +389,152 @@ export default function Cart({ products }) {
   }
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      {isEmpty ? (
-        <motion.main className={Cart()}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={mainVariants}
-          key="empty"
-        >
-          <Fill className="cart-fill" display="flex" alignItems="center" justifyContent="center">
-            <h1 className="cart-title">Seu carrinho está vazio</h1>
-          </Fill>
-        </motion.main>
-      ) : (
-        <motion.main className={Cart()}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-          variants={mainVariants}
-          key="full"
-        >
-          <Spacer responsive={1} />
-          <Container>
-            <div className="cart-title">
-              <FaShoppingCart />
-              <h1>Carrinho</h1>
-            </div>
-            <Spacer y={16} />
-            <div className="cart-container">
-              <section className="cart-products">
-                <div className="products">
-                  <AnimatePresence>
-                    {cartItems.map((item, i) => (
-                      <motion.li 
-                        className="cart-product"
-                        key={item.id}
-                        initial={{
-                          opacity: 0,
-                          translateX: 100,
-                        }}
-                        animate={{
-                          opacity: 1,
-                          translateX: 0,
-                          transition: {
-                            duration: 0.35,
-                            ease: [0.18, 0.81, 0.38, 0.89],
-                            delay: i * 0.2,
-                          }
-                        }}
-                        exit={{
-                          opacity: 0,
-                          translateX: -100,
-                          transition: {
-                            duration: 0.2,
-                            ease: [0.59, 0.14, 0.77, 0.49],
-                          }
-                        }}
-                        layout
-                      >
-                        <Link passHref href={`/products/${item.id}`}>
-                          <div className="cart-product-image">
-                            <Image
-                              src={item.image}
-                              layout="fill"
-                              objectFit="cover"
-                              alt={item.alt}
-                            />
-                          </div>
-                        </Link>
-                        <Grid className="cart-product-details">
+    <>
+      <Head>
+        <title>Carrinho | AluraGeek</title>
+      </Head>
+      <AnimatePresence exitBeforeEnter>
+        {isEmpty ? (
+          <motion.main className={Cart()}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={mainVariants}
+            key="empty"
+          >
+            <Fill className="cart-fill" display="flex" alignItems="center" justifyContent="center">
+              <h1 className="cart-title">Seu carrinho está vazio</h1>
+            </Fill>
+          </motion.main>
+        ) : (
+          <motion.main className={Cart()}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={mainVariants}
+            key="full"
+          >
+            <Spacer responsive={1} />
+            <Container>
+              <div className="cart-title">
+                <FaShoppingCart />
+                <h1>Carrinho</h1>
+              </div>
+              <Spacer y={16} />
+              <div className="cart-container">
+                <section className="cart-products">
+                  <div className="products">
+                    <AnimatePresence>
+                      {cartItems.map((item, i) => (
+                        <motion.li 
+                          className="cart-product"
+                          key={item.id}
+                          initial={{
+                            opacity: 0,
+                            translateX: 100,
+                          }}
+                          animate={{
+                            opacity: 1,
+                            translateX: 0,
+                            transition: {
+                              duration: 0.35,
+                              ease: [0.18, 0.81, 0.38, 0.89],
+                              delay: i * 0.2,
+                            }
+                          }}
+                          exit={{
+                            opacity: 0,
+                            translateX: -100,
+                            transition: {
+                              duration: 0.2,
+                              ease: [0.59, 0.14, 0.77, 0.49],
+                            }
+                          }}
+                          layout
+                        >
                           <Link passHref href={`/products/${item.id}`}>
-                            <h3 className="cart-product-name">
-                              <a>{item.name}</a>
-                            </h3>
+                            <div className="cart-product-image">
+                              <Image
+                                src={item.image}
+                                layout="fill"
+                                objectFit="cover"
+                                alt={item.alt}
+                              />
+                            </div>
                           </Link>
-                          <div className="cart-product-price">
-                            <span>
-                              <strong>{parseInt(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
-                              cada
-                            </span>
-                            <span>
-                              <strong>{parseInt(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
-                              no total
-                            </span>
-                          </div>
-                          <div className="cart-product-quantity">
-                            <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'subtract')}>
-                              <FaMinus />
-                            </button>
-                            <span>{item.quantity}</span>
-                            <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'add')}>
-                              <FaPlus />
-                            </button>
-                            <button className="cart-product-quantity-button remove" onClick={() => removeFromCart(item.id)}>
-                              <FaTrashAlt />
-                            </button>
-                          </div>
-                        </Grid>
-                      </motion.li>
-                    ))}
-                  </AnimatePresence>
-                </div>
-                <hr className="divider" />
-                <div className="cart-total-items">
-                  <span>Produtos: {cartItems.length}</span>
-                  <span>Total: {cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
-                </div>
-              </section>
-              <section className="cart-checkout">
-                <div className="cart-checkout-promo">
-                  <label className="scr-only" htmlFor="promo-code">
-                    Insira seu cupom de desconto
-                  </label>
-                  <form className="cart-checkout-promo-form">
-                    <Input className="cart-checkout-promo-input" type="text" id="promo-code" placeholder="Insira seu cupom de desconto" />
-                    <Button className="cart-checkout-promo-btn" type="submit" color="primary">Aplicar</Button>
-                  </form>
-                </div>
-                <hr className="divider" />
-                <div className="cart-checkout-total">
-                  <div className="cart-checkout-total shipping">
-                    <span className="cart-checkout-total--text">Frete</span>
-                    <span className="cart-checkout-total--text">R$ 12,00</span>
+                          <Grid className="cart-product-details">
+                            <Link passHref href={`/products/${item.id}`}>
+                              <h3 className="cart-product-name">
+                                <a>{item.name}</a>
+                              </h3>
+                            </Link>
+                            <div className="cart-product-price">
+                              <span>
+                                <strong>{parseInt(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                                cada
+                              </span>
+                              <span>
+                                <strong>{parseInt(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                                no total
+                              </span>
+                            </div>
+                            <div className="cart-product-quantity">
+                              <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'subtract')}>
+                                <FaMinus />
+                              </button>
+                              <span>{item.quantity}</span>
+                              <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'add')}>
+                                <FaPlus />
+                              </button>
+                              <button className="cart-product-quantity-button remove" onClick={() => removeFromCart(item.id)}>
+                                <FaTrashAlt />
+                              </button>
+                            </div>
+                          </Grid>
+                        </motion.li>
+                      ))}
+                    </AnimatePresence>
                   </div>
-                  <div className="cart-checkout-total discount">
-                    <span className="cart-checkout-total--text">Desconto</span>
-                    <span className="cart-checkout-total--text">0,00</span>
+                  <hr className="divider" />
+                  <div className="cart-total-items">
+                    <span>Produtos: {cartItems.length}</span>
+                    <span>Total: {cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
                   </div>
-                  <div className="cart-checkout-total estimated">
-                    <span className="cart-checkout-total--text estimated">Total estimado</span>
-                    <span className="cart-checkout-total--text estimated">{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                </section>
+                <section className="cart-checkout">
+                  <div className="cart-checkout-promo">
+                    <label className="scr-only" htmlFor="promo-code">
+                      Insira seu cupom de desconto
+                    </label>
+                    <form className="cart-checkout-promo-form">
+                      <Input className="cart-checkout-promo-input" type="text" id="promo-code" placeholder="Insira seu cupom de desconto" />
+                      <Button className="cart-checkout-promo-btn" type="submit" color="primary">Aplicar</Button>
+                    </form>
                   </div>
-                </div>
-                <Button className="cart-checkout-btn" type="submit" color="primary">Finalizar compra</Button>
-              </section>
-            </div>
-          </Container>
-          <Spacer responsive={1} />
-        </motion.main>
-      )}
-    </AnimatePresence>
+                  <hr className="divider" />
+                  <div className="cart-checkout-total">
+                    <div className="cart-checkout-total shipping">
+                      <span className="cart-checkout-total--text">Frete</span>
+                      <span className="cart-checkout-total--text">R$ 12,00</span>
+                    </div>
+                    <div className="cart-checkout-total discount">
+                      <span className="cart-checkout-total--text">Desconto</span>
+                      <span className="cart-checkout-total--text">0,00</span>
+                    </div>
+                    <div className="cart-checkout-total estimated">
+                      <span className="cart-checkout-total--text estimated">Total estimado</span>
+                      <span className="cart-checkout-total--text estimated">{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                    </div>
+                  </div>
+                  <Button className="cart-checkout-btn" type="submit" color="primary">Finalizar compra</Button>
+                </section>
+              </div>
+            </Container>
+            <Spacer responsive={1} />
+          </motion.main>
+        )}
+      </AnimatePresence>
+    </>
   )
 };
 

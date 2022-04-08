@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import useSWR from "swr";
 import ProductsTitle from "../../components/ProductsGallery/ProductsTitle";
 import Product from "../../components/Product/index";
@@ -25,12 +26,16 @@ export default function Category() {
   );
 
   const products = data || [];
+  const title = category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
 
   return (
     <>
+      <Head>
+        <title>{title} | AluraGeek</title>
+      </Head>
       <Spacer responsive={1} />
       <Container>
-        <ProductsTitle title={category} all />
+        <ProductsTitle title={title} all />
         <Grid>
           { products.length > 0 
             ? products.map(product => <Product product={product} key={product.id} />)

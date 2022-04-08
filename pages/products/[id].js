@@ -232,8 +232,7 @@ export default function Product({ product, products }) {
   return (
     <>
       <Head>
-        <title>AluraGeek</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>{product.name} | AluraGeek</title>
       </Head>
 
       <Product className="product" onScroll={() => {if(zoom) handleClick}}>

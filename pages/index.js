@@ -51,7 +51,6 @@ export default function Home() {
     <>
       <Head>
         <title>AluraGeek</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Banner />
