@@ -194,7 +194,7 @@ function Header() {
       width: '100px',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'space-evenly',
       position: 'relative',
       zIndex: '1',
       
@@ -242,6 +242,7 @@ function Header() {
       '.header-user-menu': {
         position: 'absolute',
         top: '115%',
+        left: '-35px',
         width: '130%',
         maxWidth: '150%',
         backgroundColor: '$lightBackground',
@@ -251,6 +252,7 @@ function Header() {
 
         '@media (min-width: 768px)': {
           padding: '20px',
+          left: '-60px',
         },
 
         'ul': {
@@ -414,6 +416,9 @@ function Header() {
                 onClick={toggleUserMenu}
               />
               <label className="scr-only" htmlFor="header-user">Clique para abrir o menu do usuário</label>
+              <Link passHref href="/cart">
+                <FaShoppingCart className="header-user-icon" />
+              </Link>
               <AnimatePresence>
                 {isOpen && (
                   <motion.div 
@@ -468,6 +473,9 @@ function Header() {
                 />
             }
             <label className="scr-only" htmlFor="header-user">Clique para abrir o menu do usuário</label>
+            <Link passHref href="/cart">
+              <FaShoppingCart className="header-user-icon" />
+            </Link>
             <AnimatePresence>
               {isOpen && (
                 <motion.div 
