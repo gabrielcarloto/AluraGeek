@@ -28,7 +28,6 @@ function ProductsTitle({ title, all, categoryAll, link }) {
       fontSize: '22px',
       fontWeight: '700',
       lineHeight: '26px',
-      color: '#464646',
 
       '@media (min-width: 1024px)': {
         fontSize: '32px',
@@ -47,7 +46,7 @@ function ProductsTitle({ title, all, categoryAll, link }) {
         fontSize: '14px',
         fontWeight: '700',
         lineHeight: '16px',
-        color: '#2A7AE4',
+        color: '$primary',
 
         '@media (min-width: 768px)': {
           fontSize: '16px',
