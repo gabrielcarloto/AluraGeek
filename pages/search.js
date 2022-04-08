@@ -46,7 +46,7 @@ export default function Search() {
         <Fill display="flex" alignItems="center" justifyContent="center">
           <Container>
             <Spacer responsive={1} />
-            <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} categoryAll />
+            <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} categoryAll search />
               <p><i>Não encontramos nada, apenas o vazio do espaço...</i> 🌌</p>
             <Spacer responsive={1} />
           </Container>

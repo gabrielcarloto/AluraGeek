@@ -4,7 +4,7 @@ import { css } from "@stitches/react";
 import { useSession } from 'next-auth/react';
 import Button from '../../components/Button';
 
-function ProductsTitle({ title, all, categoryAll, link }) {
+function ProductsTitle({ title, all, categoryAll, link, search }) {
   const { data: session } = useSession();
   const isAdmin = session 
                   && session.user 
@@ -17,7 +17,7 @@ function ProductsTitle({ title, all, categoryAll, link }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: 'column',
+    flexDirection: search ? 'column' : 'row',
     marginBottom: '16px',
 
     '@media (min-width: 768px)': {
@@ -40,7 +40,7 @@ function ProductsTitle({ title, all, categoryAll, link }) {
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-      alignSelf: 'flex-end',
+      alignSelf: search ? 'flex-end' : 'center',
 
       'a': {
         fontSize: '14px',
