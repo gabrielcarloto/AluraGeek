@@ -58,11 +58,11 @@ export default function Home() {
 
       <Banner />
       <Spacer responsive={1} />
-      <ProductsGallery title="star wars" isSmall={isSmallScreen} products={starWars.slice(0, isSmallScreen ? 4 : 6)} />
+      <ProductsGallery isSmall={isSmallScreen} products={starWars.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="consoles" isSmall={isSmallScreen} products={consoles.slice(0, isSmallScreen ? 4 : 6)} />
+      <ProductsGallery isSmall={isSmallScreen} products={consoles.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={2} />
-      <ProductsGallery title="outros" isSmall={isSmallScreen} products={others.slice(0, isSmallScreen ? 4 : 6)} />
+      <ProductsGallery isSmall={isSmallScreen} products={others.slice(0, isSmallScreen ? 4 : 6)} />
       <Spacer responsive={1} />
     </>
   );

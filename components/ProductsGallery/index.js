@@ -1,7 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { css, styled } from '@stitches/react';
 import Container from "../utils/Container";
 import ProductsTitle from './ProductsTitle';
 import Product from '../Product/index';
@@ -9,10 +6,12 @@ import Grid from '../utils/Grid';
 import ProductSkeleton from '../Product/ProductSkeleton';
 
 function ProductsGallery({ title, isSmall, products, link }) {
+  const category = products[0].category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+
   return (
     <section>
       <Container>
-        <ProductsTitle title={title} link={link} categoryAll />
+        <ProductsTitle title={title || category} link={link} categoryAll />
         <Grid>
           { products.length > 0 
             ? products.map(product => <Product product={product} key={product.id} />)
