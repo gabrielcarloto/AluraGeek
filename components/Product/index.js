@@ -30,7 +30,7 @@ function Product({ product }) {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `${pwrd}`,
+        Authorization: pwrd,
       },
     });
 
@@ -204,6 +204,7 @@ function Product({ product }) {
             error={error}
             state={error}
             setState={setError}
+            close
           />
         )}
         { success && (

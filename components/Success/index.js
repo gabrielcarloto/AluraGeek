@@ -4,7 +4,7 @@ import { css } from '../../styles/theme';
 import Dialog from '../Dialog/index';
 import { MdClose, MdCheckCircleOutline, MdArrowBackIosNew } from 'react-icons/md';
 
-function Success({ text, state, setState, expanded }) {;
+function Success({ text, state, setState, expanded }) {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ defaultExpanded: expanded });
 
   function toggleError() {
@@ -20,6 +20,10 @@ function Success({ text, state, setState, expanded }) {;
   return (
     <>
       <motion.div
+        style={{
+          position: 'fixed',
+          zIndex: '10',
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}

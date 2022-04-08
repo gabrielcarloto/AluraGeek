@@ -33,6 +33,10 @@ function Error({ queryError, error, state, setState, close }) {;
   return (
     <>
       <motion.div
+        style={{
+          position: 'fixed',
+          zIndex: '10',
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
