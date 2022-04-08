@@ -34,6 +34,9 @@ function Header() {
 
   Router.events.on('routeChangeComplete', () => {
     setIsOpen(false);
+    
+    if (!headerSearchMobile) return;
+    
     headerSearchMobile.current.classList.remove('active');
     headerForm.current.classList.remove('active');
   });
