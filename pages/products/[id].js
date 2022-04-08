@@ -233,6 +233,9 @@ export default function Product({ product, products }) {
     <>
       <Head>
         <title>{product.name} | AluraGeek</title>
+        <meta name="description" content={product.description} />
+        <meta property="og:title" content={`${product.name} | AluraGeek`} />
+        <meta property="og:description" content={product.description} />
       </Head>
 
       <Product className="product" onScroll={() => {if(zoom) handleClick}}>

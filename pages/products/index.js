@@ -26,6 +26,7 @@ export default function Products() {
     <>
       <Head>
         <title>Todos os produtos | AluraGeek</title>
+        <meta property="og:title" content="Todos os produtos | AluraGeek" />
       </Head>
       <Spacer responsive={1} />
       <Container>

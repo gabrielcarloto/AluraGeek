@@ -61,6 +61,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
     <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <meta property="og:url" content="https://alura-geek-mocha.vercel.app/" />
+        <meta property="og:type" content="website" />
       </Head>
       
       <SessionProvider session={session}>

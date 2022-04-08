@@ -51,6 +51,9 @@ export default function Home() {
     <>
       <Head>
         <title>AluraGeek</title>
+        <meta name="description" content="Na AluraGeek você encontra os melhores produtos do universo geek e descontos imperdíveis." />
+        <meta property="og:title" content="AluraGeek" />
+        <meta property="og:description" content="Na AluraGeek você encontra os melhores produtos do universo geek e descontos imperdíveis." />
       </Head>
 
       <Banner />
