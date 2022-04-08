@@ -26,7 +26,7 @@ export default function Category() {
   );
 
   const products = data || [];
-  const title = category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))
+  const title = !category ? '' : category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
 
   return (
     <>
