@@ -247,13 +247,11 @@ function Header() {
       },
 
       '.header-user-icon': {
-        width: '30px',
-        height: '30px',
+        fontSize: '28px',
         color: '$primary',
 
         '@media (min-width: 768px)': {
-          width: '40px',
-          height: '40px',
+          fontSize: '38px',
         },
       },
 
