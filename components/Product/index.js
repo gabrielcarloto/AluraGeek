@@ -183,7 +183,7 @@ function Product({ product }) {
               { isAdmin && (
                 <>
                   <div className="admin-buttons">
-                    <Link passHref href="/products/[id]/edit" as={`/products/${product.id}/edit`}>
+                    <Link passHref href="/products/edit/[id]" as={`/products/edit/${product.id}`}>
                       <div>
                         <MdEdit className="admin-button" />
                       </div>
