@@ -100,22 +100,27 @@ function Product({ product }) {
         
         '.admin-buttons': {
           position: 'absolute',
-          top: '5px',
-          right: '-2px',
+          right: '0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          backgroundColor: '$white',
 
           '.admin-button': {
             width: '25px',
             height: '25px',
             margin: '0 5px',
-            color: '$white',
+            color: '$primary',
             transition: 'all 200ms ease-in-out',
 
-            '&:hover': {
-              color: '$primary',
-              transform: 'scale(1.2)',
+            '&.delete': {
+              color: '$red',
+            },
+
+            '@media (hover: hover) and (pointer: fine)': {
+              '&:hover': {
+                transform: 'scale(1.1)',
+              },
             },
           },
         }
@@ -184,7 +189,7 @@ function Product({ product }) {
                       </div>
                     </Link>
                     <div onClick={deleteProduct}>
-                      <MdDelete className="admin-button" />
+                      <MdDelete className="admin-button delete" />
                     </div>
                   </div>
                 </>
