@@ -147,7 +147,6 @@ export default function Product({ product, products }) {
 
       '@media (min-width: 1024px)': {
         width: '50%',
-        minWidth: '560px',
         height: 'auto',
         minHeight: '400px',
       },
@@ -163,7 +162,7 @@ export default function Product({ product, products }) {
       '@media (min-width: 1024px)': {
         height: '100vh',
         maxHeight: '400px',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
       },
 
       '.product-title': {
@@ -220,9 +219,10 @@ export default function Product({ product, products }) {
 
         '@media (min-width: 768px)': {
           width: '100%',
+          justifySelf: 'flex-end',
         },
 
-        '@media (min-width: 1024px)': {
+        '@media (min-width: 1440px)': {
           width: '50%',
         },
       }
@@ -253,24 +253,26 @@ export default function Product({ product, products }) {
           alt={product.alt}
         />
 
-        <article className="product-info">
-          <h1 className="product-title">{product.name}</h1>
-          <div className="product-details">
-            <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
-            <Link passHref href={`/products/${(product.category).replace(/ /g, '-')}`}>
-              <a className="product-category">{product.category}</a>
-            </Link>
-          </div>
-          <p className="product-description">{product.description || `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
-          anim id est laborum.`}</p>
+        <div className="product-info">
+          <article>
+            <h1 className="product-title">{product.name}</h1>
+            <div className="product-details">
+              <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+              <Link passHref href={`/products/${(product.category).replace(/ /g, '-')}`}>
+                <a className="product-category">{product.category}</a>
+              </Link>
+            </div>
+            <p className="product-description">{product.description || `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+            anim id est laborum.`}</p>
+          </article>
           <Button className="product-button" color="primary" onClick={addToCart}>
             Adicionar ao carrinho {totalProducts > 0 && `(${totalProducts})`}
           </Button>
-        </article>
+        </div>
       </Product>
       <Spacer responsive="2" />
       <ProductsGallery title="Produtos similares" link={product.category} products={similarProducts.slice(0, isMobile ? 4 : 6)} />
