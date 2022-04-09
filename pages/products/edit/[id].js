@@ -196,6 +196,7 @@ export default function EditProduct({ product }) {
       setError(false);
 
       const productData = {
+        id: product.id,
         name: nameValue,
         alt: nameValue,
         image: imageValue,
