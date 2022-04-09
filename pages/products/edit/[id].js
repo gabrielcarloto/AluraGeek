@@ -96,6 +96,12 @@ export default function EditProduct({ product }) {
         },
       },
 
+      [`${Input}, ${Textarea}`]: {
+        outlineColor: '#C8C8C8',
+        outlineStyle: 'solid',
+        outlineWidth: '1px',
+      },
+
 
       'label': {
         top: '11px',
@@ -172,10 +178,6 @@ export default function EditProduct({ product }) {
     const priceLabelBg = React.useRef(null);
     const descLabelBg = React.useRef(null);
 
-    function toggleClass(ref, className) {
-      ref.current.classList.toggle(className);
-    }
-
     async function handleSubmit(e) {
       e.preventDefault();
       
@@ -251,7 +253,7 @@ export default function EditProduct({ product }) {
         </div>
         <div className={FloatLabel()}>
           <div
-            className={'label-background' + (nameValue == '' ? '' : ' active')}
+            className="label-background focus active"
             ref={nameLabelBg}
           />
           <Input 
@@ -261,8 +263,6 @@ export default function EditProduct({ product }) {
             label="true"
             value={nameValue}
             onChange={event => setNameValue(event.target.value)}
-            onFocus={() => toggleClass(nameLabelBg, 'focus')}
-            onBlur={() => toggleClass(nameLabelBg, 'focus')}
           />
           <label 
             className={'name-label float-label' + (nameValue !== '' ? ' active' : '')}
@@ -273,7 +273,7 @@ export default function EditProduct({ product }) {
         </div>
         <div className={FloatLabel()}>
           <div
-            className={'label-background' + (imageValue == '' ? '' : ' active')}
+            className="label-background focus active"
             ref={imageLabelBg}
           />
           <Input 
@@ -282,8 +282,6 @@ export default function EditProduct({ product }) {
             label="true"
             value={imageValue}
             onChange={event => setImageValue(event.target.value)}
-            onFocus={() => toggleClass(imageLabelBg, 'focus')}
-            onBlur={() => toggleClass(imageLabelBg, 'focus')}
           />
           <label 
             className={'image-label float-label' + (imageValue !== '' ? ' active' : '')}
@@ -294,7 +292,7 @@ export default function EditProduct({ product }) {
         </div>
         <div className={FloatLabel()}>
           <div
-            className={'label-background' + (categoryValue == '' ? '' : ' active')}
+            className="label-background focus active"
             ref={categoryLabelBg}
           />
           <Input 
@@ -304,8 +302,6 @@ export default function EditProduct({ product }) {
             label="true"
             value={categoryValue}
             onChange={event => setCategoryValue(event.target.value)}
-            onFocus={() => toggleClass(categoryLabelBg, 'focus')}
-            onBlur={() => toggleClass(categoryLabelBg, 'focus')}
           />
           <label 
             className={'category-label float-label' + (categoryValue !== '' ? ' active' : '')}
@@ -316,7 +312,7 @@ export default function EditProduct({ product }) {
         </div>
         <div className={FloatLabel()}>
           <div
-            className={'label-background' + (priceValue == '' ? '' : ' active')}
+            className="label-background focus active"
             ref={priceLabelBg}
           />
           <Input 
@@ -325,8 +321,6 @@ export default function EditProduct({ product }) {
             label="true"
             value={priceValue}
             onChange={event => setPriceValue(event.target.value)}
-            onFocus={() => toggleClass(priceLabelBg, 'focus')}
-            onBlur={() => toggleClass(priceLabelBg, 'focus')}
           />
           <label 
             className={'price-label float-label' + (priceValue !== '' ? ' active' : '')}
@@ -337,7 +331,7 @@ export default function EditProduct({ product }) {
         </div>
         <div className={FloatLabel()}>
           <div 
-            className={'label-background' + (descValue == '' ? '' : ' active')}
+            className="label-background focus active"
             ref={descLabelBg}
           />
           <Textarea
@@ -346,8 +340,6 @@ export default function EditProduct({ product }) {
             label="true"
             value={descValue}
             onChange={event => setDescValue(event.target.value)}
-            onFocus={() => toggleClass(descLabelBg, 'focus')}
-            onBlur={() => toggleClass(descLabelBg, 'focus')}
           />
           <label
             className={'desc-label float-label' + (descValue !== '' ? ' active' : '')}
