@@ -51,7 +51,7 @@ function Product({ product }) {
     backgroundColor: '#FFFFFF',
     transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
   
-    '@media (hover: hover) and (pointer: fine)': {
+    '@media (hover: hover) and (pointer: fine)': !isAdmin && {
       '&:hover': {
         padding: '20px',
         boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
