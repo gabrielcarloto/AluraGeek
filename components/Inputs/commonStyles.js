@@ -1,9 +1,9 @@
 const commonStyles = {
   width: '100%',
   border: 'none',
-  borderBottom: '1px solid #C8C8C8',
+  borderBottom: '1px solid $border',
   borderRadius: '4px',
-  color: '#464646',
+  color: '$text',
   fontFamily: 'Raleway',
   fontSize: '16px',
   fontWeight: '400',
@@ -15,7 +15,7 @@ const commonStyles = {
   },
 
   '&:focus': {
-    outlineColor: '#C8C8C8',
+    outlineColor: '$border',
     outlineStyle: 'solid',
     outlineWidth: '1px',
   },

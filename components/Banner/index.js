@@ -33,7 +33,7 @@ function Banner() {
         fontSize: '22px',
         fontWeight: '700',
         lineHeight: '26px',
-        color: '#FFFFFF',
+        color: '$white',
         marginTop: '0',
         marginBottom: '8px',
   
@@ -48,7 +48,7 @@ function Banner() {
         fontSize: '14px',
         fontWeight: '600',
         lineHeight: '16px',
-        color: '#FFFFFF',
+        color: '$white',
         marginTop: '0',
         marginBottom: '8px',
   

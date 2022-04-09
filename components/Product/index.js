@@ -48,7 +48,7 @@ function Product({ product }) {
     cursor: 'pointer',
     gridColumn: 'span 6',
     padding: '10px',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '$lightBackground',
     transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
   
     '@media (hover: hover) and (pointer: fine)': !isAdmin && {
@@ -138,7 +138,7 @@ function Product({ product }) {
         fontSize: '14px',
         fontWeight: '500',
         lineHeight: '16px',
-        color: '#464646',
+        color: '$text',
         margin: '0',
   
         '@media (min-width: 768px)': {
@@ -150,7 +150,7 @@ function Product({ product }) {
         fontSize: '16px',
         fontWeight: '700',
         lineHeight: '18px',
-        color: '#464646',
+        color: '$text',
         margin: '0',
       },
   
@@ -158,7 +158,7 @@ function Product({ product }) {
         fontSize: '14px',
         fontWeight: '700',
         lineHeight: '16px',
-        color: '#2A7AE4',
+        color: '$primary',
         margin: '0',
   
         '@media (min-width: 768px)': {

@@ -17,22 +17,22 @@ const Button = styled('button', {
   variants: {
     color: {
       primary: {
-        backgroundColor: '#2A7AE4',
-        color: '#FFFFFF',
+        backgroundColor: '$primary',
+        color: '$white',
         border: 'none',
 
         '&:hover': {
-          backgroundColor: '#5595E9',
+          backgroundColor: '$primaryHover',
         }
       },
 
       secondary: {
         backgroundColor: 'transparent',
-        color: '#2A7AE4',
-        border: '1px solid #2A7AE4',
+        color: '$primary',
+        border: '1px solid $primary',
 
         '&:hover': {
-          backgroundColor: '#D4E4FA',
+          backgroundColor: '$secondaryHover',
         }
       },
     }

@@ -9,7 +9,7 @@ const FloatLabel = css({
     height: '0',
     width: '100%',
     borderRadius: '4px 4px 0 0',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '$lightBackground',
     transition: 'all 200ms ease-in-out',
     zIndex: '1',
     
@@ -20,11 +20,11 @@ const FloatLabel = css({
   },
 
   '.focus': {
-    boxShadow: '-0.7px -0.7px 0px #C8C8C8, 0.7px -0.7px 0px #C8C8C8',
+    boxShadow: '-0.7px -0.7px 0px $border, 0.7px -0.7px 0px $border',
   },
   
   'label': {
-    color: '#A2A2A2',
+    color: '$lightText',
     position: 'absolute',
     userSelect: 'none',
     cursor: 'text',

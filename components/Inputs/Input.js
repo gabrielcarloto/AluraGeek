@@ -28,13 +28,13 @@ const Input = styled('input', {
         fontFamily: 'Raleway',
         fontSize: '14px',
         fontWeight: '400',
-        color: '#A2A2A2',
-        backgroundColor: '#F5F5F5',
+        color: '$gray',
+        backgroundColor: '$background',
 
         '&:focus': {
           outlineStyle: 'solid',
           outlineWidth: '1px',
-          outlineColor: '#A2A2A2',
+          outlineColor: '$gray',
         },
       }
     },
