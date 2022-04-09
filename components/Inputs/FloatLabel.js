@@ -20,7 +20,7 @@ const FloatLabel = css({
   },
 
   '.focus': {
-    boxShadow: '-0.7px -0.7px 0px $border, 0.7px -0.7px 0px $border',
+    boxShadow: '$border',
   },
   
   'label': {

@@ -28,5 +28,9 @@ export const { styled, css, globalCss } = createStitches({
       yellow: "#FFA000",
       yellowHover: "#FFB100",
     },
+
+    shadows: {
+      border: "-0.7px -0.7px 0px #C8C8C8, 0.7px -0.7px 0px #C8C8C8",
+    }
   }
 });
