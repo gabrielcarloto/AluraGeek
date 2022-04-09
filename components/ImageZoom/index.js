@@ -47,9 +47,12 @@ function ImageZoom({ zoom, setZoom, img, alt }) {
     background: 'rgba(0, 0, 0, 0.5)',
     cursor: 'zoom-out',
 
-    'span': {
-      width: '80%',
-      height: 'auto',
+    'img': {
+      padding: '5px',
+
+      '@media (min-width: 1024px)': {
+        padding: '20%',
+      },
     },
   });
 
