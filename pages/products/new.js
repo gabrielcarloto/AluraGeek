@@ -186,7 +186,7 @@ export default function NewProduct() {
         return;
       }
 
-      const pwrd = prompt("Insira a senha para deletar o produto:");
+      const pwrd = prompt("Insira a senha para adicionar o produto:");
 
       NProgress.start();
       setError(false);
