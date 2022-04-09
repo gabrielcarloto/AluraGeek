@@ -157,7 +157,7 @@ export default function Product({ product, products }) {
       padding: '16px',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#FFFFFF',
+      backgroundColor: '$lightBackground',
 
       '@media (min-width: 1024px)': {
         height: '100vh',
@@ -194,7 +194,7 @@ export default function Product({ product, products }) {
         '.product-category': {
           fontSize: '14px',
           fontWeight: '500',
-          color: '#2A7AE4',
+          color: '$primary',
           textTransform: 'capitalize',
 
           '@media (min-width: 1024px)': {
