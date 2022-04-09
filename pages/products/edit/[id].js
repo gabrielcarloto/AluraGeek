@@ -97,7 +97,7 @@ export default function EditProduct({ product }) {
       },
 
       [`${Input}, ${Textarea}`]: {
-        outlineColor: '#C8C8C8',
+        outlineColor: '$border',
         outlineStyle: 'solid',
         outlineWidth: '1px',
       },
