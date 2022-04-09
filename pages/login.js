@@ -22,6 +22,8 @@ export default function Login({ csrfToken }) {
     const [passwordValue, setPasswordValue] = React.useState('');
     const userLabelBg = React.useRef(null);
     const passwordLabelBg = React.useRef(null);
+    const userInput = React.useRef(null);
+    const passwordInput = React.useRef(null);
 
     function toggleClass(element, name) {
       element.current.classList.toggle(name);
@@ -122,6 +124,7 @@ export default function Login({ csrfToken }) {
               type="text"
               required
               label="true"
+              ref={userInput}
               onChange={event => setUserValue(event.target.value)}
               onFocus={() => toggleClass(userLabelBg, 'focus')}
               onBlur={() => toggleClass(userLabelBg, 'focus')}
@@ -129,6 +132,7 @@ export default function Login({ csrfToken }) {
             <label 
               className={'user-label' + (userValue !== '' ? ' active' : '')}
               htmlFor="user"
+              onClick={() => userInput.current.focus()}
             >
               Escreva seu usuário
             </label>
@@ -146,6 +150,7 @@ export default function Login({ csrfToken }) {
               type="password"
               required
               label="true"
+              ref={passwordInput}
               onChange={event => setPasswordValue(event.target.value)}
               onFocus={() => toggleClass(passwordLabelBg, 'focus')}
               onBlur={() => toggleClass(passwordLabelBg, 'focus')}
@@ -153,6 +158,7 @@ export default function Login({ csrfToken }) {
             <label
               className={'password-label' + (passwordValue !== '' ? ' active' : '')}
               htmlFor="password"
+              onClick={() => passwordInput.current.focus()}
             >
               Escreva sua senha
             </label>
