@@ -43,7 +43,7 @@ function Footer() {
       },
       
       '@media (min-width: 1024px)': {
-        gridColumn: '4 / 6',
+        gridColumn: '4 / 7',
         marginBottom: '0',
       },
   
