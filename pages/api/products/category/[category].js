@@ -12,7 +12,7 @@ export default async function productCategoryHandler(req, res) {
     where: { category },
   });
 
-  if (method === 'GET') {
+  if (method === "GET") {
     if (products.length === 0) {
       res.status(404).json({ error: "No products found" });
       return;
@@ -23,5 +23,5 @@ export default async function productCategoryHandler(req, res) {
     res.statusCode = 405;
     res.setHeader("Allow", "GET");
     res.end("Method Not Allowed");
-  };
-};
+  }
+}
