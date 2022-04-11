@@ -36,10 +36,16 @@ function Footer() {
       textAlign: "center",
       marginBottom: "16px",
       gridColumn: "1 / -1",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "16px",
 
       "@media (min-width: 768px)": {
         textAlign: "left",
         gridColumn: "1 / 5",
+        alignItems: "flex-start",
+        gap: "24px",
       },
 
       "@media (min-width: 1024px)": {
@@ -83,31 +89,26 @@ function Footer() {
                 <a>Quem somos</a>
               </Link>
             </li>
-            <Spacer responsive={3} role="none" />
             <li>
               <Link passHref href="/">
                 <a>Política de Privacidade</a>
               </Link>
             </li>
-            <Spacer responsive={3} role="none" />
             <li>
               <Link passHref href="/">
                 <a>Programa fidelidade</a>
               </Link>
             </li>
-            <Spacer responsive={3} role="none" />
             <li>
               <Link passHref href="/">
                 <a>Nossas lojas</a>
               </Link>
             </li>
-            <Spacer responsive={3} role="none" />
             <li>
               <Link passHref href="/">
                 <a>Quero ser franqueado</a>
               </Link>
             </li>
-            <Spacer responsive={3} role="none" />
             <li>
               <Link passHref href="/">
                 <a>Anuncie aqui</a>
