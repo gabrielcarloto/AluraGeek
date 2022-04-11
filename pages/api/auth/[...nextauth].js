@@ -46,10 +46,10 @@ export default NextAuth({
   ],
 
   callbacks: {
-    async signIn({ user, account, credentials }) {
+    async signIn() {
       return true;
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       return baseUrl;
     },
     jwt: async ({ token, user }) => {
