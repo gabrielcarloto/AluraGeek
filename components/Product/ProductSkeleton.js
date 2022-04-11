@@ -6,7 +6,7 @@ function ProductSkeleton({ length }) {
     gridColumn: 'span 6',
     padding: '10px',
     height: '250px',
-    backgroundColor: '#lightBackground',
+    backgroundColor: '$lightBackground',
     display: 'flex',
     flexDirection: 'column',
     gap: '8px',
