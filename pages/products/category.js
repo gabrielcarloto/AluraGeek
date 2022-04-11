@@ -10,7 +10,6 @@ import Spacer from "../../components/utils/Spacer";
 import Fill from "../../components/utils/Fill";
 import Error from "../../components/Error";
 
-
 export default function Category() {
   const router = useRouter();
   const { q: category } = router.query;
@@ -18,15 +17,20 @@ export default function Category() {
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR(`/api/products/category/${category}`, fetcher);
 
-  if (error) return (
-    <>
-      <Fill />
-      <Error error="Ocorreu um erro. Atualize a página" />
-    </>
-  );
+  if (error)
+    return (
+      <>
+        <Fill />
+        <Error error="Ocorreu um erro. Atualize a página" />
+      </>
+    );
 
   const products = data || [];
-  const title = !category ? '' : category.replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
+  const title = !category
+    ? ""
+    : category.replace(/\w\S*/g, (w) =>
+        w.replace(/^\w/, (c) => c.toUpperCase())
+      );
 
   return (
     <>
@@ -37,13 +41,16 @@ export default function Category() {
       <Container>
         <ProductsTitle title={title} all />
         <Grid>
-          { products.length > 0 
-            ? products.map(product => <Product product={product} key={product.id} />)
-            : <ProductSkeleton length={18} />
-          }
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Product product={product} key={product.id} />
+            ))
+          ) : (
+            <ProductSkeleton length={18} />
+          )}
         </Grid>
       </Container>
       <Spacer responsive={1} />
     </>
   );
-};
+}

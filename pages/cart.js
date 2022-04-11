@@ -12,9 +12,11 @@ import Spacer from "../components/utils/Spacer";
 import Fill from "../components/utils/Fill";
 import Grid from "../components/utils/Grid";
 
-const fetcher = (url) => fetch(url).then(r => r.json());
-const dev = process.env.NODE_ENV !== 'production';
-const baseURL = dev ? 'http://localhost:3000/api' : 'https://alura-geek-mocha.vercel.app/api';
+const fetcher = (url) => fetch(url).then((r) => r.json());
+const dev = process.env.NODE_ENV !== "production";
+const baseURL = dev
+  ? "http://localhost:3000/api"
+  : "https://alura-geek-mocha.vercel.app/api";
 
 export default function Cart({ products }) {
   const [cartItems, setCartItems] = React.useState([]);
@@ -23,7 +25,7 @@ export default function Cart({ products }) {
   const [animationEnded, setAnimationEnded] = React.useState(false);
 
   React.useEffect(() => {
-    if (cartItems.length == 0) return
+    if (cartItems.length == 0) return;
 
     const total = cartItems.reduce((sum, item) => {
       return sum + item.price * item.quantity;
@@ -40,10 +42,10 @@ export default function Cart({ products }) {
     if (!cart || cart.products.length == 0) {
       setIsEmpty(true);
       return;
-    };
+    }
 
-    let items = cart.products.map(item => {
-      const product = products.find(p => p.id === item.id);
+    let items = cart.products.map((item) => {
+      const product = products.find((p) => p.id === item.id);
       return {
         ...product,
         quantity: item.quantity,
@@ -58,7 +60,7 @@ export default function Cart({ products }) {
   }, cartItems.length * 200);
 
   function handleAddOrSubtract(id, method) {
-    const newCart = cartItems.map(item => {
+    const newCart = cartItems.map((item) => {
       if (item.id === id) {
         if (method === "subtract" && item.quantity > 1) {
           return {
@@ -80,211 +82,211 @@ export default function Cart({ products }) {
   }
 
   function removeFromCart(id) {
-    const newCart = cartItems.filter(item => item.id !== id);
+    const newCart = cartItems.filter((item) => item.id !== id);
     setCartItems(newCart);
     localStorage.setItem("cart", JSON.stringify({ products: newCart }));
-    
+
     if (newCart.length === 0) setIsEmpty(true);
-  };
+  }
 
   const Cart = css({
-    width: '100%',
-    minHeight: '50vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    width: "100%",
+    minHeight: "50vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "flex-start",
 
-    '@media (min-width: 768px)': {
-      '.cart-container': {
-        display: 'flex',
-        flexDirection: 'row',
+    "@media (min-width: 768px)": {
+      ".cart-container": {
+        display: "flex",
+        flexDirection: "row",
       },
     },
 
-    '.cart-fill': {
-      height: '50vh',
+    ".cart-fill": {
+      height: "50vh",
 
-      '@media (min-width: 1024px)': {
-        height: '65vh',
+      "@media (min-width: 1024px)": {
+        height: "65vh",
       },
 
-      '@media (min-width: 1440px)': {
-        height: '58vh',
-      },
-    },
-
-    '.cart-title': {
-      fontWeight: 'bold',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      gap: '10px',
-
-      'h1': {
-        fontSize: '22px',
-      },
-
-      'svg': {
-        fontSize: '22px',
-      },
-
-      '@media (min-width: 1024px)': {
-        gap: '15px',
-
-        'h1': {
-          fontSize: '32px',
-        },
-
-        'svg': {
-          fontSize: '32px',
-        },
+      "@media (min-width: 1440px)": {
+        height: "58vh",
       },
     },
 
-    '.cart-container': {
-      minHeight: '40vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: '16px',
+    ".cart-title": {
+      fontWeight: "bold",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "flex-start",
+      gap: "10px",
 
-      '@media (min-width: 768px)': {
-        gap: '32px',
+      h1: {
+        fontSize: "22px",
       },
 
-      '@media (min-width: 1024px)': {
-        height: 'auto',
-        flexDirection: 'row',
+      svg: {
+        fontSize: "22px",
       },
 
-      '.divider': {
-        height: '0',
-        border: '1px solid $border',
-      },
+      "@media (min-width: 1024px)": {
+        gap: "15px",
 
-      '.cart-products': {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        
-        '@media (min-width: 1024px)': {
-          alignSelf: 'flex-start',
+        h1: {
+          fontSize: "32px",
         },
 
-        '.products': {
-          height: cartItems.length * 168.5 + 'px',
-          transition: animationEnded ? 'height 300ms ease-in-out' : 'none',
-          transitionDelay: '300ms',
+        svg: {
+          fontSize: "32px",
         },
-        
-        '.cart-product': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '8px',
-          padding: '5px',
-          marginBottom: '8px',
-          backgroundColor: '$white',
-  
-          '.cart-product-image': {
-            width: '30vw',
-            height: '150px',
-            position: 'relative',
-            cursor: 'pointer',
-  
-            '@media (min-width: 1024px)': {
-              width: '15vw',
+      },
+    },
+
+    ".cart-container": {
+      minHeight: "40vh",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "16px",
+
+      "@media (min-width: 768px)": {
+        gap: "32px",
+      },
+
+      "@media (min-width: 1024px)": {
+        height: "auto",
+        flexDirection: "row",
+      },
+
+      ".divider": {
+        height: "0",
+        border: "1px solid $border",
+      },
+
+      ".cart-products": {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+
+        "@media (min-width: 1024px)": {
+          alignSelf: "flex-start",
+        },
+
+        ".products": {
+          height: cartItems.length * 168.5 + "px",
+          transition: animationEnded ? "height 300ms ease-in-out" : "none",
+          transitionDelay: "300ms",
+        },
+
+        ".cart-product": {
+          width: "100%",
+          display: "flex",
+          flexDirection: "row",
+          gap: "8px",
+          padding: "5px",
+          marginBottom: "8px",
+          backgroundColor: "$white",
+
+          ".cart-product-image": {
+            width: "30vw",
+            height: "150px",
+            position: "relative",
+            cursor: "pointer",
+
+            "@media (min-width: 1024px)": {
+              width: "15vw",
             },
 
-            '@media (min-width: 1440px)': {
-              width: '10vw',
+            "@media (min-width: 1440px)": {
+              width: "10vw",
             },
           },
-  
-          '.cart-product-details': {
-            padding: '16px 0',
-            flex: '1',
-            gap: '8px',
 
-            '@media (min-width: 1024px)': {
-              padding: '16px 8px',
+          ".cart-product-details": {
+            padding: "16px 0",
+            flex: "1",
+            gap: "8px",
+
+            "@media (min-width: 1024px)": {
+              padding: "16px 8px",
             },
-  
-            '.cart-product-name': {
-              fontSize: '16px',
-              fontWeight: '600',
-              gridColumn: '1 / -1',
-              gridRow: '1',
 
-              '@media (min-width: 1024px)': {
-                fontSize: '18px',
+            ".cart-product-name": {
+              fontSize: "16px",
+              fontWeight: "600",
+              gridColumn: "1 / -1",
+              gridRow: "1",
+
+              "@media (min-width: 1024px)": {
+                fontSize: "18px",
               },
             },
-  
-            '.cart-product-price': {
-              fontWeight: '400',
-              gridColumn: '1 / -1',
-              gridRow: '2',
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
 
-              '@media (min-width: 1024px)': {
-                justifyContent: 'flex-start',
-                flexDirection: 'row',
-                gap: '16px',
+            ".cart-product-price": {
+              fontWeight: "400",
+              gridColumn: "1 / -1",
+              gridRow: "2",
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+
+              "@media (min-width: 1024px)": {
+                justifyContent: "flex-start",
+                flexDirection: "row",
+                gap: "16px",
               },
-              
-              'span': {
-                fontSize: '16px',
-                display: 'flex',
-                gap: '4px',
+
+              span: {
+                fontSize: "16px",
+                display: "flex",
+                gap: "4px",
               },
-  
-              'strong': {
-                fontWeight: '700',
-              }
+
+              strong: {
+                fontWeight: "700",
+              },
             },
-  
-            '.cart-product-quantity': {
-              fontSize: '16px',
-              fontWeight: '700',
-              gridColumn: '1 / -1',
-              gridRow: '3',
-              display: 'flex',
-              alignItems: 'center',
-              alignSelf: 'flex-end',
-              justifySelf: 'flex-end',
-  
-              '.cart-product-quantity-button': {
-                width: '30px',
-                height: '30px',
-                margin: '0 5px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: 'none',
-                borderRadius: '50%',
-                backgroundColor: '$secondary',
-                color: '$primary',
-                cursor: 'pointer',
-                transition: 'all 100ms ease-in-out',
-  
-                '&.remove': {
-                  backgroundColor: 'rgba(255, 50, 50, 0.15)',
-                  color: '$red',
+
+            ".cart-product-quantity": {
+              fontSize: "16px",
+              fontWeight: "700",
+              gridColumn: "1 / -1",
+              gridRow: "3",
+              display: "flex",
+              alignItems: "center",
+              alignSelf: "flex-end",
+              justifySelf: "flex-end",
+
+              ".cart-product-quantity-button": {
+                width: "30px",
+                height: "30px",
+                margin: "0 5px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                border: "none",
+                borderRadius: "50%",
+                backgroundColor: "$secondary",
+                color: "$primary",
+                cursor: "pointer",
+                transition: "all 100ms ease-in-out",
+
+                "&.remove": {
+                  backgroundColor: "rgba(255, 50, 50, 0.15)",
+                  color: "$red",
                 },
 
-                '@media (hover: hover) and (pointer: fine)': {
-                  '&:hover': {
-                    backgroundColor: '$primary',
-                    color: '$white',
+                "@media (hover: hover) and (pointer: fine)": {
+                  "&:hover": {
+                    backgroundColor: "$primary",
+                    color: "$white",
 
-                    '&.remove': {
-                      backgroundColor: '$red',
-                      color: '$white',
+                    "&.remove": {
+                      backgroundColor: "$red",
+                      color: "$white",
                     },
                   },
                 },
@@ -293,82 +295,82 @@ export default function Cart({ products }) {
           },
         },
 
-        '.cart-total-items': {
-          fontSize: '16px',
-          fontWeight: '400',
-          marginTop: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
+        ".cart-total-items": {
+          fontSize: "16px",
+          fontWeight: "400",
+          marginTop: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
         },
       },
-  
-      '.cart-checkout': {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-  
-        '@media (min-width: 1024px)': {
-          width: '60%',
-          alignSelf: 'flex-start',
-          gap: '16px',
-          position: 'sticky',
-          top: '32px',
+
+      ".cart-checkout": {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: "8px",
+
+        "@media (min-width: 1024px)": {
+          width: "60%",
+          alignSelf: "flex-start",
+          gap: "16px",
+          position: "sticky",
+          top: "32px",
         },
 
-        '@media (min-width: 1440px)': {
-          width: '50%',
+        "@media (min-width: 1440px)": {
+          width: "50%",
         },
-  
-        '.cart-checkout-promo': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-  
-          '.cart-checkout-promo-form': {
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-  
-            '.cart-checkout-promo-input': {
-              width: '100%',
-              height: '40px',
-              borderRadius: '0',
-  
-              '@media (min-width: 768px)': {
-                height: '50px',
+
+        ".cart-checkout-promo": {
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+
+          ".cart-checkout-promo-form": {
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+
+            ".cart-checkout-promo-input": {
+              width: "100%",
+              height: "40px",
+              borderRadius: "0",
+
+              "@media (min-width: 768px)": {
+                height: "50px",
               },
             },
-  
-            '.cart-checkout-promo-btn': {
-              width: '30%',
+
+            ".cart-checkout-promo-btn": {
+              width: "30%",
             },
           },
         },
-  
-        '.cart-checkout-total': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
 
-          '@media (min-width: 1024px)': {
-            gap: '8px',
+        ".cart-checkout-total": {
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "4px",
+
+          "@media (min-width: 1024px)": {
+            gap: "8px",
           },
-  
-          '.shipping, .discount, .estimated': {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+
+          ".shipping, .discount, .estimated": {
+            flexDirection: "row",
+            justifyContent: "space-between",
           },
-  
-          '.cart-checkout-total--text': {
-            fontSize: '16px',
-            fontWeight: '500',
-  
-            '&.estimated': {
-              fontSize: '18px',
-              fontWeight: '700',
+
+          ".cart-checkout-total--text": {
+            fontSize: "16px",
+            fontWeight: "500",
+
+            "&.estimated": {
+              fontSize: "18px",
+              fontWeight: "700",
             },
           },
         },
@@ -385,8 +387,8 @@ export default function Cart({ products }) {
     },
     transition: {
       duration: 0.3,
-    }
-  }
+    },
+  };
 
   return (
     <>
@@ -395,19 +397,26 @@ export default function Cart({ products }) {
       </Head>
       <AnimatePresence exitBeforeEnter>
         {isEmpty ? (
-          <motion.main className={Cart()}
+          <motion.main
+            className={Cart()}
             initial="hidden"
             animate="visible"
             exit="hidden"
             variants={mainVariants}
             key="empty"
           >
-            <Fill className="cart-fill" display="flex" alignItems="center" justifyContent="center">
+            <Fill
+              className="cart-fill"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
               <h1 className="cart-title">Seu carrinho está vazio</h1>
             </Fill>
           </motion.main>
         ) : (
-          <motion.main className={Cart()}
+          <motion.main
+            className={Cart()}
             initial="hidden"
             animate="visible"
             exit="hidden"
@@ -426,7 +435,7 @@ export default function Cart({ products }) {
                   <div className="products">
                     <AnimatePresence>
                       {cartItems.map((item, i) => (
-                        <motion.li 
+                        <motion.li
                           className="cart-product"
                           key={item.id}
                           initial={{
@@ -440,7 +449,7 @@ export default function Cart({ products }) {
                               duration: 0.35,
                               ease: [0.18, 0.81, 0.38, 0.89],
                               delay: i * 0.2,
-                            }
+                            },
                           }}
                           exit={{
                             opacity: 0,
@@ -448,7 +457,7 @@ export default function Cart({ products }) {
                             transition: {
                               duration: 0.2,
                               ease: [0.59, 0.14, 0.77, 0.49],
-                            }
+                            },
                           }}
                           layout
                         >
@@ -470,23 +479,48 @@ export default function Cart({ products }) {
                             </Link>
                             <div className="cart-product-price">
                               <span>
-                                <strong>{parseInt(item.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                                <strong>
+                                  {parseInt(item.price).toLocaleString(
+                                    "pt-BR",
+                                    { style: "currency", currency: "BRL" }
+                                  )}
+                                </strong>
                                 cada
                               </span>
                               <span>
-                                <strong>{parseInt(item.price * item.quantity).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</strong>
+                                <strong>
+                                  {parseInt(
+                                    item.price * item.quantity
+                                  ).toLocaleString("pt-BR", {
+                                    style: "currency",
+                                    currency: "BRL",
+                                  })}
+                                </strong>
                                 no total
                               </span>
                             </div>
                             <div className="cart-product-quantity">
-                              <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'subtract')}>
+                              <button
+                                className="cart-product-quantity-button"
+                                onClick={() =>
+                                  handleAddOrSubtract(item.id, "subtract")
+                                }
+                              >
                                 <FaMinus />
                               </button>
                               <span>{item.quantity}</span>
-                              <button className="cart-product-quantity-button" onClick={() => handleAddOrSubtract(item.id, 'add')}>
+                              <button
+                                className="cart-product-quantity-button"
+                                onClick={() =>
+                                  handleAddOrSubtract(item.id, "add")
+                                }
+                              >
                                 <FaPlus />
                               </button>
-                              <button className="cart-product-quantity-button remove" onClick={() => removeFromCart(item.id)}>
+                              <button
+                                className="cart-product-quantity-button remove"
+                                onClick={() => removeFromCart(item.id)}
+                              >
                                 <FaTrashAlt />
                               </button>
                             </div>
@@ -498,7 +532,10 @@ export default function Cart({ products }) {
                   <hr className="divider" />
                   <div className="cart-total-items">
                     <span>Produtos: {cartItems.length}</span>
-                    <span>Total: {cartItems.reduce((acc, item) => acc + item.quantity, 0)}</span>
+                    <span>
+                      Total:{" "}
+                      {cartItems.reduce((acc, item) => acc + item.quantity, 0)}
+                    </span>
                   </div>
                 </section>
                 <section className="cart-checkout">
@@ -507,26 +544,54 @@ export default function Cart({ products }) {
                       Insira seu cupom de desconto
                     </label>
                     <form className="cart-checkout-promo-form">
-                      <Input className="cart-checkout-promo-input" type="text" id="promo-code" placeholder="Insira seu cupom de desconto" />
-                      <Button className="cart-checkout-promo-btn" type="submit" color="primary">Aplicar</Button>
+                      <Input
+                        className="cart-checkout-promo-input"
+                        type="text"
+                        id="promo-code"
+                        placeholder="Insira seu cupom de desconto"
+                      />
+                      <Button
+                        className="cart-checkout-promo-btn"
+                        type="submit"
+                        color="primary"
+                      >
+                        Aplicar
+                      </Button>
                     </form>
                   </div>
                   <hr className="divider" />
                   <div className="cart-checkout-total">
                     <div className="cart-checkout-total shipping">
                       <span className="cart-checkout-total--text">Frete</span>
-                      <span className="cart-checkout-total--text">R$ 12,00</span>
+                      <span className="cart-checkout-total--text">
+                        R$ 12,00
+                      </span>
                     </div>
                     <div className="cart-checkout-total discount">
-                      <span className="cart-checkout-total--text">Desconto</span>
+                      <span className="cart-checkout-total--text">
+                        Desconto
+                      </span>
                       <span className="cart-checkout-total--text">0,00</span>
                     </div>
                     <div className="cart-checkout-total estimated">
-                      <span className="cart-checkout-total--text estimated">Total estimado</span>
-                      <span className="cart-checkout-total--text estimated">{total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                      <span className="cart-checkout-total--text estimated">
+                        Total estimado
+                      </span>
+                      <span className="cart-checkout-total--text estimated">
+                        {total.toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
+                      </span>
                     </div>
                   </div>
-                  <Button className="cart-checkout-btn" type="submit" color="primary">Finalizar compra</Button>
+                  <Button
+                    className="cart-checkout-btn"
+                    type="submit"
+                    color="primary"
+                  >
+                    Finalizar compra
+                  </Button>
                 </section>
               </div>
             </Container>
@@ -535,10 +600,10 @@ export default function Cart({ products }) {
         )}
       </AnimatePresence>
     </>
-  )
-};
+  );
+}
 
 export async function getStaticProps() {
   const products = await fetcher(`${baseURL}/products`);
   return { props: { products } };
-};
+}

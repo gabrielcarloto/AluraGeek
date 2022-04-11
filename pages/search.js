@@ -21,17 +21,18 @@ export default function Search() {
 
   if (!search) {
     return <NotFound />;
-  };
+  }
 
-  if (error) return (
-    <>
-      <Fill />
-      <Error error="Ocorreu um erro. Atualize a página" />
-    </>
-  );
+  if (error)
+    return (
+      <>
+        <Fill />
+        <Error error="Ocorreu um erro. Atualize a página" />
+      </>
+    );
 
   const products = data || [];
-  
+
   const filteredProducts = products.filter((product) => {
     const name = product.name.toLowerCase();
     return name.includes(search.toLowerCase());
@@ -46,14 +47,20 @@ export default function Search() {
         <Fill display="flex" alignItems="center" justifyContent="center">
           <Container>
             <Spacer responsive={1} />
-            <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} categoryAll search />
-              <p><i>Não encontramos nada, apenas o vazio do espaço...</i> 🌌</p>
+            <ProductsTitle
+              title={`Resultados para a sua pesquisa "${search}"`}
+              categoryAll
+              search
+            />
+            <p>
+              <i>Não encontramos nada, apenas o vazio do espaço...</i> 🌌
+            </p>
             <Spacer responsive={1} />
           </Container>
         </Fill>
       </>
     );
-  };
+  }
 
   return (
     <>
@@ -62,15 +69,22 @@ export default function Search() {
       </Head>
       <Spacer responsive={1} />
       <Container>
-        <ProductsTitle title={`Resultados para a sua pesquisa "${search}"`} search all />
+        <ProductsTitle
+          title={`Resultados para a sua pesquisa "${search}"`}
+          search
+          all
+        />
         <Grid>
-          { filteredProducts.length > 0 
-            ? filteredProducts.map(product => <Product product={product} key={product.id} />)
-            : <ProductSkeleton length={18} />
-          }
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <Product product={product} key={product.id} />
+            ))
+          ) : (
+            <ProductSkeleton length={18} />
+          )}
         </Grid>
       </Container>
       <Spacer responsive={1} />
     </>
   );
-};
+}

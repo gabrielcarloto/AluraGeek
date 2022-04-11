@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import { Router } from 'next/dist/client/router';
-import { SessionProvider, useSession } from "next-auth/react"
+import Head from "next/head";
+import { Router } from "next/dist/client/router";
+import { SessionProvider, useSession } from "next-auth/react";
 import { AnimatePresence, motion } from "framer-motion";
 import NProgress from "nprogress";
-import globalStyles from "../styles/global"
+import globalStyles from "../styles/global";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Fill from "../components/utils/Fill";
@@ -13,15 +13,15 @@ NProgress.configure({
   showSpinner: false,
 });
 
-Router.events.on('routeChangeStart', () => {
+Router.events.on("routeChangeStart", () => {
   NProgress.start();
 });
 
-Router.events.on('routeChangeComplete', () => {
+Router.events.on("routeChangeComplete", () => {
   NProgress.done();
 });
 
-Router.events.on('routeChangeError', () => {
+Router.events.on("routeChangeError", () => {
   NProgress.done();
 });
 
@@ -52,9 +52,8 @@ const transitionVariants = {
   },
 };
 
-
 function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
-  const isSearch = (path) => path.includes('/search')
+  const isSearch = (path) => path.includes("/search");
 
   globalStyles();
   return (
@@ -62,10 +61,13 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content="/meta_image.png" />
-        <meta property="og:url" content="https://alura-geek-mocha.vercel.app/" />
+        <meta
+          property="og:url"
+          content="https://alura-geek-mocha.vercel.app/"
+        />
         <meta property="og:type" content="website" />
       </Head>
-      
+
       <SessionProvider session={session}>
         <Header />
         <AnimatePresence
@@ -73,12 +75,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
           initial={false}
           onExitComplete={() => window.scrollTo(0, 0)}
         >
-          <motion.div 
-            initial="initial" 
+          <motion.div
+            initial="initial"
             animate="animate"
-            exit="exit" 
+            exit="exit"
             variants={transitionVariants}
-            key={isSearch(router.route) ? 'search' : Math.random()}
+            key={isSearch(router.route) ? "search" : Math.random()}
           >
             {Component.auth ? (
               <Auth>
@@ -92,24 +94,24 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
         <Footer />
       </SessionProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
 
 function Auth({ children }) {
-  const { data: session, status } = useSession({ required: true })
-  const isAdmin = session 
-                && session.user
-                && session.user.name === 'Admin'
-                && session.user.email === 'nevergonna@giveyou.up'
+  const { data: session, status } = useSession({ required: true });
+  const isAdmin =
+    session &&
+    session.user &&
+    session.user.name === "Admin" &&
+    session.user.email === "nevergonna@giveyou.up";
 
-                
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <AnimatePresence>
-        <motion.div 
-          initial="initial" 
+        <motion.div
+          initial="initial"
           animate="animate"
           exit="exit"
           variants={transitionVariants}
@@ -120,23 +122,23 @@ function Auth({ children }) {
           </Fill>
         </motion.div>
       </AnimatePresence>
-    )
+    );
   } else if (isAdmin) {
     return (
       <AnimatePresence>
         <motion.div
-          initial="initial" 
+          initial="initial"
           animate="animate"
-          exit="exit" 
+          exit="exit"
           variants={transitionVariants}
           key={Router.route}
         >
           {children}
         </motion.div>
       </AnimatePresence>
-    )
+    );
   }
 
-  window.location.href = '/'
-  return <NotFound />
+  window.location.href = "/";
+  return <NotFound />;
 }

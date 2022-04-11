@@ -13,12 +13,13 @@ export default function Products() {
   const fetcher = (url) => fetch(url).then((r) => r.json());
   const { data, error } = useSWR("/api/products", fetcher);
 
-  if (error) return (
-    <>
-      <Fill />
-      <Error error="Ocorreu um erro. Atualize a página" />
-    </>
-  );
+  if (error)
+    return (
+      <>
+        <Fill />
+        <Error error="Ocorreu um erro. Atualize a página" />
+      </>
+    );
 
   const products = data || [];
 
@@ -32,13 +33,16 @@ export default function Products() {
       <Container>
         <ProductsTitle title="Todos os produtos" />
         <Grid>
-          { products.length > 0 
-            ? products.map(product => <Product product={product} key={product.id} />)
-            : <ProductSkeleton length={18} />
-          }
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Product product={product} key={product.id} />
+            ))
+          ) : (
+            <ProductSkeleton length={18} />
+          )}
         </Grid>
       </Container>
       <Spacer responsive={1} />
     </>
   );
-};
+}

@@ -1,11 +1,11 @@
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import GithubProvider from "next-auth/providers/github"
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      id: 'credentials',
+      id: "credentials",
       name: "credentials",
 
       credentials: {
@@ -22,14 +22,17 @@ export default NextAuth({
       },
 
       authorize: (credentials) => {
-        if (credentials.username === "peypey" && credentials.password === "negoney") {
+        if (
+          credentials.username === "peypey" &&
+          credentials.password === "negoney"
+        ) {
           const user = {
             id: 1,
             name: "Admin",
             email: "nevergonna@giveyou.up",
-          }
-          
-          return user
+          };
+
+          return user;
         }
 
         return null;
@@ -44,15 +47,15 @@ export default NextAuth({
 
   callbacks: {
     async signIn({ user, account, credentials }) {
-      return true
+      return true;
     },
     async redirect({ url, baseUrl }) {
-      return baseUrl
+      return baseUrl;
     },
     jwt: async ({ token, user }) => {
       if (user) {
         token.id = user.id;
-      };
+      }
 
       return token;
     },
@@ -60,7 +63,7 @@ export default NextAuth({
     session: ({ session, token }) => {
       if (token) {
         session.id = token.id;
-      };
+      }
 
       return session;
     },

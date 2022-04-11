@@ -11,10 +11,11 @@ import Success from "../Success";
 
 function Product({ product }) {
   const { data: session } = useSession();
-  const isAdmin = session 
-                  && session.user 
-                  && session.user.name === "Admin"
-                  && session.user.email === "nevergonna@giveyou.up";
+  const isAdmin =
+    session &&
+    session.user &&
+    session.user.name === "Admin" &&
+    session.user.email === "nevergonna@giveyou.up";
 
   const [error, setError] = React.useState(null);
   const [success, setSuccess] = React.useState(null);
@@ -37,132 +38,132 @@ function Product({ product }) {
     NProgress.done();
 
     if (!response.ok) {
-      setError('Erro ao deletar o produto');
+      setError("Erro ao deletar o produto");
       return;
-    };
+    }
 
     setSuccess(true);
-  };
+  }
 
   const Product = css({
-    cursor: 'pointer',
-    gridColumn: 'span 6',
-    padding: '10px',
-    backgroundColor: '$lightBackground',
-    transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
-  
-    '@media (hover: hover) and (pointer: fine)': !isAdmin && {
-      '&:hover': {
-        padding: '20px',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-        transform: 'translate(10px, 20px) scale(1.2)',
-        zIndex: '1',
+    cursor: "pointer",
+    gridColumn: "span 6",
+    padding: "10px",
+    backgroundColor: "$lightBackground",
+    transition: "all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)",
 
-        '.product-image-container': {
-          height: '164px',
+    "@media (hover: hover) and (pointer: fine)": !isAdmin && {
+      "&:hover": {
+        padding: "20px",
+        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.1)",
+        transform: "translate(10px, 20px) scale(1.2)",
+        zIndex: "1",
 
-          '@media (min-width: 1440px)': {
-            height: '210px',
+        ".product-image-container": {
+          height: "164px",
+
+          "@media (min-width: 1440px)": {
+            height: "210px",
           },
         },
 
-        '.product-link::after': {
-          width: '100%',
-          top: '18px',
+        ".product-link::after": {
+          width: "100%",
+          top: "18px",
         },
       },
     },
-  
-    '@media (min-width: 768px)': {
-      gridColumn: 'span 3',
-    },
-    
-    '@media (min-width: 1024px)': {
-      padding: '16px',
+
+    "@media (min-width: 768px)": {
+      gridColumn: "span 3",
     },
 
-    '@media (min-width: 1440px)': {
-      gridColumn: 'span 2',
+    "@media (min-width: 1024px)": {
+      padding: "16px",
     },
-  
-    '.product-image-container': {
-      height: '174px',
-      transition: 'all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)',
 
-      '@media (min-width: 1440px)': {
-        height: '220px',
+    "@media (min-width: 1440px)": {
+      gridColumn: "span 2",
+    },
+
+    ".product-image-container": {
+      height: "174px",
+      transition: "all 200ms cubic-bezier(0.29, 0.59, 0.43, 1.01)",
+
+      "@media (min-width: 1440px)": {
+        height: "220px",
       },
 
-      '.product-image': {
-        height: '100%',
-        width: '100%',
-        position: 'relative',
-        
-        '.admin-buttons': {
-          position: 'absolute',
-          right: '0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: '$white',
+      ".product-image": {
+        height: "100%",
+        width: "100%",
+        position: "relative",
 
-          '.admin-button': {
-            width: '25px',
-            height: '25px',
-            margin: '0 5px',
-            color: '$primary',
-            transition: 'all 200ms ease-in-out',
+        ".admin-buttons": {
+          position: "absolute",
+          right: "0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "$white",
 
-            '&.delete': {
-              color: '$red',
+          ".admin-button": {
+            width: "25px",
+            height: "25px",
+            margin: "0 5px",
+            color: "$primary",
+            transition: "all 200ms ease-in-out",
+
+            "&.delete": {
+              color: "$red",
             },
 
-            '@media (hover: hover) and (pointer: fine)': {
-              '&:hover': {
-                transform: 'scale(1.1)',
+            "@media (hover: hover) and (pointer: fine)": {
+              "&:hover": {
+                transform: "scale(1.1)",
               },
             },
           },
-        }
-      },
-    },
-  
-    '.product-details': {
-      marginTop: '8px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'flex-start',
-      gap: '8px',
-
-      '.product-name': {
-        fontSize: '14px',
-        fontWeight: '500',
-        lineHeight: '16px',
-        color: '$text',
-        margin: '0',
-  
-        '@media (min-width: 768px)': {
-          fontSize: '16px',
         },
       },
-  
-      '.product-price': {
-        fontSize: '16px',
-        fontWeight: '700',
-        lineHeight: '18px',
-        color: '$text',
-        margin: '0',
+    },
+
+    ".product-details": {
+      marginTop: "8px",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      gap: "8px",
+
+      ".product-name": {
+        fontSize: "14px",
+        fontWeight: "500",
+        lineHeight: "16px",
+        color: "$text",
+        margin: "0",
+
+        "@media (min-width: 768px)": {
+          fontSize: "16px",
+        },
       },
-  
-      '.product-link': {
-        fontSize: '14px',
-        fontWeight: '700',
-        lineHeight: '16px',
-        color: '$primary',
-        margin: '0',
-  
-        '@media (min-width: 768px)': {
-          fontSize: '16px',
+
+      ".product-price": {
+        fontSize: "16px",
+        fontWeight: "700",
+        lineHeight: "18px",
+        color: "$text",
+        margin: "0",
+      },
+
+      ".product-link": {
+        fontSize: "14px",
+        fontWeight: "700",
+        lineHeight: "16px",
+        color: "$primary",
+        margin: "0",
+
+        "@media (min-width: 768px)": {
+          fontSize: "16px",
         },
       },
     },
@@ -170,20 +171,30 @@ function Product({ product }) {
 
   return (
     <>
-      <Link passHref href="/products/[id]" as={`/products/${product.id}`} key={product.id} scroll={false}>
+      <Link
+        passHref
+        href="/products/[id]"
+        as={`/products/${product.id}`}
+        key={product.id}
+        scroll={false}
+      >
         <div className={Product()}>
           <div className="product-image-container">
             <div className="product-image">
-              <Image 
+              <Image
                 src={product.image}
                 alt={product.alt}
                 layout="fill"
                 objectFit="cover"
               />
-              { isAdmin && (
+              {isAdmin && (
                 <>
                   <div className="admin-buttons">
-                    <Link passHref href="/products/edit/[id]" as={`/products/edit/${product.id}`}>
+                    <Link
+                      passHref
+                      href="/products/edit/[id]"
+                      as={`/products/edit/${product.id}`}
+                    >
                       <div>
                         <MdEdit className="admin-button" />
                       </div>
@@ -198,21 +209,21 @@ function Product({ product }) {
           </div>
           <div className="product-details">
             <h3 className="product-name">{product.name}</h3>
-            <p className="product-price">{parseInt(product.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+            <p className="product-price">
+              {parseInt(product.price).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              })}
+            </p>
             <a className="product-link">Ver produto</a>
           </div>
         </div>
       </Link>
       <AnimatePresence>
-        { error && (
-          <Error
-            error={error}
-            state={error}
-            setState={setError}
-            close
-          />
+        {error && (
+          <Error error={error} state={error} setState={setError} close />
         )}
-        { success && (
+        {success && (
           <Success
             text="Produto deletado com sucesso"
             state={success}
@@ -223,6 +234,6 @@ function Product({ product }) {
       </AnimatePresence>
     </>
   );
-};
+}
 
 export default Product;

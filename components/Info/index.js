@@ -1,20 +1,22 @@
-import useCollapse from 'react-collapsed';
-import { motion } from 'framer-motion';
-import { css } from '../../styles/theme';
-import Dialog from '../Dialog/index';
-import { MdClose, MdInfoOutline, MdArrowBackIosNew } from 'react-icons/md';
+import useCollapse from "react-collapsed";
+import { motion } from "framer-motion";
+import { css } from "../../styles/theme";
+import Dialog from "../Dialog/index";
+import { MdClose, MdInfoOutline, MdArrowBackIosNew } from "react-icons/md";
 
-function Info({ title, state, setState, expanded, children, close }) {;
-  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ defaultExpanded: expanded });
+function Info({ title, state, setState, expanded, children, close }) {
+  const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
+    defaultExpanded: expanded,
+  });
 
   function toggleState() {
     setState(!state);
   }
 
   const Arrow = css({
-    cursor: 'pointer',
-    transition: 'transform 200ms ease-in-out',
-    transform: `rotate(${isExpanded ? '90deg' : '-90deg'})`,
+    cursor: "pointer",
+    transition: "transform 200ms ease-in-out",
+    transform: `rotate(${isExpanded ? "90deg" : "-90deg"})`,
   });
 
   return (
@@ -25,19 +27,12 @@ function Info({ title, state, setState, expanded, children, close }) {;
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
       >
-        <Dialog
-          color="info"
-          expanded={isExpanded}
-          key="info"
-          tabIndex={0}
-        >
-          <div
-            className="dialog-header"
-          >
+        <Dialog color="info" expanded={isExpanded} key="info" tabIndex={0}>
+          <div className="dialog-header">
             <div className="dialog-header-content">
               <div className="dialog-header-title">
-                <MdInfoOutline className="dialog-header-icon" /> 
-                <p>{title || 'Informação'}</p>
+                <MdInfoOutline className="dialog-header-icon" />
+                <p>{title || "Informação"}</p>
               </div>
               <div className="dialog-header-buttons">
                 {close && (
@@ -54,7 +49,7 @@ function Info({ title, state, setState, expanded, children, close }) {;
                   </>
                 )}
                 {children && (
-                  <MdArrowBackIosNew 
+                  <MdArrowBackIosNew
                     className={Arrow()}
                     id="dialog-collapse"
                     tabIndex={0}
@@ -64,17 +59,15 @@ function Info({ title, state, setState, expanded, children, close }) {;
               </div>
             </div>
           </div>
-            {children && (
-              <div className="dialog-content" {...getCollapseProps()}>
-                <p>
-                  {children}
-                </p>
-              </div>
-            )}
+          {children && (
+            <div className="dialog-content" {...getCollapseProps()}>
+              <p>{children}</p>
+            </div>
+          )}
         </Dialog>
       </motion.div>
     </>
   );
-};
+}
 
 export default Info;

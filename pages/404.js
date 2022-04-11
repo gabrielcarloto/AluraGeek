@@ -1,5 +1,5 @@
-import Head from 'next/head';
-import NotFound from '../components/NotFound/index';
+import Head from "next/head";
+import NotFound from "../components/NotFound/index";
 
 export default function Custom404() {
   return (
@@ -9,5 +9,5 @@ export default function Custom404() {
       </Head>
       <NotFound />
     </>
-  )
-};
+  );
+}
