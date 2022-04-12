@@ -163,12 +163,34 @@ export default function NewProduct() {
 
     const nameLabelBg = React.useRef(null);
     const imageLabelBg = React.useRef(null);
+    const imageInput = React.useRef(null);
     const categoryLabelBg = React.useRef(null);
     const priceLabelBg = React.useRef(null);
     const descLabelBg = React.useRef(null);
 
     function toggleClass(ref, className) {
       ref.current.classList.toggle(className);
+    }
+
+    function uploadImage(e) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64Image = reader.result;
+
+        fetch("/api/upload", {
+          method: "POST",
+          body: base64Image,
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            setImageValue(data.link);
+            imageInput.current.focus();
+          });
+      };
+
+      reader.readAsDataURL(file);
     }
 
     async function handleSubmit(e) {
@@ -244,7 +266,7 @@ export default function NewProduct() {
             >
               Arraste para adicionar uma imagem para o produto
             </label>
-            <input type="file" id="product-image" />
+            <input type="file" id="product-image" onChange={uploadImage} />
           </div>
           <p className="desktop">Ou</p>
           <Button className="desktop" color="secondary" type="button">
@@ -288,6 +310,8 @@ export default function NewProduct() {
             type="text"
             id="image-url"
             label="true"
+            ref={imageInput}
+            value={imageValue}
             onChange={(event) => setImageValue(event.target.value)}
             onFocus={() => toggleClass(imageLabelBg, "focus")}
             onBlur={() => toggleClass(imageLabelBg, "focus")}
