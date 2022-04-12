@@ -67,6 +67,10 @@ function Footer() {
       fontSize: "16px",
       fontWeight: "500",
       textAlign: "center",
+
+      a: {
+        display: "inline-block",
+      },
     },
   });
 
