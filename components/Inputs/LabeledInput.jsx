@@ -31,6 +31,8 @@ export default function LabeledInput({
   }, [isEmpty]);
 
   const LabeledInput = css('div', {
+    width: '100%',
+
     '.container': {
       position: 'relative',
 
