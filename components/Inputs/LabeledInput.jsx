@@ -7,8 +7,9 @@ export default function LabeledInput({
   label,
   inputValue,
   setInputValue,
-  type,
   textarea = false,
+  type,
+  name,
   required,
   minLength,
   maxLength,
@@ -95,6 +96,7 @@ export default function LabeledInput({
           <input
             className="container__input"
             id={`input_${uniqueInput}`}
+            name={name}
             type={type}
             required={required}
             minLength={minLength}
@@ -115,6 +117,7 @@ export default function LabeledInput({
           <textarea
             className="container__input textarea"
             id={`input_${uniqueInput}`}
+            name={name}
             required={required}
             minLength={minLength}
             maxLength={maxLength}
