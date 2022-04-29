@@ -7,6 +7,7 @@ export default function LabeledInput({
   inputValue,
   setInputValue,
   type,
+  textarea = false,
   required,
   minLength,
   maxLength,
@@ -52,8 +53,19 @@ export default function LabeledInput({
       '&__input': {
         ...commonStyles,
         height: '36px',
-        outline: 'transparent',
         padding: '18px 12px',
+
+        '&.textarea': {
+          height: '82px',
+          padding: '8px 12px',
+          resize: 'none',
+
+          '&.active': {
+            padding: '24px 12px 8px',
+          },
+        },
+
+        outline: 'transparent',
         transition: 'padding 200ms ease-in-out',
 
         '&.active': {
@@ -69,25 +81,46 @@ export default function LabeledInput({
         <label className="container__label" ref={labelTag} htmlFor="input">
           {label}
         </label>
-        <input
-          className="container__input"
-          id="input"
-          type={type}
-          required={required}
-          minLength={minLength}
-          maxLength={maxLength}
-          ref={inputTag}
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          onFocus={() => {
-            toggleClass(inputTag, 'add', 'active');
-            isEmpty && toggleClass(labelTag, 'add', 'active');
-          }}
-          onBlur={() => {
-            isEmpty && toggleClass(inputTag, 'remove', 'active');
-            isEmpty && toggleClass(labelTag, 'remove', 'active');
-          }}
-        />
+        {!textarea ? (
+          <input
+            className="container__input"
+            id="input"
+            type={type}
+            required={required}
+            minLength={minLength}
+            maxLength={maxLength}
+            ref={inputTag}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onFocus={() => {
+              toggleClass(inputTag, 'add', 'active');
+              isEmpty && toggleClass(labelTag, 'add', 'active');
+            }}
+            onBlur={() => {
+              isEmpty && toggleClass(inputTag, 'remove', 'active');
+              isEmpty && toggleClass(labelTag, 'remove', 'active');
+            }}
+          />
+        ) : (
+          <textarea
+            className="container__input textarea"
+            id="input"
+            required={required}
+            minLength={minLength}
+            maxLength={maxLength}
+            ref={inputTag}
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            onFocus={() => {
+              toggleClass(inputTag, 'add', 'active');
+              isEmpty && toggleClass(labelTag, 'add', 'active');
+            }}
+            onBlur={() => {
+              isEmpty && toggleClass(inputTag, 'remove', 'active');
+              isEmpty && toggleClass(labelTag, 'remove', 'active');
+            }}
+          />
+        )}
       </div>
     </div>
   );
