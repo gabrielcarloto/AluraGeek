@@ -1,6 +1,7 @@
 import { css } from '../../styles/theme';
 import { useRef, useEffect } from 'react';
 import commonStyles from './commonStyles';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function LabeledInput({
   label,
@@ -16,6 +17,8 @@ export default function LabeledInput({
 
   const inputTag = useRef(null);
   const labelTag = useRef(null);
+
+  const uniqueInput = uuidv4();
 
   const toggleClass = (ref, method, className) => {
     if (!method) ref.current.classList.toggle(className);
@@ -40,14 +43,15 @@ export default function LabeledInput({
         color: '$lightText',
         position: 'absolute',
         left: '12px',
-        top: '10px',
+        top: '50%',
+        transform: 'translateY(-50%)',
         userSelect: 'none',
         cursor: 'text',
         fontSize: '15px',
         transition: 'all 200ms ease-in-out',
 
         '&.active': {
-          top: '8px',
+          top: '13px',
           fontSize: '12px',
         },
       },
@@ -80,13 +84,17 @@ export default function LabeledInput({
   return (
     <div className={LabeledInput()}>
       <div className="container">
-        <label className="container__label" ref={labelTag} htmlFor="input">
+        <label
+          className="container__label"
+          ref={labelTag}
+          htmlFor={`input_${uniqueInput}`}
+        >
           {label}
         </label>
         {!textarea ? (
           <input
             className="container__input"
-            id="input"
+            id={`input_${uniqueInput}`}
             type={type}
             required={required}
             minLength={minLength}
@@ -106,7 +114,7 @@ export default function LabeledInput({
         ) : (
           <textarea
             className="container__input textarea"
-            id="input"
+            id={`input_${uniqueInput}`}
             required={required}
             minLength={minLength}
             maxLength={maxLength}
