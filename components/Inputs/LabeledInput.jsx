@@ -6,6 +6,7 @@ export default function LabeledInput({
   label,
   inputValue,
   setInputValue,
+  type,
   required,
   minLength,
   maxLength,
@@ -71,6 +72,7 @@ export default function LabeledInput({
         <input
           className="container__input"
           id="input"
+          type={type}
           required={required}
           minLength={minLength}
           maxLength={maxLength}
