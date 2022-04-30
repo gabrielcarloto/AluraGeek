@@ -1,6 +1,5 @@
 import { css } from '../../styles/theme';
 import { useRef, useEffect } from 'react';
-import commonStyles from './commonStyles';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function LabeledInput({
@@ -59,9 +58,33 @@ export default function LabeledInput({
       },
 
       '&__input': {
-        ...commonStyles,
+        width: '100%',
         height: '36px',
         padding: '18px 12px',
+        border: 'none',
+        borderBottom: '1px solid $border',
+        borderRadius: '4px',
+        outline: 'transparent',
+        color: '$text',
+        fontFamily: 'Raleway',
+        fontSize: '16px',
+        fontWeight: '400',
+        transition: 'all 200ms ease-in-out',
+
+        '&:user-invalid': {
+          outline: '1px solid $error',
+          borderBottom: '0',
+        },
+
+        '&:focus': {
+          outlineColor: '$border',
+          outlineStyle: 'solid',
+          outlineWidth: '1px',
+        },
+
+        '&.active, &:invalid': {
+          padding: '34px 12px 18px',
+        },
 
         '&.textarea': {
           height: '82px',
@@ -71,13 +94,6 @@ export default function LabeledInput({
           '&.active': {
             padding: '24px 12px 8px',
           },
-        },
-
-        outline: 'transparent',
-        transition: 'padding 200ms ease-in-out',
-
-        '&.active, &:invalid': {
-          padding: '34px 12px 18px',
         },
       },
     },
