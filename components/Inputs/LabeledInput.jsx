@@ -76,7 +76,7 @@ export default function LabeledInput({
         outline: 'transparent',
         transition: 'padding 200ms ease-in-out',
 
-        '&.active': {
+        '&.active, &:invalid': {
           padding: '34px 12px 18px',
         },
       },
