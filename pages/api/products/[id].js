@@ -1,6 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = global.prisma || new PrismaClient();
+import { prisma } from '../../../lib/db';
 const password = process.env.PRODUCTS_PASSWORD;
 
 export default async function productHandler(req, res) {
