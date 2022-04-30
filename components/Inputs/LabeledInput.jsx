@@ -7,6 +7,7 @@ export default function LabeledInput({
   label,
   inputValue,
   setInputValue,
+  handleChange,
   textarea = false,
   type,
   name,
@@ -103,7 +104,10 @@ export default function LabeledInput({
             maxLength={maxLength}
             ref={inputTag}
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              if (setInputValue) setInputValue(e.target.value);
+              if (handleChange) handleChange(e);
+            }}
             onFocus={() => {
               toggleClass(inputTag, 'add', 'active');
               isEmpty && toggleClass(labelTag, 'add', 'active');
@@ -123,7 +127,10 @@ export default function LabeledInput({
             maxLength={maxLength}
             ref={inputTag}
             value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            onChange={(e) => {
+              if (setInputValue) setInputValue(e.target.value);
+              if (handleChange) handleChange(e);
+            }}
             onFocus={() => {
               toggleClass(inputTag, 'add', 'active');
               isEmpty && toggleClass(labelTag, 'add', 'active');
