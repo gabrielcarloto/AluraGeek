@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@fontsource/raleway': ^4.5.5
-  '@prisma/client': ^3.12.0
+  '@prisma/client': ^4.8.1
   '@stitches/react': ^1.2.7
   eslint: 8.13.0
   eslint-config-next: 12.1.4
@@ -23,7 +23,7 @@ specifiers:
 
 dependencies:
   '@fontsource/raleway': 4.5.11
-  '@prisma/client': 3.15.2_prisma@3.15.2
+  '@prisma/client': 4.8.1_prisma@3.15.2
   '@stitches/react': 1.2.8_react@18.0.0
   framer-motion: 6.5.1_zpnidt7m3osuk7shl3s4oenomq
   imgur: 2.2.0
@@ -294,9 +294,9 @@ packages:
     resolution: {integrity: sha512-MSAs9t3Go7GUkMhpKC44T58DJ5KGk2vBo+h1cqQeqlMfdGkxaVB78ZWpv9gYi/g2fa4sopag9gJsNvS8XGgWJA==}
     dev: false
 
-  /@prisma/client/3.15.2_prisma@3.15.2:
-    resolution: {integrity: sha512-ErqtwhX12ubPhU4d++30uFY/rPcyvjk+mdifaZO5SeM21zS3t4jQrscy8+6IyB0GIYshl5ldTq6JSBo1d63i8w==}
-    engines: {node: '>=12.6'}
+  /@prisma/client/4.8.1_prisma@3.15.2:
+    resolution: {integrity: sha512-d4xhZhETmeXK/yZ7K0KcVOzEfI5YKGGEr4F5SBV04/MU4ncN/HcE28sy3e4Yt8UFW0ZuImKFQJE+9rWt9WbGSQ==}
+    engines: {node: '>=14.17'}
     requiresBuild: true
     peerDependencies:
       prisma: '*'
@@ -304,12 +304,12 @@ packages:
       prisma:
         optional: true
     dependencies:
-      '@prisma/engines-version': 3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e
+      '@prisma/engines-version': 4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe
       prisma: 3.15.2
     dev: false
 
-  /@prisma/engines-version/3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e:
-    resolution: {integrity: sha512-e3k2Vd606efd1ZYy2NQKkT4C/pn31nehyLhVug6To/q8JT8FpiMrDy7zmm3KLF0L98NOQQcutaVtAPhzKhzn9w==}
+  /@prisma/engines-version/4.8.0-61.d6e67a83f971b175a593ccc12e15c4a757f93ffe:
+    resolution: {integrity: sha512-MHSOSexomRMom8QN4t7bu87wPPD+pa+hW9+71JnVcF3DqyyO/ycCLhRL1we3EojRpZxKvuyGho2REQsMCvxcJw==}
     dev: false
 
   /@prisma/engines/3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e:
