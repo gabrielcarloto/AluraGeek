@@ -25,22 +25,23 @@ function toggleClass<
 
 interface SharedProps {
   label: string;
-  inputValue: string;
-  setInputValue: Dispatch<SetStateAction<string>>;
+  inputValue: string | number | undefined;
+  setInputValue?: Dispatch<SetStateAction<string>>;
   handleChange?: (
-    // eslint-disable-next-line no-unused-vars
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: any, // TODO: remove any
   ) => void;
   // textarea?: boolean;
 }
 
 // eslint-disable-next-line no-undef
 type InputProps = JSX.IntrinsicElements['input'] & {
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   textarea?: false;
 };
 
 // eslint-disable-next-line no-undef
 type TextAreaProps = JSX.IntrinsicElements['textarea'] & {
+  handleChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   textarea: true;
 };
 
@@ -72,9 +73,17 @@ export default function LabeledInput({
     return {
       className: `container__input ${isTextarea ? 'textarea' : ''}`,
       id: `input_${uniqueInput}`,
-      onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      onChange: (
+        e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+      ) => {
         if (setInputValue) setInputValue(e.target.value);
-        if (handleChange) handleChange(e);
+        if (handleChange) {
+          handleChange(
+            textarea
+              ? (e as ChangeEvent<HTMLTextAreaElement>)
+              : (e as ChangeEvent<HTMLInputElement>),
+          );
+        }
       },
       onFocus: () => {
         toggleClass(inputTag, 'add', 'active');

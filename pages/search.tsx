@@ -1,23 +1,24 @@
-import React from "react";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import ProductsTitle from "../components/ProductsGallery/ProductsTitle";
-import Product from "../components/Product/index";
-import ProductSkeleton from "../components/Product/ProductSkeleton";
-import Container from "../components/utils/Container";
-import Grid from "../components/utils/Grid";
-import Spacer from "../components/utils/Spacer";
-import Fill from "../components/utils/Fill";
-import Error from "../components/Error";
-import NotFound from "../components/NotFound";
+import React from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import ProductsTitle from '../components/ProductsGallery/ProductsTitle';
+import Product from '../components/Product/index';
+import ProductSkeleton from '../components/Product/ProductSkeleton';
+import Container from '../components/utils/Container';
+import Grid from '../components/utils/Grid';
+import Spacer from '../components/utils/Spacer';
+import Fill from '../components/utils/Fill';
+import Error from '../components/Error';
+import NotFound from '../components/NotFound';
+import { fetcher } from '../utils';
+import type { Product as IProduct } from '../types';
 
 export default function Search() {
   const router = useRouter();
   const { q: search } = router.query;
 
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data, error } = useSWR(`/api/products`, fetcher);
+  const { data, error } = useSWR<IProduct[]>(`/api/products`, fetcher);
 
   if (!search) {
     return <NotFound />;

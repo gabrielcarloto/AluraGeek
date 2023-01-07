@@ -23,7 +23,7 @@ interface ErrorProps {
   queryError?: SignInErrorTypes | string;
   error?: string;
   // eslint-disable-next-line no-undef
-  setState?: Dispatch<SetStateAction<string | null | undefined>>;
+  setState?: Dispatch<SetStateAction<string | undefined>>;
   close?: boolean;
 }
 
@@ -31,7 +31,7 @@ function Error({ queryError, error, setState, close }: ErrorProps) {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   function toggleError() {
-    if (setState) setState(null);
+    if (setState) setState(undefined);
   }
 
   const Arrow = css({

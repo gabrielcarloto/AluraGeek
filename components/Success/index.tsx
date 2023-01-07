@@ -10,7 +10,7 @@ import {
 import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 interface SuccessProps {
-  text: string;
+  text?: string;
   state: boolean;
   setState: Dispatch<SetStateAction<boolean>>;
   expanded?: boolean;

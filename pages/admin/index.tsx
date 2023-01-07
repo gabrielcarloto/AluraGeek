@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Head from 'next/head';
 import { css } from '../../styles/theme';
 import { MdAdd, MdImage } from 'react-icons/md';
@@ -10,16 +10,19 @@ import Spacer from '../../components/utils/Spacer';
 import Error from '../../components/Error';
 import Success from '../../components/Success';
 import LabeledInput from '../../components/Inputs/LabeledInput';
+import type { Product as IProduct } from '../../types';
+import { BASE_URL, fetcher } from '../../utils';
+import type { NextPage, NextPageContext } from 'next';
+import { isDefined, keysAreOfValue } from '../../utils/assert';
+import type { UndefinedPartial } from '../../utils/types';
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-const dev = process.env.NODE_ENV !== 'production';
-const baseURL = dev
-  ? 'http://localhost:3000/api'
-  : 'https://alura-geek-mocha.vercel.app/api';
+interface Props {
+  product: IProduct | undefined;
+}
 
-export default function AdminPage({ product }) {
-  const [error, setError] = React.useState(false);
-  const [success, setSuccess] = React.useState(false);
+const AdminPage: NextPage<Props> = ({ product }) => {
+  const [error, setError] = React.useState<string>();
+  const [success, setSuccess] = React.useState<boolean>(false);
 
   const NewProductContainer = css({
     '@media (min-width: 1024px)': {
@@ -113,23 +116,31 @@ export default function AdminPage({ product }) {
   });
 
   function Form() {
-    const [form, setForm] = useState({
-      name: product.name || '',
-      image: product.image || '',
-      category: product.category || '',
-      price: product.price || '',
-      description: product.description || '',
-    });
+    const [form, setForm] = useState(
+      product && {
+        name: product.name,
+        image: product.image,
+        category: product.category,
+        price: product.price,
+        description: product.description,
+      },
+    );
 
-    function handleChange(e) {
-      setForm({
-        ...form,
-        [e.target.name]: e.target.value,
+    function handleChange(
+      e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    ) {
+      setForm((prevForm) => {
+        const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+
+        return {
+          ...prevForm,
+          [target.name]: target['value'],
+        } as typeof prevForm; // TODO: remove casting maybe
       });
     }
 
-    function uploadImage(e) {
-      const file = e.target.files[0];
+    function uploadImage(e: ChangeEvent<HTMLInputElement>) {
+      const file = e.target.files && e.target.files[0];
       const reader = new FileReader();
 
       reader.onloadend = () => {
@@ -148,28 +159,30 @@ export default function AdminPage({ product }) {
             return r.json();
           })
           .then((data) => {
-            if (data) setForm({ ...form, image: data.link });
+            if (data)
+              setForm((prevForm) => {
+                return {
+                  ...prevForm,
+                  image: data.link as string,
+                } as typeof prevForm; // TODO: remove casting maybe
+              });
           });
       };
 
-      reader.readAsDataURL(file);
+      if (file) reader.readAsDataURL(file);
+      else setError('Ocorreu um erro');
     }
 
-    async function handleSubmit(e) {
+    async function handleSubmit(e: FormEvent<HTMLFormElement>) {
       e.preventDefault();
 
-      if (
-        form.name == '' ||
-        form.image == '' ||
-        form.category == '' ||
-        form.price == ''
-      ) {
+      if (keysAreOfValue(form, '')) {
         setError('Preencha todos os campos');
         return;
-      } else if (!form.image.includes('http')) {
+      } else if (isDefined(form) && !form.image.includes('http')) {
         setError('Insira uma URL válida para a imagem');
         return;
-      } else if (form.price < 0) {
+      } else if (isDefined(form) && form.price < 0) {
         setError('O preço não pode ser negativo');
         return;
       }
@@ -177,45 +190,33 @@ export default function AdminPage({ product }) {
       const pwrd = prompt('Insira a senha para adicionar o produto:');
 
       NProgress.start();
-      setError(false);
+      setError(undefined);
 
-      const productData = {
-        ...form,
-        alt: form.name,
-        price: parseInt(form.price),
-        id: product.id || undefined,
-      };
+      if (isDefined(form) && pwrd) {
+        const productData = {
+          ...form,
+          alt: form.name,
+          price: form.price, // ! maybe it has to be converted from string to number
+          id: product?.id,
+        };
 
-      await saveProduct(productData, pwrd);
+        await saveProduct(productData, pwrd);
+      }
     }
 
-    async function saveProduct(data, pass) {
-      let response;
-
-      if (!product) {
-        response = await fetch('/api/products', {
-          method: 'POST',
-          headers: {
-            Authorization: `${pass}`,
-          },
-          body: JSON.stringify(data),
-        });
-      } else {
-        response = await fetch('/api/products', {
-          method: 'PUT',
-          headers: {
-            Authorization: `${pass}`,
-          },
-          body: JSON.stringify(data),
-        });
-      }
+    async function saveProduct(data: UndefinedPartial<IProduct>, pass: string) {
+      const response = await fetch('/api/products', {
+        method: product ? 'PUT' : 'POST',
+        headers: {
+          Authorization: `${pass}`,
+        },
+        body: JSON.stringify(data),
+      });
 
       NProgress.done();
 
-      if (!response.ok) {
-        setError('Erro ao salvar produto');
-        return;
-      }
+      if (!response.ok) return setError('Erro ao salvar produto');
+
       setSuccess(true);
     }
 
@@ -249,38 +250,38 @@ export default function AdminPage({ product }) {
           label="Nome do produto"
           name="name"
           type="text"
-          maxLength="20"
-          inputValue={form.name}
+          maxLength={20}
+          inputValue={form?.name}
           handleChange={handleChange}
         />
         <LabeledInput
           label="Imagem do produto"
           name="image"
           type="url"
-          inputValue={form.image}
+          inputValue={form?.image}
           handleChange={handleChange}
         />
         <LabeledInput
           label="Categoria do produto"
           name="category"
           type="text"
-          maxLength="20"
-          inputValue={form.category}
+          maxLength={20}
+          inputValue={form?.category}
           handleChange={handleChange}
         />
         <LabeledInput
           label="Preço do produto"
           name="price"
           type="number"
-          inputValue={form.price}
+          inputValue={form?.price}
           handleChange={handleChange}
         />
         <LabeledInput
           label="Descrição do produto"
           name="description"
           textarea
-          maxLength="150"
-          inputValue={form.description}
+          maxLength={150}
+          inputValue={form?.description}
           handleChange={handleChange}
         />
         <Button type="submit" color="primary">
@@ -304,21 +305,24 @@ export default function AdminPage({ product }) {
       </Container>
       <Spacer responsive={1} />
       <AnimatePresence>
-        {error && (
-          <Error error={error} state={error} setState={setError} close />
-        )}
+        {error && <Error error={error} setState={setError} close />}
         {success && <Success state={success} setState={setSuccess} />}
       </AnimatePresence>
     </>
   );
-}
+};
 
-AdminPage.getInitialProps = async ({ query }) => {
-  if (!query.product) return { product: false };
-  const id = query.product;
-  const product = await fetcher(`${baseURL}/products/${id}`);
+AdminPage.getInitialProps = async ({
+  query,
+}: NextPageContext & { query: { product: string } }) => {
+  if (!query['product']) return { product: undefined };
+
+  const id = query['product'];
+  const product = await fetcher<IProduct>(`${BASE_URL}/products/${id}`);
 
   return {
     product,
   };
 };
+
+export default AdminPage;

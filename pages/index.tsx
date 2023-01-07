@@ -7,8 +7,7 @@ import ProductsGallery from '../components/ProductsGallery/index';
 import Spacer from '../components/utils/Spacer';
 import Fill from '../components/utils/Fill';
 import type { Product } from '../types';
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+import { fetcher } from '../utils';
 
 export default function Home() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
