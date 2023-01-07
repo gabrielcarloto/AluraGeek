@@ -1,81 +1,14 @@
-import Link from "next/link";
-import { css } from "../../styles/theme";
-import Grid from "../utils/Grid";
-import Spacer from "../utils/Spacer";
-import Container from "../utils/Container";
-import Form from "./Form";
+import Link from 'next/link';
+import Grid from '../utils/Grid';
+import Spacer from '../utils/Spacer';
+import Container from '../utils/Container';
+import Form from './Form';
+
+import { FooterStyles } from './Footer.styles';
 
 function Footer() {
-  const Footer = css({
-    backgroundColor: "$secondary",
-
-    ".footer-grid": {
-      "@media (min-width: 1024px)": {
-        rowGap: "0",
-      },
-    },
-
-    ".footer-logo": {
-      gridColumn: "1 / -1",
-      margin: "0 auto",
-      cursor: "pointer",
-
-      "@media (min-width: 768px)": {
-        width: "176px",
-        gridColumn: "1 / 5",
-        margin: "0",
-      },
-
-      "@media (min-width: 1024px)": {
-        gridColumn: "1 / 3",
-      },
-    },
-
-    ".footer-links": {
-      listStyleType: "none",
-      textAlign: "center",
-      marginBottom: "16px",
-      gridColumn: "1 / -1",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "16px",
-
-      "@media (min-width: 768px)": {
-        textAlign: "left",
-        gridColumn: "1 / 5",
-        alignItems: "flex-start",
-        gap: "24px",
-      },
-
-      "@media (min-width: 1024px)": {
-        gridColumn: "4 / 7",
-        marginBottom: "0",
-      },
-
-      li: {
-        cursor: "pointer",
-      },
-    },
-
-    ".form-btn": {
-      width: "clamp(150px, 10vw, 165px)",
-    },
-
-    ".dev": {
-      backgroundColor: "$lightBackground",
-      fontSize: "16px",
-      fontWeight: "500",
-      textAlign: "center",
-
-      a: {
-        display: "inline-block",
-      },
-    },
-  });
-
   return (
-    <footer className={Footer()}>
+    <footer className={FooterStyles()}>
       <Spacer responsive={1} />
       <Container className="footer-container">
         <Grid className="footer-grid">
@@ -126,11 +59,11 @@ function Footer() {
       <div className="dev">
         <Spacer y={32} />
         <p>
-          Desenvolvido com{" "}
+          Desenvolvido com{' '}
           <span role="img" aria-label="heart">
             ❤️
-          </span>{" "}
-          por{" "}
+          </span>{' '}
+          por{' '}
           <a
             href="https://github.com/gabrielcarloto/AluraGeek"
             target="_blank"

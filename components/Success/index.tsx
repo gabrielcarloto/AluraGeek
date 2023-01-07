@@ -1,14 +1,29 @@
-import useCollapse from "react-collapsed";
-import { motion } from "framer-motion";
-import { css } from "../../styles/theme";
-import Dialog from "../Dialog/index";
+import useCollapse from 'react-collapsed';
+import { motion } from 'framer-motion';
+import { css } from '../../styles/theme';
+import Dialog from '../Dialog/index';
 import {
   MdClose,
   MdCheckCircleOutline,
   MdArrowBackIosNew,
-} from "react-icons/md";
+} from 'react-icons/md';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
-function Success({ text, state, setState, expanded }) {
+interface SuccessProps {
+  text: string;
+  state: boolean;
+  setState: Dispatch<SetStateAction<boolean>>;
+  expanded?: boolean;
+  children?: ReactNode;
+  close?: boolean;
+}
+function Success({
+  text,
+  state,
+  setState,
+  expanded = false,
+  close,
+}: SuccessProps) {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({
     defaultExpanded: expanded,
   });
@@ -18,17 +33,17 @@ function Success({ text, state, setState, expanded }) {
   }
 
   const Arrow = css({
-    cursor: "pointer",
-    transition: "transform 200ms ease-in-out",
-    transform: `rotate(${isExpanded ? "90deg" : "-90deg"})`,
+    cursor: 'pointer',
+    transition: 'transform 200ms ease-in-out',
+    transform: `rotate(${isExpanded ? '90deg' : '-90deg'})`,
   });
 
   return (
     <>
       <motion.div
         style={{
-          position: "fixed",
-          zIndex: "10",
+          position: 'fixed',
+          zIndex: '10',
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -37,7 +52,7 @@ function Success({ text, state, setState, expanded }) {
       >
         <Dialog
           color="success"
-          expanded={isExpanded}
+          // expanded={isExpanded}
           key="success"
           tabIndex={0}
         >
@@ -63,10 +78,10 @@ function Success({ text, state, setState, expanded }) {
                 )}
                 {text && (
                   <MdArrowBackIosNew
+                    {...getToggleProps()}
                     className={Arrow()}
                     id="dialog-collapse"
                     tabIndex={0}
-                    {...getToggleProps()}
                   />
                 )}
               </div>

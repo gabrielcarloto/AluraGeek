@@ -1,8 +1,15 @@
-import React from "react";
-import { css } from "@stitches/react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { Dispatch, SetStateAction } from 'react';
+import { css } from '@stitches/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-function ImageZoom({ zoom, setZoom, img, alt }) {
+interface ImageZoomProps {
+  zoom: boolean;
+  setZoom: Dispatch<SetStateAction<boolean>>;
+  img: string;
+  alt: string;
+}
+
+function ImageZoom({ zoom, setZoom, img, alt }: ImageZoomProps) {
   /*
    *  HOW IT WORKS:
    *  1. When the user clicks on the image, the zoom state is set to true on the parent component.
@@ -33,24 +40,24 @@ function ImageZoom({ zoom, setZoom, img, alt }) {
   }, 200);
 
   const Modal = css({
-    position: "fixed",
-    top: "0",
-    left: "0",
-    zIndex: "2",
-    width: "100vw",
-    height: "100vh",
-    padding: "20px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "rgba(0, 0, 0, 0.5)",
-    cursor: "zoom-out",
+    position: 'fixed',
+    top: '0',
+    left: '0',
+    zIndex: '2',
+    width: '100vw',
+    height: '100vh',
+    padding: '20px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: 'rgba(0, 0, 0, 0.5)',
+    cursor: 'zoom-out',
 
     img: {
-      padding: "5px",
+      padding: '5px',
 
-      "@media (min-width: 1024px)": {
-        padding: "20%",
+      '@media (min-width: 1024px)': {
+        padding: '20%',
       },
     },
   });
@@ -97,7 +104,7 @@ function ImageZoom({ zoom, setZoom, img, alt }) {
               y: 100,
               opacity: 0,
               transition: {
-                ease: "easeInOut",
+                ease: 'easeInOut',
               },
             }}
             transition={{

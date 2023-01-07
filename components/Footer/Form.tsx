@@ -37,7 +37,7 @@ function Form() {
         type="text"
         label="Nome"
         required
-        maxLength="40"
+        maxLength={40}
         inputValue={nameValue}
         setInputValue={setNameValue}
       />
@@ -46,7 +46,7 @@ function Form() {
         textarea
         label="Escreva sua mensagem"
         required
-        maxLength="120"
+        maxLength={120}
         inputValue={messageValue}
         setInputValue={setMessageValue}
       />
