@@ -1,33 +1,33 @@
-import Head from "next/head";
-import React from "react";
-import useSWR from "swr";
-import Banner from "../components/Banner/index";
-import Error from "../components/Error/index";
-import ProductsGallery from "../components/ProductsGallery/index";
-import Spacer from "../components/utils/Spacer";
-import Fill from "../components/utils/Fill";
+import Head from 'next/head';
+import React from 'react';
+import useSWR from 'swr';
+import Banner from '../components/Banner/index';
+import Error from '../components/Error/index';
+import ProductsGallery from '../components/ProductsGallery/index';
+import Spacer from '../components/utils/Spacer';
+import Fill from '../components/utils/Fill';
+import type { Product } from '../types';
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function Home() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);
 
   React.useEffect(() => {
-    const screen = window.matchMedia("(max-width: 1400px)");
+    const screen = window.matchMedia('(max-width: 1400px)');
 
-    const handleChange = (e) => {
+    const handleChange = (e: MediaQueryListEvent) => {
       setIsSmallScreen(e.matches);
     };
 
-    screen.addEventListener("change", handleChange(screen));
+    screen.addEventListener('change', handleChange);
 
     return () => {
-      screen.removeEventListener("change", handleChange(screen));
+      screen.removeEventListener('change', handleChange);
     };
   }, []);
 
-  // get products from api
-  const { data, error } = useSWR("/api/products", fetcher);
+  const { data, error } = useSWR<Product[]>('/api/products', fetcher);
 
   if (error)
     return (
@@ -39,16 +39,15 @@ export default function Home() {
 
   const products = data;
 
-  // filter products by category
-  function filter(category) {
+  function filter(category: string) {
     return products
       ? products.filter((product) => product.category === category)
       : [];
   }
 
-  const starWars = filter("star wars");
-  const consoles = filter("consoles");
-  const others = filter("outros");
+  const starWars = filter('star wars');
+  const consoles = filter('consoles');
+  const others = filter('outros');
 
   return (
     <>

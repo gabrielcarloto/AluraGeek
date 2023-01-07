@@ -8,7 +8,7 @@ interface ProductsTitleProps {
   title: string;
   all?: boolean;
   categoryAll: boolean;
-  link: string;
+  link: string | undefined;
   search?: boolean;
 }
 

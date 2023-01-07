@@ -10,7 +10,7 @@ interface ProductsGalleryProps {
   title: string;
   isSmall: boolean;
   products: IProduct[];
-  link: string;
+  link?: string;
 }
 
 function ProductsGallery({

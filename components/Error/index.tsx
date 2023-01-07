@@ -4,19 +4,7 @@ import { motion } from 'framer-motion';
 import { css } from '../../styles/theme';
 import Dialog from '../Dialog/index';
 import { MdClose, MdErrorOutline, MdArrowBackIosNew } from 'react-icons/md';
-
-type SignInErrorTypes =
-  | 'Signin'
-  | 'OAuthSignin'
-  | 'OAuthCallback'
-  // | 'OAuthCreateAccount'
-  // | 'EmailCreateAccount'
-  | 'Callback'
-  | 'OAuthAccountNotLinked'
-  // | 'EmailSignin'
-  | 'CredentialsSignin'
-  | 'SessionRequired'
-  | 'default';
+import type { SignInErrorTypes } from '../../types';
 
 const queryErrors: Readonly<Record<SignInErrorTypes, string>> = {
   Signin: 'Tente logar com outra conta',
@@ -32,10 +20,10 @@ const queryErrors: Readonly<Record<SignInErrorTypes, string>> = {
 };
 
 interface ErrorProps {
-  queryError?: SignInErrorTypes;
-  error: string;
+  queryError?: SignInErrorTypes | string;
+  error?: string;
   // eslint-disable-next-line no-undef
-  setState: Dispatch<SetStateAction<string | null>>;
+  setState?: Dispatch<SetStateAction<string | null | undefined>>;
   close?: boolean;
 }
 
@@ -43,7 +31,7 @@ function Error({ queryError, error, setState, close }: ErrorProps) {
   const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
 
   function toggleError() {
-    setState(null);
+    if (setState) setState(null);
   }
 
   const Arrow = css({
@@ -99,7 +87,13 @@ function Error({ queryError, error, setState, close }: ErrorProps) {
             </div>
           </div>
           <div className="dialog-content" {...getCollapseProps()}>
-            <p>{queryError ? queryErrors[queryError] : error}</p>
+            <p>
+              {queryError
+                ? queryError in queryErrors
+                  ? queryErrors[queryError as SignInErrorTypes]
+                  : queryErrors['default']
+                : error}
+            </p>
           </div>
         </Dialog>
       </motion.div>
