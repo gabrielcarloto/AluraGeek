@@ -226,7 +226,7 @@ function Header() {
                 className="header-user-image"
                 id="header-user"
                 src={session.user.image}
-                alt={session.user.name!}
+                alt={session.user.name as string}
                 tabIndex={0}
                 onClick={toggleUserMenu}
               />

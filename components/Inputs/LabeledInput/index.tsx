@@ -25,9 +25,8 @@ function toggleClass<
 
 interface SharedProps {
   label: string;
-  inputValue: string | number;
-  // eslint-disable-next-line no-undef
-  setInputValue: Dispatch<SetStateAction<any>>;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
   handleChange?: (
     // eslint-disable-next-line no-unused-vars
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
