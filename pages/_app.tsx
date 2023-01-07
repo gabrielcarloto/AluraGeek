@@ -1,27 +1,31 @@
-import Head from "next/head";
-import { Router } from "next/dist/client/router";
-import { SessionProvider, useSession } from "next-auth/react";
-import { AnimatePresence, motion } from "framer-motion";
-import NProgress from "nprogress";
-import globalStyles from "../styles/global";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Fill from "../components/utils/Fill";
-import NotFound from "../components/NotFound";
+import Head from 'next/head';
+import { Router } from 'next/dist/client/router';
+import { SessionProvider, useSession } from 'next-auth/react';
+import { AnimatePresence, motion } from 'framer-motion';
+import NProgress from 'nprogress';
+import globalStyles from '../styles/global';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Fill from '../components/utils/Fill';
+import NotFound from '../components/NotFound';
+import type { AppProps as NextAppProps } from 'next/app';
+import type { Session } from 'next-auth';
+import type { ReactNode } from 'react';
+import type { NextComponentType, NextPageContext } from 'next';
 
 NProgress.configure({
   showSpinner: false,
 });
 
-Router.events.on("routeChangeStart", () => {
+Router.events.on('routeChangeStart', () => {
   NProgress.start();
 });
 
-Router.events.on("routeChangeComplete", () => {
+Router.events.on('routeChangeComplete', () => {
   NProgress.done();
 });
 
-Router.events.on("routeChangeError", () => {
+Router.events.on('routeChangeError', () => {
   NProgress.done();
 });
 
@@ -52,8 +56,21 @@ const transitionVariants = {
   },
 };
 
-function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
-  const isSearch = (path) => path.includes("/search");
+interface Props {
+  session: Session;
+}
+
+type MyAppProps = NextAppProps<Props> & {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Component: NextComponentType<NextPageContext, any, any> & { auth: boolean };
+};
+
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+  router,
+}: MyAppProps) {
+  const isSearch = (path: string) => path.includes('/search');
 
   globalStyles();
   return (
@@ -80,7 +97,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
             animate="animate"
             exit="exit"
             variants={transitionVariants}
-            key={isSearch(router.route) ? "search" : Math.random()}
+            key={isSearch(router.route) ? 'search' : Math.random()}
           >
             {Component.auth ? (
               <Auth>
@@ -99,15 +116,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
 
 export default MyApp;
 
-function Auth({ children }) {
+function Auth({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession({ required: true });
   const isAdmin =
     session &&
     session.user &&
-    session.user.name === "Admin" &&
-    session.user.email === "nevergonna@giveyou.up";
+    session.user.name === 'Admin' &&
+    session.user.email === 'nevergonna@giveyou.up';
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return (
       <AnimatePresence>
         <motion.div
@@ -115,7 +132,7 @@ function Auth({ children }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
-          key={Router.route}
+          key={(Router as any).route}
         >
           <Fill display="flex">
             <h1>Carregando...</h1>
@@ -131,7 +148,7 @@ function Auth({ children }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
-          key={Router.route}
+          key={(Router as any).route}
         >
           {children}
         </motion.div>
@@ -139,6 +156,6 @@ function Auth({ children }) {
     );
   }
 
-  window.location.href = "/";
+  window.location.href = '/';
   return <NotFound />;
 }
