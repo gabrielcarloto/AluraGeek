@@ -1,16 +1,17 @@
-import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { css } from "../styles/theme";
-import { AnimatePresence, motion } from "framer-motion";
-import { FaShoppingCart, FaPlus, FaMinus, FaTrashAlt } from "react-icons/fa";
-import Input from "../components/Inputs/Input";
+import React from "react";
+import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from "react-icons/fa";
+
 import Button from "../components/Button";
+import Input from "../components/Inputs/Input";
 import Container from "../components/utils/Container";
-import Spacer from "../components/utils/Spacer";
 import Fill from "../components/utils/Fill";
 import Grid from "../components/utils/Grid";
+import Spacer from "../components/utils/Spacer";
+import { css } from "../styles/theme";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 const dev = process.env.NODE_ENV !== "production";

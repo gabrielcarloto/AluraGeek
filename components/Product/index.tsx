@@ -1,14 +1,14 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 import { AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import NProgress from 'nprogress';
-import { MdEdit, MdDelete } from 'react-icons/md';
-import Error from '../Error';
-import Success from '../Success';
+import React from 'react';
+import { MdDelete,MdEdit } from 'react-icons/md';
 
 import type { Product as IProduct } from '../../types';
+import Error from '../Error';
+import Success from '../Success';
 import { ProductStyles } from './Product.styles';
 
 function Product({ product }: { product: IProduct }) {

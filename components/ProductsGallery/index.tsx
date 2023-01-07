@@ -1,10 +1,11 @@
 import React from 'react';
-import Container from '../utils/Container';
-import ProductsTitle from './ProductsTitle';
-import Product from '../Product/index';
-import Grid from '../utils/Grid';
-import ProductSkeleton from '../Product/ProductSkeleton';
+
 import type { Product as IProduct } from '../../types';
+import Product from '../Product/index';
+import ProductSkeleton from '../Product/ProductSkeleton';
+import Container from '../utils/Container';
+import Grid from '../utils/Grid';
+import ProductsTitle from './ProductsTitle';
 
 interface ProductsGalleryProps {
   title: string;

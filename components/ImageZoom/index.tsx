@@ -1,6 +1,6 @@
-import React, { Dispatch, SetStateAction } from 'react';
 import { css } from '@stitches/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import React, { Dispatch, SetStateAction } from 'react';
 
 interface ImageZoomProps {
   zoom: boolean;

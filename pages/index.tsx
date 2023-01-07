@@ -1,11 +1,12 @@
 import Head from 'next/head';
 import React from 'react';
 import useSWR from 'swr';
+
 import Banner from '../components/Banner/index';
 import Error from '../components/Error/index';
 import ProductsGallery from '../components/ProductsGallery/index';
-import Spacer from '../components/utils/Spacer';
 import Fill from '../components/utils/Fill';
+import Spacer from '../components/utils/Spacer';
 import type { Product } from '../types';
 import { fetcher } from '../utils';
 

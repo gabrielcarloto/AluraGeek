@@ -1,4 +1,4 @@
-import { styled, keyframes } from "@stitches/react";
+import { keyframes,styled } from "@stitches/react";
 
 const shimmer = keyframes({
   "0%": {

@@ -1,13 +1,14 @@
-import useCollapse from 'react-collapsed';
 import { motion } from 'framer-motion';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import useCollapse from 'react-collapsed';
+import {
+  MdArrowBackIosNew,
+  MdCheckCircleOutline,
+  MdClose,
+} from 'react-icons/md';
+
 import { css } from '../../styles/theme';
 import Dialog from '../Dialog/index';
-import {
-  MdClose,
-  MdCheckCircleOutline,
-  MdArrowBackIosNew,
-} from 'react-icons/md';
-import type { Dispatch, ReactNode, SetStateAction } from 'react';
 
 interface SuccessProps {
   text?: string;

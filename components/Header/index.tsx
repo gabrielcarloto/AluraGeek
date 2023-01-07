@@ -1,19 +1,19 @@
-import React, { FormEvent } from 'react';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import Router, { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
-
-import {
-  FaRegUserCircle,
-  FaSignOutAlt,
-  FaSignInAlt,
-  FaPlusCircle,
-  FaShoppingCart,
-} from 'react-icons/fa';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
+import React, { FormEvent } from 'react';
 import useOnClickOutside from 'react-cool-onclickoutside';
-import Container from '../utils/Container';
+import {
+  FaPlusCircle,
+  FaRegUserCircle,
+  FaShoppingCart,
+  FaSignInAlt,
+  FaSignOutAlt,
+} from 'react-icons/fa';
+
 import Input from '../Inputs/Input';
+import Container from '../utils/Container';
 import { HeaderStyles } from './Header.styles';
 
 function Header() {

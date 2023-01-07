@@ -1,4 +1,5 @@
 import { styled } from '@stitches/react';
+
 import Skeleton from '../utils/Skeleton';
 
 function ProductSkeleton({ length }: { length: number }) {

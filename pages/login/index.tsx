@@ -1,18 +1,16 @@
+import { css, styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
-import { getCsrfToken, getSession, signIn } from 'next-auth/react';
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { getCsrfToken, getSession, signIn } from 'next-auth/react';
 import React from 'react';
 import { VscGithub } from 'react-icons/vsc';
-
-import { css, styled } from '@stitches/react';
 
 import Button from '../../components/Button';
 import Error from '../../components/Error/index';
 import Spacer from '../../components/utils/Spacer';
 import { Form } from './Form';
-
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
 export default function Login({
   csrfToken,

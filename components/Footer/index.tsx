@@ -1,10 +1,10 @@
 import Link from 'next/link';
+
+import Container from '../utils/Container';
 import Grid from '../utils/Grid';
 import Spacer from '../utils/Spacer';
-import Container from '../utils/Container';
-import Form from './Form';
-
 import { FooterStyles } from './Footer.styles';
+import Form from './Form';
 
 function Footer() {
   return (

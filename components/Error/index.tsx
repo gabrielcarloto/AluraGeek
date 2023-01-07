@@ -1,10 +1,11 @@
+import { motion } from 'framer-motion';
 import type { Dispatch, SetStateAction } from 'react';
 import useCollapse from 'react-collapsed';
-import { motion } from 'framer-motion';
+import { MdArrowBackIosNew,MdClose, MdErrorOutline } from 'react-icons/md';
+
 import { css } from '../../styles/theme';
-import Dialog from '../Dialog/index';
-import { MdClose, MdErrorOutline, MdArrowBackIosNew } from 'react-icons/md';
 import type { SignInErrorTypes } from '../../types';
+import Dialog from '../Dialog/index';
 
 const queryErrors: Readonly<Record<SignInErrorTypes, string>> = {
   Signin: 'Tente logar com outra conta',

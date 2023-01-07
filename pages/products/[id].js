@@ -1,14 +1,15 @@
-import React from "react";
+import { styled } from "@stitches/react";
+import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { styled } from "@stitches/react";
-import Spacer from "../../components/utils/Spacer";
+import React from "react";
+
 import Button from "../../components/Button/index";
-import ProductsGallery from "../../components/ProductsGallery/index";
 import ImageZoom from "../../components/ImageZoom";
 import Info from "../../components/Info";
-import { AnimatePresence } from "framer-motion";
+import ProductsGallery from "../../components/ProductsGallery/index";
+import Spacer from "../../components/utils/Spacer";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 const dev = process.env.NODE_ENV !== "production";

@@ -1,17 +1,18 @@
-import Head from 'next/head';
-import { Router } from 'next/dist/client/router';
-import { SessionProvider, useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'framer-motion';
-import NProgress from 'nprogress';
-import globalStyles from '../styles/global';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import Fill from '../components/utils/Fill';
-import NotFound from '../components/NotFound';
-import type { AppProps as NextAppProps } from 'next/app';
-import type { Session } from 'next-auth';
-import type { ReactNode } from 'react';
 import type { NextComponentType, NextPageContext } from 'next';
+import type { AppProps as NextAppProps } from 'next/app';
+import { Router } from 'next/dist/client/router';
+import Head from 'next/head';
+import type { Session } from 'next-auth';
+import { SessionProvider, useSession } from 'next-auth/react';
+import NProgress from 'nprogress';
+import type { ReactNode } from 'react';
+
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import NotFound from '../components/NotFound';
+import Fill from '../components/utils/Fill';
+import globalStyles from '../styles/global';
 
 NProgress.configure({
   showSpinner: false,
