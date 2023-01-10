@@ -13,6 +13,7 @@ import Header from '../components/Header';
 import NotFound from '../components/NotFound';
 import Fill from '../components/utils/Fill';
 import globalStyles from '../styles/global';
+import { isAdmin } from '../utils';
 
 NProgress.configure({
   showSpinner: false,
@@ -119,11 +120,7 @@ export default MyApp;
 
 function Auth({ children }: { children: ReactNode }) {
   const { data: session, status } = useSession({ required: true });
-  const isAdmin =
-    session &&
-    session.user &&
-    session.user.name === 'Admin' &&
-    session.user.email === 'nevergonna@giveyou.up';
+  const isUserAdmin = isAdmin(session);
 
   if (status === 'loading') {
     return (
@@ -141,7 +138,7 @@ function Auth({ children }: { children: ReactNode }) {
         </motion.div>
       </AnimatePresence>
     );
-  } else if (isAdmin) {
+  } else if (isUserAdmin) {
     return (
       <AnimatePresence>
         <motion.div

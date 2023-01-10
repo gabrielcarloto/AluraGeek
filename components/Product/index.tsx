@@ -4,20 +4,17 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import NProgress from 'nprogress';
 import React from 'react';
-import { MdDelete,MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 import type { Product as IProduct } from '../../types';
+import { isAdmin } from '../../utils';
 import Error from '../Error';
 import Success from '../Success';
 import { ProductStyles } from './Product.styles';
 
 function Product({ product }: { product: IProduct }) {
   const { data: session } = useSession();
-  const isAdmin =
-    session &&
-    session.user &&
-    session.user.name === 'Admin' &&
-    session.user.email === 'nevergonna@giveyou.up';
+  const isUserAdmin = isAdmin(session);
 
   const [error, setError] = React.useState<string | null>(null);
   const [success, setSuccess] = React.useState<boolean>();
@@ -58,7 +55,7 @@ function Product({ product }: { product: IProduct }) {
         key={product.id}
         scroll={false}
       >
-        <div className={ProductStyles(isAdmin)()}>
+        <div className={ProductStyles(isUserAdmin)()}>
           <div className="product-image-container">
             <div className="product-image">
               <Image
@@ -67,7 +64,7 @@ function Product({ product }: { product: IProduct }) {
                 layout="fill"
                 objectFit="cover"
               />
-              {isAdmin && (
+              {isUserAdmin && (
                 <>
                   <div className="admin-buttons">
                     <Link passHref href={`/admin?product=${product.id}`}>

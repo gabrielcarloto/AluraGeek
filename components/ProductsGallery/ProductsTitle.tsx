@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
 import Button from '../../components/Button';
+import { isAdmin } from '../../utils';
 
 interface ProductsTitleProps {
   title: string;
@@ -21,11 +22,7 @@ function ProductsTitle({
   search,
 }: ProductsTitleProps) {
   const { data: session } = useSession();
-  const isAdmin =
-    session &&
-    session.user &&
-    session.user.name === 'Admin' &&
-    session.user.email === 'nevergonna@giveyou.up';
+  const isUserAdmin = isAdmin(session);
 
   const isAll = all || categoryAll;
 
@@ -132,7 +129,7 @@ function ProductsTitle({
           </div>
         </Link>
       )}
-      {!isAll && isAdmin && (
+      {!isAll && isUserAdmin && (
         <Link passHref href="/products/new" scroll={false}>
           <Button className="add-product-btn" color="primary">
             Adicionar produto

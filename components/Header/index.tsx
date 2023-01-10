@@ -12,6 +12,7 @@ import {
   FaSignOutAlt,
 } from 'react-icons/fa';
 
+import { isAdmin } from '../../utils';
 import Input from '../Inputs/Input';
 import Container from '../utils/Container';
 import { HeaderStyles } from './Header.styles';
@@ -21,11 +22,7 @@ function Header() {
   const isLoginPage = router.pathname === '/login';
 
   const { data: session } = useSession();
-  const isAdmin =
-    session &&
-    session.user &&
-    session.user.name === 'Admin' &&
-    session.user.email === 'nevergonna@giveyou.up';
+  const isUserAdmin = isAdmin(session);
 
   const headerSearchMobile = React.useRef<HTMLDivElement>(null);
   const headerForm = React.useRef<HTMLFormElement>(null);
@@ -256,7 +253,7 @@ function Header() {
                   ref={headerUserMenu}
                 >
                   <ul>
-                    {isAdmin ? (
+                    {isUserAdmin ? (
                       <li tabIndex={0}>
                         <Link passHref href="/admin">
                           <p>
