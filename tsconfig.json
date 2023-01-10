@@ -6,7 +6,8 @@
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
       "@types": ["types/index.ts"],
-      "@lib/*": ["lib/*"]
+      "@lib/*": ["lib/*"],
+      "@hooks/*": ["hooks/*"]
     },
     "exactOptionalPropertyTypes": false
   },

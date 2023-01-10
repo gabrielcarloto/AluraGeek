@@ -8,24 +8,11 @@ import Error from '@components/Error';
 import ProductsGallery from '@components/ProductsGallery';
 import Fill from '@components/utils/Fill';
 import Spacer from '@components/utils/Spacer';
+import { useMediaQuery } from '@hooks/useMediaQuery';
 import { fetcher } from '@utils/fetch';
 
 export default function Home() {
-  const [isSmallScreen, setIsSmallScreen] = React.useState(false);
-
-  React.useEffect(() => {
-    const screen = window.matchMedia('(max-width: 1400px)');
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setIsSmallScreen(e.matches);
-    };
-
-    screen.addEventListener('change', handleChange);
-
-    return () => {
-      screen.removeEventListener('change', handleChange);
-    };
-  }, []);
+  const isSmallScreen = useMediaQuery('1400px');
 
   const { data, error } = useSWR<Product[]>('/api/products', fetcher);
 

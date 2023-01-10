@@ -34,7 +34,7 @@
           // Packages
           ["^react", "^@?\\w"],
           // Internal packages.
-          ["^@(components|utils|types|styles|lib)(/.*|$)?"],
+          ["^@(components|utils|types|styles|lib|hooks)(/.*|$)?"],
           // Side effect imports.
           ["^\\u0000"],
           // Parent imports. Put `..` last.
