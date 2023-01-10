@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Product } from '@prisma/client';
 import Head from 'next/head';
 import useSWR from 'swr';
 
@@ -7,8 +8,7 @@ import Error from '@components/Error';
 import ProductsGallery from '@components/ProductsGallery';
 import Fill from '@components/utils/Fill';
 import Spacer from '@components/utils/Spacer';
-import type { Product } from '@types';
-import { fetcher } from '@utils';
+import { fetcher } from '@utils/fetch';
 
 export default function Home() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);

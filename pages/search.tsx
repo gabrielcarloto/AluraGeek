@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Product as IProduct } from '@prisma/client';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -12,8 +13,7 @@ import Container from '@components/utils/Container';
 import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
-import type { Product as IProduct } from '@types';
-import { fetcher } from '@utils';
+import { fetcher } from '@utils/fetch';
 
 export default function Search() {
   const router = useRouter();

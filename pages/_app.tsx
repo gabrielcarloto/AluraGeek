@@ -13,7 +13,7 @@ import Header from '@components/Header';
 import NotFound from '@components/NotFound';
 import Fill from '@components/utils/Fill';
 import globalStyles from '@styles/global';
-import { isAdmin } from '@utils';
+import { isAdmin } from '@utils/admin';
 
 NProgress.configure({
   showSpinner: false,

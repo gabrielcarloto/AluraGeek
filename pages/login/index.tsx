@@ -19,9 +19,9 @@ export default function Login({
   const router = useRouter();
   const { error } = router.query as { error: string | undefined };
 
-  const [errorVisible, setErrorVisible] = React.useState<
-    string | null | undefined
-  >(error);
+  const [errorVisible, setErrorVisible] = React.useState<string | undefined>(
+    error,
+  );
 
   const FormSection = css({
     height: '60vh',

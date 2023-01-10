@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from 'react-icons/fa';
+import type { Product } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
@@ -12,8 +13,8 @@ import Container from '@components/utils/Container';
 import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
-import type { Cart, CartProducts, Product } from '@types';
-import { BASE_URL, fetcher } from '@utils';
+import type { Cart, CartProducts } from '@types';
+import { BASE_URL, fetcher } from '@utils/all';
 
 import CartStyles, { mainElAnimationProps } from './Cart.styles';
 

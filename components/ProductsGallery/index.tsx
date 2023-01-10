@@ -1,10 +1,10 @@
 import React from 'react';
+import type { Product as IProduct } from '@prisma/client';
 
 import Product from '@components/Product';
 import ProductSkeleton from '@components/Product/ProductSkeleton';
 import Container from '@components/utils/Container';
 import Grid from '@components/utils/Grid';
-import type { Product as IProduct } from '@types';
 
 import ProductsTitle from './ProductsTitle';
 
