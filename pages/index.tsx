@@ -1,14 +1,14 @@
-import Head from 'next/head';
 import React from 'react';
+import Head from 'next/head';
 import useSWR from 'swr';
 
-import Banner from '../components/Banner/index';
-import Error from '../components/Error/index';
-import ProductsGallery from '../components/ProductsGallery/index';
-import Fill from '../components/utils/Fill';
-import Spacer from '../components/utils/Spacer';
-import type { Product } from '../types';
-import { fetcher } from '../utils';
+import Banner from '@components/Banner';
+import Error from '@components/Error';
+import ProductsGallery from '@components/ProductsGallery';
+import Fill from '@components/utils/Fill';
+import Spacer from '@components/utils/Spacer';
+import type { Product } from '@types';
+import { fetcher } from '@utils';
 
 export default function Home() {
   const [isSmallScreen, setIsSmallScreen] = React.useState(false);

@@ -1,9 +1,9 @@
-import { css } from '@stitches/react';
 import { useState } from 'react';
+import { css } from '@stitches/react';
 
-import Button from '../../components/Button';
-import LabeledInput from '../../components/Inputs/LabeledInput';
-import Spacer from '../../components/utils/Spacer';
+import Button from '@components/Button';
+import LabeledInput from '@components/Inputs/LabeledInput';
+import Spacer from '@components/utils/Spacer';
 
 export function Form({ csrfToken }: { csrfToken: string | undefined }) {
   const [userValue, setUserValue] = useState('');

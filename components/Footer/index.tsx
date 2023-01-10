@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
-import Container from '../utils/Container';
-import Grid from '../utils/Grid';
-import Spacer from '../utils/Spacer';
+import Container from '@components/utils/Container';
+import Grid from '@components/utils/Grid';
+import Spacer from '@components/utils/Spacer';
+
 import { FooterStyles } from './Footer.styles';
 import Form from './Form';
 

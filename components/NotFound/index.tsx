@@ -1,4 +1,4 @@
-import Fill from "../utils/Fill";
+import Fill from '@components/utils/Fill';
 
 function NotFound() {
   return (

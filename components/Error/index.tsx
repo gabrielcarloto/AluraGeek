@@ -1,10 +1,11 @@
-import { motion } from 'framer-motion';
 import type { Dispatch, SetStateAction } from 'react';
 import useCollapse from 'react-collapsed';
-import { MdArrowBackIosNew,MdClose, MdErrorOutline } from 'react-icons/md';
+import { MdArrowBackIosNew, MdClose, MdErrorOutline } from 'react-icons/md';
+import { motion } from 'framer-motion';
 
-import { css } from '../../styles/theme';
-import type { SignInErrorTypes } from '../../types';
+import { css } from '@styles/theme';
+import type { SignInErrorTypes } from '@types';
+
 import Dialog from '../Dialog/index';
 
 const queryErrors: Readonly<Record<SignInErrorTypes, string>> = {

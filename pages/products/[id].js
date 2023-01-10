@@ -1,9 +1,9 @@
+import React from "react";
 import { styled } from "@stitches/react";
 import { AnimatePresence } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 import Button from "../../components/Button/index";
 import ImageZoom from "../../components/ImageZoom";

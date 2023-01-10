@@ -1,21 +1,21 @@
+import React, { ChangeEvent, FormEvent, useState } from 'react';
+import { MdAdd, MdImage } from 'react-icons/md';
 import { AnimatePresence } from 'framer-motion';
 import type { NextPage, NextPageContext } from 'next';
 import Head from 'next/head';
 import NProgress from 'nprogress';
-import React, { ChangeEvent, FormEvent, useState } from 'react';
-import { MdAdd, MdImage } from 'react-icons/md';
 
-import Button from '../../components/Button/index';
-import Error from '../../components/Error';
-import LabeledInput from '../../components/Inputs/LabeledInput';
-import Success from '../../components/Success';
-import Container from '../../components/utils/Container';
-import Spacer from '../../components/utils/Spacer';
-import { css } from '../../styles/theme';
-import type { Product as IProduct } from '../../types';
-import { BASE_URL, fetcher } from '../../utils';
-import { isDefined, keysAreOfValue } from '../../utils/assert';
-import type { UndefinedPartial } from '../../utils/types';
+import Button from '@components/Button/index';
+import Error from '@components/Error';
+import LabeledInput from '@components/Inputs/LabeledInput';
+import Success from '@components/Success';
+import Container from '@components/utils/Container';
+import Spacer from '@components/utils/Spacer';
+import { css } from '@styles/theme';
+import type { Product as IProduct } from '@types';
+import { BASE_URL, fetcher } from '@utils';
+import { isDefined, keysAreOfValue } from '@utils/assert';
+import type { UndefinedPartial } from '@utils/types';
 
 interface Props {
   product: IProduct | undefined;

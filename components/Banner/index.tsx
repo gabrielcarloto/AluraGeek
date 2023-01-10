@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import Button from '../Button/index';
 import Container from '../utils/Container';
+
 import { BannerStyles } from './Banner.styles';
 
 function Banner() {

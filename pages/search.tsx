@@ -1,19 +1,19 @@
+import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React from 'react';
 import useSWR from 'swr';
 
-import Error from '../components/Error';
-import NotFound from '../components/NotFound';
-import Product from '../components/Product/index';
-import ProductSkeleton from '../components/Product/ProductSkeleton';
-import ProductsTitle from '../components/ProductsGallery/ProductsTitle';
-import Container from '../components/utils/Container';
-import Fill from '../components/utils/Fill';
-import Grid from '../components/utils/Grid';
-import Spacer from '../components/utils/Spacer';
-import type { Product as IProduct } from '../types';
-import { fetcher } from '../utils';
+import Error from '@components/Error';
+import NotFound from '@components/NotFound';
+import Product from '@components/Product/index';
+import ProductSkeleton from '@components/Product/ProductSkeleton';
+import ProductsTitle from '@components/ProductsGallery/ProductsTitle';
+import Container from '@components/utils/Container';
+import Fill from '@components/utils/Fill';
+import Grid from '@components/utils/Grid';
+import Spacer from '@components/utils/Spacer';
+import type { Product as IProduct } from '@types';
+import { fetcher } from '@utils';
 
 export default function Search() {
   const router = useRouter();

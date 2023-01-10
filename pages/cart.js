@@ -1,9 +1,9 @@
+import React from "react";
+import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from "react-icons/fa";
 import { AnimatePresence, motion } from "framer-motion";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from "react-icons/fa";
 
 import Button from "../components/Button";
 import Input from "../components/Inputs/Input";

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { BASE_URL, isAdmin } from '../../utils';
+import { BASE_URL, isAdmin } from '@utils';
 
 export async function middleware(req: NextRequest) {
   // return early if url isn't supposed to be protected

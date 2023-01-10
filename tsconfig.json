@@ -1,3 +1,13 @@
 {
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@styles/*": ["styles/*"],
+      "@utils": ["utils/index.ts"],
+      "@utils/*": ["utils/*"],
+      "@types": ["types/index.ts"]
+    }
+  },
   "extends": "@tsconfig/next-strictest/tsconfig.json"
 }

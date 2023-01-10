@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
-import Button from '../../components/Button';
-import { isAdmin } from '../../utils';
+import Button from '@components/Button';
+import { isAdmin } from '@utils';
 
 interface ProductsTitleProps {
   title: string;

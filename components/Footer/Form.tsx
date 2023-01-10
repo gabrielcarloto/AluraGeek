@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { css } from '../../styles/theme';
-import Button from '../Button/index';
-import LabeledInput from '../Inputs/LabeledInput';
-import Spacer from '../utils/Spacer';
+import Button from '@componentsButton/index';
+import LabeledInput from '@componentsInputs/LabeledInput';
+import Spacer from '@componentsutils/Spacer';
+import { css } from '@styles/theme';
 
 function Form() {
   const [nameValue, setNameValue] = React.useState('');

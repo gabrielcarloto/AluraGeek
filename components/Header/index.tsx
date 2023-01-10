@@ -1,7 +1,3 @@
-import { AnimatePresence, motion, Variants } from 'framer-motion';
-import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
-import { signOut, useSession } from 'next-auth/react';
 import React, { FormEvent } from 'react';
 import useOnClickOutside from 'react-cool-onclickoutside';
 import {
@@ -11,10 +7,15 @@ import {
   FaSignInAlt,
   FaSignOutAlt,
 } from 'react-icons/fa';
+import { AnimatePresence, motion, Variants } from 'framer-motion';
+import Link from 'next/link';
+import Router, { useRouter } from 'next/router';
+import { signOut, useSession } from 'next-auth/react';
 
-import { isAdmin } from '../../utils';
-import Input from '../Inputs/Input';
-import Container from '../utils/Container';
+import Input from '@components/Inputs/Input';
+import Container from '@components/utils/Container';
+import { isAdmin } from '@utils';
+
 import { HeaderStyles } from './Header.styles';
 
 function Header() {
