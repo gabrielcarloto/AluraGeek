@@ -6,8 +6,10 @@
       "@styles/*": ["styles/*"],
       "@utils": ["utils/index.ts"],
       "@utils/*": ["utils/*"],
-      "@types": ["types/index.ts"]
-    }
+      "@types": ["types/index.ts"],
+      "@lib/*": ["lib/*"]
+    },
+    "exactOptionalPropertyTypes": false
   },
   "extends": "@tsconfig/next-strictest/tsconfig.json"
 }
