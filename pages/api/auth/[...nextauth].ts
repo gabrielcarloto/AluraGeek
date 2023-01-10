@@ -1,9 +1,9 @@
 import NextAuth, { User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
-import assert from 'node:assert';
 
 import { ADMIN_USER } from '@utils/admin';
+import { getENV } from '@utils/env';
 
 const ENV = getENV('GITHUB_ID', 'GITHUB_SECRET', 'NEXTAUTH_SECRET');
 
@@ -85,18 +85,3 @@ export default NextAuth({
     signIn: '/login',
   },
 });
-
-function getENV<T extends string>(...variables: Array<T>) {
-  const envVariables: Record<string, string> = {};
-
-  variables.forEach((v) => {
-    assert(
-      process.env[v] !== undefined,
-      `Expected environment variable ${v} to be defined`,
-    );
-
-    envVariables[v] = process.env[v] as string;
-  });
-
-  return envVariables as Record<T, string>;
-}
