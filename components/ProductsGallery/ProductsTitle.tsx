@@ -8,8 +8,8 @@ import Button from '../../components/Button';
 interface ProductsTitleProps {
   title: string;
   all?: boolean;
-  categoryAll: boolean;
-  link: string | undefined;
+  categoryAll?: boolean;
+  link?: string | undefined;
   search?: boolean;
 }
 

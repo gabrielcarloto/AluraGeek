@@ -17,7 +17,7 @@ import { fetcher } from '../utils';
 
 export default function Search() {
   const router = useRouter();
-  const { q: search } = router.query;
+  const { q: search } = router.query as { q: string };
 
   const { data, error } = useSWR<IProduct[]>(`/api/products`, fetcher);
 
@@ -46,7 +46,7 @@ export default function Search() {
         <Head>
           <title>Pesquisa: &quot;{search}&quot; | AluraGeek</title>
         </Head>
-        <Fill display="flex" alignItems="center" justifyContent="center">
+        <Fill display="flex">
           <Container>
             <Spacer responsive={1} />
             <ProductsTitle
