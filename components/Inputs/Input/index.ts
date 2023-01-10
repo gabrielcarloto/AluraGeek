@@ -1,4 +1,4 @@
-import { styled } from '@stitches/react';
+import { styled } from '@styles/theme';
 
 const Input = styled('input', {
   height: '36px',

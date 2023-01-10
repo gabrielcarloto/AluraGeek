@@ -1,9 +1,9 @@
-import { css } from '@stitches/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 
 import Button from '@components/Button';
+import { css } from '@styles/theme';
 import { isAdmin } from '@utils';
 
 interface ProductsTitleProps {

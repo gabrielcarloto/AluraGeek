@@ -1,6 +1,5 @@
-import { styled } from '@stitches/react';
-
-import Skeleton from '../utils/Skeleton';
+import Skeleton from '@components/utils/Skeleton';
+import { styled } from '@styles/theme';
 
 function ProductSkeleton({ length }: { length: number }) {
   const SkeletonWrapper = styled('div', {

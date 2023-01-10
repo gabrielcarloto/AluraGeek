@@ -1,4 +1,4 @@
-import { css } from '@stitches/react';
+import { css } from '@styles/theme';
 
 export const BannerStyles = css({
   width: '100vw',

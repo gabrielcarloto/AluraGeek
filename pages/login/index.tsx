@@ -1,6 +1,5 @@
 import React from 'react';
 import { VscGithub } from 'react-icons/vsc';
-import { css, styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import Head from 'next/head';
@@ -10,6 +9,7 @@ import { getCsrfToken, getSession, signIn } from 'next-auth/react';
 import Button from '@components/Button';
 import Error from '@components/Error/index';
 import Spacer from '@components/utils/Spacer';
+import { css, styled } from '@styles/theme';
 
 import { Form } from './Form';
 
