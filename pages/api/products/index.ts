@@ -2,7 +2,7 @@ import type { Product } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createProduct, getManyProducts, updateProduct } from '@lib/prisma';
-import { authAdminAction } from '@utils';
+import { authAdminAction } from '@utils/admin';
 import { allowedHttpMethods, STATUS } from '@utils/http';
 
 export default async function handler(

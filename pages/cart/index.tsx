@@ -14,7 +14,7 @@ import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
 import type { Cart, CartProducts } from '@types';
-import { BASE_URL, fetcher } from '@utils/all';
+import { BASE_API_URL, fetcher } from '@utils/all';
 
 import CartStyles, { mainElAnimationProps } from './Cart.styles';
 
@@ -311,6 +311,6 @@ export default function Cart({
 }
 
 export async function getStaticProps() {
-  const products = await fetcher<Product[]>(`${BASE_URL}/products`);
+  const products = await fetcher<Product[]>(`${BASE_API_URL}/products`);
   return { props: { products } };
 }

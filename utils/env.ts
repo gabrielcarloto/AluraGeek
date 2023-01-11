@@ -1,4 +1,4 @@
-import assert from 'node:assert';
+import assert from 'assert';
 
 export function getENV<T extends string>(...variables: Array<T>) {
   const envVariables: Record<string, string> = {};

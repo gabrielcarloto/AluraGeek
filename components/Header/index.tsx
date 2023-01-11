@@ -14,7 +14,7 @@ import { signOut, useSession } from 'next-auth/react';
 
 import Input from '@components/Inputs/Input';
 import Container from '@components/utils/Container';
-import { isAdmin } from '@utils';
+import { isAdmin } from '@utils/admin';
 
 import { HeaderStyles } from './Header.styles';
 

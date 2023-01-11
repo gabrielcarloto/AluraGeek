@@ -11,8 +11,6 @@ export const ADMIN_USER = {
   PASSWORD: 'negoney',
 } as const;
 
-const PRODUCTS_PASSWORD = getENV('PRODUCTS_PASSWORD').PRODUCTS_PASSWORD;
-
 /**
  * Can be used both in client and server
  */
@@ -39,6 +37,8 @@ export function isAdmin(session: JWT | Session | null): boolean {
  * a password only I know
  */
 export function authAdminAction(req: NextApiRequest, res: NextApiResponse) {
+  const PRODUCTS_PASSWORD = getENV('PRODUCTS_PASSWORD').PRODUCTS_PASSWORD;
+
   if (req.headers.authorization !== PRODUCTS_PASSWORD) {
     res.status(401).json({ error: 'Unauthorized' });
     return false;

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Button from '@componentsButton/index';
-import LabeledInput from '@componentsInputs/LabeledInput';
-import Spacer from '@componentsutils/Spacer';
+import Button from '@components/Button/index';
+import LabeledInput from '@components/Inputs/LabeledInput';
+import Spacer from '@components/utils/Spacer';
 import { css } from '@styles/theme';
 
 function Form() {

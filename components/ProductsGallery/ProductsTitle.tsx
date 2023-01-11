@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 
 import Button from '@components/Button';
 import { css } from '@styles/theme';
-import { isAdmin } from '@utils';
+import { isAdmin } from '@utils/admin';
 
 interface ProductsTitleProps {
   title: string;

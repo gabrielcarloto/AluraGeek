@@ -13,7 +13,7 @@ import Success from '@components/Success';
 import Container from '@components/utils/Container';
 import Spacer from '@components/utils/Spacer';
 import { css } from '@styles/theme';
-import { BASE_URL, fetcher, isDefined, keysAreOfValue } from '@utils/all';
+import { BASE_API_URL, fetcher, isDefined, keysAreOfValue } from '@utils/all';
 import type { UndefinedPartial } from '@utils/types';
 
 interface Props {
@@ -318,7 +318,7 @@ AdminPage.getInitialProps = async ({
   if (!query['product']) return { product: undefined };
 
   const id = query['product'];
-  const product = await fetcher<IProduct>(`${BASE_URL}/products/${id}`);
+  const product = await fetcher<IProduct>(`${BASE_API_URL}/products/${id}`);
 
   return {
     product,
