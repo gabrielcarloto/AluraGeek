@@ -1,83 +1,77 @@
-import React from "react";
-import { styled } from "@stitches/react";
-import { AnimatePresence } from "framer-motion";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import type { Product as IProduct } from '@prisma/client';
+import { styled } from '@stitches/react';
+import { AnimatePresence } from 'framer-motion';
+import type { GetStaticProps, InferGetStaticPropsType } from 'next';
+import Head from 'next/head';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import Button from "../../components/Button/index";
-import ImageZoom from "../../components/ImageZoom";
-import Info from "../../components/Info";
-import ProductsGallery from "../../components/ProductsGallery/index";
-import Spacer from "../../components/utils/Spacer";
+import Button from '@components/Button';
+import ImageZoom from '@components/ImageZoom';
+import Info from '@components/Info';
+import ProductsGallery from '@components/ProductsGallery';
+import Spacer from '@components/utils/Spacer';
+import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Cart } from '@types';
+import { BASE_URL, fetcher } from '@utils/all';
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
-const dev = process.env.NODE_ENV !== "production";
-const baseURL = dev
-  ? "http://localhost:3000/api"
-  : "https://alura-geek-mocha.vercel.app/api";
-
-export default function Product({ product, products }) {
+export default function Product({
+  product,
+  products,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   // similar products:
   // - remove the current product from the list
   // - get products from the same category
   // - if there is less than 6 products, get more from other categories
   const filteredProducts = products.filter(
-    (p) => p.category === product.category && p.id !== product.id
+    (p) => p.category === product.category && p.id !== product.id,
   );
+
   const similarProducts =
     filteredProducts.length < 6
       ? filteredProducts.concat(
           products
             .filter((p) => p.category !== product.category)
-            .slice(0, 6 - filteredProducts.length)
+            .slice(0, 6 - filteredProducts.length),
         )
       : filteredProducts;
 
   // image zoom
-  const [zoom, setZoom] = React.useState(false);
+  const [zoom, setZoom] = useState(false);
   function handleClick() {
     setZoom(!zoom);
   }
 
-  const [addedToCart, setAddedToCart] = React.useState(false);
-  const [totalProducts, setTotalProducts] = React.useState(0);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const [totalProducts, setTotalProducts] = useState(0);
 
-  React.useEffect(() => {
-    const cart = localStorage.getItem("cart");
+  useEffect(() => {
+    const cart = localStorage.getItem('cart');
 
     if (!cart) return;
 
-    const data = JSON.parse(cart);
+    const data: Cart = JSON.parse(cart);
 
-    data.products.map((p) => {
+    data?.products?.map((p) => {
       if (p.id === product.id) {
         setTotalProducts(p.quantity);
       }
     });
   }, [product]);
 
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const mobile = window.matchMedia("(max-width: 1024px)");
-
-    const handleMobile = (e) => {
-      setIsMobile(e.matches);
-    };
-
-    mobile.addEventListener("change", handleMobile(mobile));
-
-    return () => {
-      mobile.removeEventListener("change", handleMobile(mobile));
-    };
-  }, []);
+  const isMobile = useMediaQuery('1024px');
 
   function addToCart() {
-    let data;
+    let data: {
+      products: Pick<
+        NonNullable<NonNullable<Cart>['products']>[0],
+        'id' | 'quantity'
+      >[];
+    };
     let isAdded = false;
 
-    const cart = localStorage.getItem("cart");
+    const cart = localStorage.getItem('cart');
 
     if (!cart) {
       data = {
@@ -113,7 +107,7 @@ export default function Product({ product, products }) {
       }
     }
 
-    localStorage.setItem("cart", JSON.stringify(data));
+    localStorage.setItem('cart', JSON.stringify(data));
 
     if (!isAdded) {
       setAddedToCart(true);
@@ -121,121 +115,121 @@ export default function Product({ product, products }) {
     }
   }
 
-  const Product = styled("main", {
-    display: "flex",
-    flexDirection: "column",
-    padding: "0",
+  const Product = styled('main', {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '0',
 
-    "@media (min-width: 768px)": {
-      flexDirection: "row",
-      marginTop: "32px",
+    '@media (min-width: 768px)': {
+      flexDirection: 'row',
+      marginTop: '32px',
 
-      "@media (orientation: portrait)": {
-        padding: "0px 35px",
+      '@media (orientation: portrait)': {
+        padding: '0px 35px',
       },
 
-      "@media (orientation: landscape)": {
-        padding: "0px 152px",
-      },
-    },
-
-    "@media (min-width: 1024px)": {
-      marginTop: "64px",
-      alignItems: "center",
-    },
-
-    ".product-image": {
-      width: "100vw",
-      height: "250px",
-      position: "relative",
-      cursor: "zoom-in",
-
-      "@media (min-width: 768px)": {
-        width: "70%",
-        height: "auto",
-        margin: "0",
-        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
-      },
-
-      "@media (min-width: 1024px)": {
-        width: "50%",
-        height: "auto",
-        minHeight: "400px",
+      '@media (orientation: landscape)': {
+        padding: '0px 152px',
       },
     },
 
-    ".product-info": {
-      width: "100%",
-      padding: "16px",
-      display: "flex",
-      flexDirection: "column",
-      backgroundColor: "$lightBackground",
+    '@media (min-width: 1024px)': {
+      marginTop: '64px',
+      alignItems: 'center',
+    },
 
-      "@media (min-width: 1024px)": {
-        height: "100vh",
-        maxHeight: "400px",
-        justifyContent: "space-evenly",
+    '.product-image': {
+      width: '100vw',
+      height: '250px',
+      position: 'relative',
+      cursor: 'zoom-in',
+
+      '@media (min-width: 768px)': {
+        width: '70%',
+        height: 'auto',
+        margin: '0',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
       },
 
-      ".product-title": {
-        fontSize: "22px",
-        fontWeight: "500",
-        marginBottom: "8px",
+      '@media (min-width: 1024px)': {
+        width: '50%',
+        height: 'auto',
+        minHeight: '400px',
+      },
+    },
 
-        "@media (min-width: 768px)": {
-          fontSize: "28px",
+    '.product-info': {
+      width: '100%',
+      padding: '16px',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '$lightBackground',
+
+      '@media (min-width: 1024px)': {
+        height: '100vh',
+        maxHeight: '400px',
+        justifyContent: 'space-evenly',
+      },
+
+      '.product-title': {
+        fontSize: '22px',
+        fontWeight: '500',
+        marginBottom: '8px',
+
+        '@media (min-width: 768px)': {
+          fontSize: '28px',
         },
 
-        "@media (min-width: 1024px)": {
-          fontSize: "52px",
+        '@media (min-width: 1024px)': {
+          fontSize: '52px',
         },
       },
 
-      ".product-details": {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginBottom: "8px",
+      '.product-details': {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '8px',
 
-        ".product-price": {
-          fontSize: "16px",
-          fontWeight: "700",
+        '.product-price': {
+          fontSize: '16px',
+          fontWeight: '700',
         },
 
-        ".product-category": {
-          fontSize: "14px",
-          fontWeight: "500",
-          color: "$primary",
-          textTransform: "capitalize",
+        '.product-category': {
+          fontSize: '14px',
+          fontWeight: '500',
+          color: '$primary',
+          textTransform: 'capitalize',
 
-          "@media (min-width: 1024px)": {
-            fontSize: "16px",
+          '@media (min-width: 1024px)': {
+            fontSize: '16px',
           },
         },
       },
 
-      ".product-description": {
-        fontSize: "14px",
-        fontWeight: "400",
-        marginBottom: "8px",
+      '.product-description': {
+        fontSize: '14px',
+        fontWeight: '400',
+        marginBottom: '8px',
 
-        "@media (min-width: 1024px)": {
-          fontSize: "16px",
+        '@media (min-width: 1024px)': {
+          fontSize: '16px',
         },
       },
 
-      ".product-button": {
-        alignSelf: "flex-end",
-        width: "50%",
+      '.product-button': {
+        alignSelf: 'flex-end',
+        width: '50%',
 
-        "@media (min-width: 768px)": {
-          width: "100%",
-          justifySelf: "flex-end",
+        '@media (min-width: 768px)': {
+          width: '100%',
+          justifySelf: 'flex-end',
         },
 
-        "@media (min-width: 1440px)": {
-          width: "50%",
+        '@media (min-width: 1440px)': {
+          width: '50%',
         },
       },
     },
@@ -280,14 +274,14 @@ export default function Product({ product, products }) {
             <h1 className="product-title">{product.name}</h1>
             <div className="product-details">
               <p className="product-price">
-                {parseInt(product.price).toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
+                {product.price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
                 })}
               </p>
               <Link
                 passHref
-                href={`/products/${product.category.replace(/ /g, "-")}`}
+                href={`/products/${product.category.replace(/ /g, '-')}`}
               >
                 <a className="product-category">{product.category}</a>
               </Link>
@@ -326,9 +320,9 @@ export default function Product({ product, products }) {
             setState={setAddedToCart}
             close
           >
-            Para finalizar a compra,{" "}
+            Para finalizar a compra,{' '}
             <Link passHref href="/cart">
-              <span style={{ cursor: "pointer" }}>vá até o carrinho</span>
+              <span style={{ cursor: 'pointer' }}>vá até o carrinho</span>
             </Link>
             .
           </Info>
@@ -338,9 +332,14 @@ export default function Product({ product, products }) {
   );
 }
 
-export async function getStaticProps({ params }) {
-  const product = await fetcher(`${baseURL}/products/${params.id}`);
-  const products = await fetcher(`${baseURL}/products`);
+export const getStaticProps: GetStaticProps<{
+  product: IProduct;
+  products: IProduct[];
+}> = async ({ params }) => {
+  const param = params as unknown as { id: number };
+
+  const product: IProduct = await fetcher(`${BASE_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
+  const products: IProduct[] = await fetcher(`${BASE_URL}/products`);
 
   return {
     props: {
@@ -348,10 +347,10 @@ export async function getStaticProps({ params }) {
       products,
     },
   };
-}
+};
 
 export async function getStaticPaths() {
-  const res = await fetcher(`${baseURL}/products`);
+  const res = await fetcher<IProduct[]>(`${BASE_URL}/products`);
   const paths = res.map((product) => ({
     params: { id: product.id.toString() },
   }));

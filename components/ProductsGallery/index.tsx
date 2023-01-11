@@ -10,7 +10,7 @@ import ProductsTitle from './ProductsTitle';
 
 interface ProductsGalleryProps {
   title: string;
-  isSmall: boolean;
+  isSmall?: boolean;
   products: IProduct[];
   link?: string;
 }

@@ -1,22 +1,26 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import useSWR from "swr";
+import type { Product as IProduct } from '@prisma/client';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
 
-import Error from "../../components/Error";
-import Product from "../../components/Product/index";
-import ProductSkeleton from "../../components/Product/ProductSkeleton";
-import ProductsTitle from "../../components/ProductsGallery/ProductsTitle";
-import Container from "../../components/utils/Container";
-import Fill from "../../components/utils/Fill";
-import Grid from "../../components/utils/Grid";
-import Spacer from "../../components/utils/Spacer";
+import Error from '@components/Error';
+import Product from '@components/Product/index';
+import ProductSkeleton from '@components/Product/ProductSkeleton';
+import ProductsTitle from '@components/ProductsGallery/ProductsTitle';
+import Container from '@components/utils/Container';
+import Fill from '@components/utils/Fill';
+import Grid from '@components/utils/Grid';
+import Spacer from '@components/utils/Spacer';
+import { fetcher } from '@utils/fetch';
 
 export default function Category() {
   const router = useRouter();
   const { q: category } = router.query;
 
-  const fetcher = (url) => fetch(url).then((r) => r.json());
-  const { data, error } = useSWR(`/api/products/category/${category}`, fetcher);
+  const { data, error } = useSWR<IProduct[]>(
+    `/api/products/category/${category}`,
+    fetcher,
+  );
 
   if (error)
     return (
@@ -28,9 +32,9 @@ export default function Category() {
 
   const products = data || [];
   const title = !category
-    ? ""
-    : category.replace(/\w\S*/g, (w) =>
-        w.replace(/^\w/, (c) => c.toUpperCase())
+    ? ''
+    : (category as string).replace(/\w\S*/g, (w) =>
+        w.replace(/^\w/, (c) => c.toUpperCase()),
       );
 
   return (
