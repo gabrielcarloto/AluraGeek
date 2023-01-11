@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "prismadb": "dotenv -e .env.local -- npx prisma"
   },
   "dependencies": {
     "@fontsource/raleway": "^4.5.5",
