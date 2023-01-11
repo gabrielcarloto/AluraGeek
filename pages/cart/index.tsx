@@ -67,7 +67,7 @@ export default function Cart({
     setAnimationEnded(true);
   }, (cartItems?.length ?? 0) * 200);
 
-  function handleAddOrSubtract(id: string, method: 'add' | 'subtract') {
+  function handleAddOrSubtract(id: number, method: 'add' | 'subtract') {
     if (!cartItems) return;
 
     const newCart = cartItems.map((item) => {
@@ -91,7 +91,7 @@ export default function Cart({
     localStorage.setItem('cart', JSON.stringify({ products: newCart }));
   }
 
-  function removeFromCart(id: string) {
+  function removeFromCart(id: number) {
     if (!cartItems) return;
 
     const newCart = cartItems.filter((item) => item.id !== id);
@@ -141,7 +141,7 @@ export default function Cart({
                   <div className="products">
                     <AnimatePresence>
                       {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-                      {cartItems!.map((item, i) => (
+                      {cartItems?.map((item, i) => (
                         <motion.li
                           className="cart-product"
                           key={item.id}
