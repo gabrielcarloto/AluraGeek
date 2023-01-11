@@ -22,7 +22,7 @@ interface Props {
 
 const AdminPage: NextPage<Props> = ({ product }) => {
   const [error, setError] = React.useState<string>();
-  const [success, setSuccess] = React.useState<boolean>(false);
+  const [success, setSuccess] = React.useState<boolean>();
 
   const NewProductContainer = css({
     '@media (min-width: 1024px)': {

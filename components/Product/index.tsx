@@ -17,7 +17,7 @@ function Product({ product }: { product: IProduct }) {
   const { data: session } = useSession();
   const isUserAdmin = isAdmin(session);
 
-  const [error, setError] = React.useState<string | null>(null);
+  const [error, setError] = React.useState<string>();
   const [success, setSuccess] = React.useState<boolean>();
 
   async function deleteProduct(
@@ -84,7 +84,7 @@ function Product({ product }: { product: IProduct }) {
           <div className="product-details">
             <h3 className="product-name">{product.name}</h3>
             <p className="product-price">
-              {parseInt(product.price).toLocaleString('pt-BR', {
+              {product.price.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
               })}

@@ -13,7 +13,7 @@ import { css } from '@styles/theme';
 interface SuccessProps {
   text?: string;
   state: boolean;
-  setState: Dispatch<SetStateAction<boolean>>;
+  setState: Dispatch<SetStateAction<boolean | undefined>>;
   expanded?: boolean;
   children?: ReactNode;
   close?: boolean;

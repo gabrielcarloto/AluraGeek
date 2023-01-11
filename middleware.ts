@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-import { BASE_URL, isAdmin } from '@utils';
+import { BASE_URL, isAdmin } from '@utils/all';
 
 export async function middleware(req: NextRequest) {
   // return early if url isn't supposed to be protected
@@ -21,4 +22,6 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-// https://gist.github.com/balazsorban44/30e2267fe1105529f217acbe3763b468
+export const config = {
+  matcher: '/admin/:path*',
+};
