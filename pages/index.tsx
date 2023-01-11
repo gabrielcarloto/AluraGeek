@@ -1,10 +1,10 @@
 import React from 'react';
 import type { Product } from '@prisma/client';
-import Head from 'next/head';
 import useSWR from 'swr';
 
 import Banner from '@components/Banner';
 import Error from '@components/Error';
+import Head from '@components/Head';
 import ProductsGallery from '@components/ProductsGallery';
 import Fill from '@components/utils/Fill';
 import Spacer from '@components/utils/Spacer';
@@ -38,18 +38,10 @@ export default function Home() {
 
   return (
     <>
-      <Head>
-        <title>AluraGeek</title>
-        <meta
-          name="description"
-          content="Na AluraGeek você encontra os melhores produtos do universo geek e descontos imperdíveis!"
-        />
-        <meta property="og:title" content="AluraGeek" />
-        <meta
-          property="og:description"
-          content="Na AluraGeek você encontra os melhores produtos do universo geek e descontos imperdíveis!"
-        />
-      </Head>
+      <Head
+        title="Página Inicial"
+        description="Na AluraGeek você encontra os melhores produtos do universo geek e descontos imperdíveis!"
+      />
 
       <Banner />
       <Spacer responsive={1} />

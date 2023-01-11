@@ -3,11 +3,11 @@ import type { Product as IProduct } from '@prisma/client';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Button from '@components/Button';
+import Head from '@components/Head';
 import ImageZoom from '@components/ImageZoom';
 import Info from '@components/Info';
 import ProductsGallery from '@components/ProductsGallery';
@@ -237,12 +237,7 @@ export default function Product({
 
   return (
     <>
-      <Head>
-        <title>{product.name} | AluraGeek</title>
-        <meta name="description" content={product.description} />
-        <meta property="og:title" content={`${product.name} | AluraGeek`} />
-        <meta property="og:description" content={product.description} />
-      </Head>
+      <Head title={product.name} description={product.description} />
 
       <Product
         className="product"
