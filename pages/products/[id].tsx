@@ -14,7 +14,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
 import { useMediaQuery } from '@hooks/useMediaQuery';
 import type { Cart } from '@types';
-import { BASE_URL, fetcher } from '@utils/all';
+import { BASE_API_URL, fetcher } from '@utils/all';
 
 export default function Product({
   product,
@@ -333,8 +333,10 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ params }) => {
   const param = params as unknown as { id: number };
 
-  const product: IProduct = await fetcher(`${BASE_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
-  const products: IProduct[] = await fetcher(`${BASE_URL}/products`);
+  const product: IProduct = await fetcher(
+    `${BASE_API_URL}/products/${param.id}`,
+  ); // ! possible error if params is undefined or the id doesnt exist
+  const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
 
   return {
     props: {
@@ -345,7 +347,7 @@ export const getStaticProps: GetStaticProps<{
 };
 
 export async function getStaticPaths() {
-  const res = await fetcher<IProduct[]>(`${BASE_URL}/products`);
+  const res = await fetcher<IProduct[]>(`${BASE_API_URL}/products`);
   const paths = res.map((product) => ({
     params: { id: product.id.toString() },
   }));
