@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { Product as IProduct } from '@prisma/client';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
@@ -12,14 +12,16 @@ import ImageZoom from '@components/ImageZoom';
 import Info from '@components/Info';
 import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
+import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
-import type { Cart } from '@types';
 import { BASE_API_URL, fetcher } from '@utils/all';
 
 export default function Product({
   product,
   products,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const isMobile = useMediaQuery('1024px');
+
   // similar products:
   // - remove the current product from the list
   // - get products from the same category
@@ -44,74 +46,25 @@ export default function Product({
   }
 
   const [addedToCart, setAddedToCart] = useState(false);
-  const [totalProducts, setTotalProducts] = useState(0);
+  const [cart, { updateItem }] = useCart();
 
-  useEffect(() => {
-    const cart = localStorage.getItem('cart');
-
-    if (!cart) return;
-
-    const data: Cart = JSON.parse(cart);
-
-    data?.products?.map((p) => {
-      if (p.id === product.id) {
-        setTotalProducts(p.quantity);
-      }
-    });
-  }, [product]);
-
-  const isMobile = useMediaQuery('1024px');
+  console.log(cart);
+  const productInCart = Array.isArray(cart)
+    ? cart.find((p) => p.id === product.id)
+    : undefined;
+  const totalProducts = productInCart?.quantity ?? 0;
 
   function addToCart() {
-    let data: {
-      products: Pick<
-        NonNullable<NonNullable<Cart>['products']>[0],
-        'id' | 'quantity'
-      >[];
-    };
-    let isAdded = false;
+    if (productInCart) {
+      updateItem((cart) =>
+        cart.map((c) => {
+          if (c.id !== product.id) return c;
 
-    const cart = localStorage.getItem('cart');
-
-    if (!cart) {
-      data = {
-        products: [
-          {
-            id: product.id,
-            quantity: 1,
-          },
-        ],
-      };
+          return { ...c, quantity: c.quantity + 1 };
+        }),
+      );
     } else {
-      data = JSON.parse(cart);
-
-      data.products = data.products.map((p) => {
-        if (p.id === product.id) {
-          isAdded = true;
-          setTotalProducts(totalProducts + 1);
-
-          return {
-            id: product.id,
-            quantity: p.quantity + 1,
-          };
-        } else {
-          return p;
-        }
-      });
-
-      if (!isAdded) {
-        data.products.push({
-          id: product.id,
-          quantity: 1,
-        });
-      }
-    }
-
-    localStorage.setItem('cart', JSON.stringify(data));
-
-    if (!isAdded) {
-      setAddedToCart(true);
-      setTotalProducts(1);
+      updateItem((cart) => cart.concat({ ...product, quantity: 1 }));
     }
   }
 

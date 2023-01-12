@@ -1,11 +1,7 @@
 import type { Product } from '@prisma/client';
 
-export type CartProducts = (Product & {
+export type CartProduct = Product & {
   quantity: number;
-})[];
+};
 
-export type Cart =
-  | {
-      products?: CartProducts;
-    }
-  | undefined;
+export type Cart = CartProduct[];
