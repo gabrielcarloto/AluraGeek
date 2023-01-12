@@ -48,11 +48,10 @@ export function useCart() {
 
   function updateProductQuantity(id: Product['id'], value: 1 | -1) {
     updateItem((cart) =>
-      cart.map((c) => {
-        if (c.id !== id) return c;
-
-        return { ...c, quantity: c.quantity + value || 1 };
-      }),
+      cart.map((c) => ({
+        ...c,
+        quantity: c.id === id ? c.quantity + value || 1 : c.quantity,
+      })),
     );
   }
 
