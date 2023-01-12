@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from 'react-icons/fa';
 import type { Product } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -13,6 +13,7 @@ import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
+import { styled } from '@styles/theme';
 import type { Cart, CartProduct } from '@types';
 import { toCurrency } from '@utils/number';
 
@@ -64,106 +65,27 @@ export default function Cart() {
               <section className="cart-products">
                 <div className="products">
                   <AnimatePresence>
-                    {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
                     {cart?.map((item, i) => (
-                      <motion.li
-                        className="cart-product"
-                        key={item.id}
-                        initial={{
-                          opacity: 0,
-                          translateX: 100,
-                        }}
-                        animate={{
-                          opacity: 1,
-                          translateX: 0,
-                          transition: {
-                            duration: 0.35,
-                            ease: [0.18, 0.81, 0.38, 0.89],
-                            delay: i * 0.2,
-                          },
-                        }}
-                        exit={{
-                          opacity: 0,
-                          translateX: -100,
-                          transition: {
-                            duration: 0.2,
-                            ease: [0.59, 0.14, 0.77, 0.49],
-                          },
-                        }}
-                        layout
-                      >
-                        <Link passHref href={`/products/${item.id}`}>
-                          <div className="cart-product-image">
-                            <Image
-                              src={item.image}
-                              layout="fill"
-                              objectFit="cover"
-                              alt={item.alt}
-                            />
-                          </div>
-                        </Link>
-                        <Grid className="cart-product-details">
-                          <Link passHref href={`/products/${item.id}`}>
-                            <h3 className="cart-product-name">
-                              <a>{item.name}</a>
-                            </h3>
-                          </Link>
-                          <div className="cart-product-price">
-                            <span>
-                              <strong>
-                                {item.price.toLocaleString('pt-BR', {
-                                  style: 'currency',
-                                  currency: 'BRL',
-                                })}
-                              </strong>
-                              cada
-                            </span>
-                            <span>
-                              <strong>
-                                {(item.price * item.quantity).toLocaleString(
-                                  'pt-BR',
-                                  {
-                                    style: 'currency',
-                                    currency: 'BRL',
-                                  },
-                                )}
-                              </strong>
-                              no total
-                            </span>
-                          </div>
-                          <div className="cart-product-quantity">
-                            <button
-                              className="cart-product-quantity-button"
-                              onClick={() => handleChangeQuantity(item.id, -1)}
-                            >
-                              <FaMinus />
-                            </button>
-                            <span>{item.quantity}</span>
-                            <button
-                              className="cart-product-quantity-button"
-                              onClick={() => handleChangeQuantity(item.id, 1)}
-                            >
-                              <FaPlus />
-                            </button>
-                            <button
-                              className="cart-product-quantity-button remove"
-                              onClick={() => handleRemoveItemFromCart(item.id)}
-                            >
-                              <FaTrashAlt />
-                            </button>
-                          </div>
-                        </Grid>
-                      </motion.li>
+                      <CardSlideAnimationWrapper index={i} key={item.id}>
+                        <CartItem
+                          product={item}
+                          onChangeQuantity={handleChangeQuantity}
+                          onRemoveItem={handleRemoveItemFromCart}
+                        />
+                      </CardSlideAnimationWrapper>
                     ))}
                   </AnimatePresence>
                 </div>
                 <hr className="divider" />
-                <div className="cart-total-items">
-                  <span>Produtos: {cart?.length ?? 0}</span>
-                  <span>
-                    Total: {cart?.reduce((acc, item) => acc + item.quantity, 0)}
-                  </span>
-                </div>
+                <Info
+                  infos={[
+                    `Produtos: ${cart.length ?? 0}`,
+                    `Total: ${cart.reduce(
+                      (acc, item) => acc + item.quantity,
+                      0,
+                    )}`,
+                  ]}
+                />
               </section>
               <section className="cart-checkout">
                 <div className="cart-checkout-promo">
@@ -187,27 +109,7 @@ export default function Cart() {
                   </form>
                 </div>
                 <hr className="divider" />
-                <div className="cart-checkout-total">
-                  <div className="cart-checkout-total shipping">
-                    <span className="cart-checkout-total--text">Frete</span>
-                    <span className="cart-checkout-total--text">R$ 12,00</span>
-                  </div>
-                  <div className="cart-checkout-total discount">
-                    <span className="cart-checkout-total--text">Desconto</span>
-                    <span className="cart-checkout-total--text">0,00</span>
-                  </div>
-                  <div className="cart-checkout-total estimated">
-                    <span className="cart-checkout-total--text estimated">
-                      Total estimado
-                    </span>
-                    <span className="cart-checkout-total--text estimated">
-                      {total.toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      })}
-                    </span>
-                  </div>
-                </div>
+                <CheckoutInfo total={total} shipping={12} discount={0} />
                 <Button
                   className="cart-checkout-btn"
                   type="submit"
@@ -242,5 +144,167 @@ function EmptyCart() {
         </Fill>
       </main>
     </>
+  );
+}
+
+interface CartItemProps {
+  product: CartProduct;
+  onChangeQuantity: (id: Product['id'], value: 1 | -1) => void;
+  onRemoveItem: (id: Product['id']) => void;
+}
+
+function CartItem({ product, onChangeQuantity, onRemoveItem }: CartItemProps) {
+  return (
+    <>
+      <Link passHref href={`/products/${product.id}`}>
+        <div className="cart-product-image">
+          <Image
+            src={product.image}
+            layout="fill"
+            objectFit="cover"
+            alt={product.alt}
+          />
+        </div>
+      </Link>
+      <Grid className="cart-product-details">
+        <Link passHref href={`/products/${product.id}`}>
+          <h3 className="cart-product-name">
+            <a>{product.name}</a>
+          </h3>
+        </Link>
+        <div className="cart-product-price">
+          <span>
+            <b>{toCurrency(product.price)}</b>
+            cada
+          </span>
+          <span>
+            <b>{toCurrency(product.price * product.quantity)}</b>
+            no total
+          </span>
+        </div>
+        <div className="cart-product-quantity">
+          <button
+            className="cart-product-quantity-button"
+            onClick={() => onChangeQuantity(product.id, -1)}
+          >
+            <FaMinus />
+          </button>
+          <span>{product.quantity}</span>
+          <button
+            className="cart-product-quantity-button"
+            onClick={() => onChangeQuantity(product.id, 1)}
+          >
+            <FaPlus />
+          </button>
+          <button
+            className="cart-product-quantity-button remove"
+            onClick={() => onRemoveItem(product.id)}
+          >
+            <FaTrashAlt />
+          </button>
+        </div>
+      </Grid>
+    </>
+  );
+}
+
+function CheckoutInfo({
+  shipping,
+  discount,
+  total,
+}: {
+  shipping: number;
+  discount: number;
+  total: number;
+}) {
+  return (
+    <>
+      <div className="cart-checkout-total">
+        <Info infos={['Frete', toCurrency(shipping)]} variant="medium" />
+        <Info infos={['Desconto', toCurrency(discount)]} variant="medium" />
+        <Info infos={['Total estimado', toCurrency(total)]} variant="bold" />
+      </div>
+    </>
+  );
+}
+
+function Info({
+  infos,
+  variant,
+}: {
+  infos: string[];
+  variant?: 'normal' | 'medium' | 'bold';
+}) {
+  const Styled = styled('div', {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+
+    variants: {
+      font: {
+        normal: {
+          fontSize: 16,
+          fontWeight: 400,
+        },
+        medium: {
+          fontSize: 16,
+          fontWeight: 500,
+        },
+        bold: {
+          fontSize: 18,
+          fontWeight: 700,
+        },
+      },
+    },
+
+    defaultVariants: {
+      font: 'normal',
+    },
+  });
+
+  return (
+    <Styled font={variant}>
+      {infos.map((info) => (
+        <span key={info}>{info}</span>
+      ))}
+    </Styled>
+  );
+}
+
+function CardSlideAnimationWrapper({
+  index,
+  children,
+}: {
+  index: number;
+  children: ReactNode;
+}) {
+  return (
+    <motion.li
+      className="cart-product"
+      initial={{
+        opacity: 0,
+        translateX: 100,
+      }}
+      animate={{
+        opacity: 1,
+        translateX: 0,
+        transition: {
+          duration: 0.35,
+          ease: [0.18, 0.81, 0.38, 0.89],
+          delay: index * 0.2,
+        },
+      }}
+      exit={{
+        opacity: 0,
+        translateX: -100,
+        transition: {
+          duration: 0.2,
+          ease: [0.59, 0.14, 0.77, 0.49],
+        },
+      }}
+      layout
+    >
+      {children}
+    </motion.li>
   );
 }
