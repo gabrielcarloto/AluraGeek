@@ -46,9 +46,8 @@ export default function Product({
   }
 
   const [addedToCart, setAddedToCart] = useState(false);
-  const [cart, { updateItem }] = useCart();
+  const [cart, { updateProductQuantity, addProduct }] = useCart();
 
-  console.log(cart);
   const productInCart = Array.isArray(cart)
     ? cart.find((p) => p.id === product.id)
     : undefined;
@@ -56,15 +55,9 @@ export default function Product({
 
   function addToCart() {
     if (productInCart) {
-      updateItem((cart) =>
-        cart.map((c) => {
-          if (c.id !== product.id) return c;
-
-          return { ...c, quantity: c.quantity + 1 };
-        }),
-      );
+      updateProductQuantity(product.id, 1);
     } else {
-      updateItem((cart) => cart.concat({ ...product, quantity: 1 }));
+      addProduct(product);
     }
   }
 

@@ -13,14 +13,20 @@ import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
-import type { Cart } from '@types';
+import type { Cart, CartProduct } from '@types';
+import { toCurrency } from '@utils/number';
 
 import CartStyles, { mainElAnimationProps } from './Cart.styles';
-
 export default function Cart() {
   const [animationEnded, setAnimationEnded] = React.useState(false);
 
-  const [cart, { updateItem }] = useCart();
+  const [
+    cart,
+    {
+      updateProductQuantity: handleChangeQuantity,
+      removeProduct: handleRemoveItemFromCart,
+    },
+  ] = useCart();
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,20 +40,6 @@ export default function Cart() {
     (total, item) => total + item.quantity * item.price,
     0,
   );
-
-  function handleChangeQuantity(id: Product['id'], value: 1 | -1) {
-    updateItem((cart) =>
-      (cart as Cart).map((c) => {
-        if (c.id !== id) return c;
-
-        return { ...c, quantity: c.quantity + value || 1 };
-      }),
-    );
-  }
-
-  function handleRemoveItemFromCart(id: Product['id']) {
-    updateItem((cart) => (cart as Cart).filter((c) => c.id !== id));
-  }
 
   return (
     <>
