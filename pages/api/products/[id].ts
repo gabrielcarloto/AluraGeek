@@ -14,7 +14,7 @@ export default async function productHandler(
   } = req;
 
   const productId = parseInt(id as string);
-  const product = getUniqueProduct(productId);
+  const product = await getUniqueProduct(productId);
 
   if (!product) {
     res.status(STATUS.NOT_FOUND).json({ error: 'Product not found' });
