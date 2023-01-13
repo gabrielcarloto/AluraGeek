@@ -1,6 +1,5 @@
 import React, { ReactNode, useEffect } from 'react';
 import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from 'react-icons/fa';
-import type { Product } from '@prisma/client';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -148,10 +147,12 @@ function EmptyCart() {
   );
 }
 
+type UseCartReturnFunctions = ReturnType<typeof useCart>[1];
+
 interface CartItemProps {
   product: CartProduct;
-  onChangeQuantity: (id: Product['id'], value: 1 | -1) => void;
-  onRemoveItem: (id: Product['id']) => void;
+  onChangeQuantity: UseCartReturnFunctions['updateProductQuantity'];
+  onRemoveItem: UseCartReturnFunctions['removeProduct'];
 }
 
 function CartItem({ product, onChangeQuantity, onRemoveItem }: CartItemProps) {
