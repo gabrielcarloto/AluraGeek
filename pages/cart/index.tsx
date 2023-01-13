@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Button from '@components/Button';
 import Divider from '@components/Divider';
 import Head from '@components/Head';
+import IconButton from '@components/IconButton';
 import Input from '@components/Inputs/Input';
 import Container from '@components/utils/Container';
 import Fill from '@components/utils/Fill';
@@ -185,25 +186,16 @@ function CartItem({ product, onChangeQuantity, onRemoveItem }: CartItemProps) {
           </span>
         </div>
         <div className="cart-product-quantity">
-          <button
-            className="cart-product-quantity-button"
-            onClick={() => onChangeQuantity(product.id, -1)}
-          >
+          <IconButton onClick={() => onChangeQuantity(product.id, -1)}>
             <FaMinus />
-          </button>
+          </IconButton>
           <span>{product.quantity}</span>
-          <button
-            className="cart-product-quantity-button"
-            onClick={() => onChangeQuantity(product.id, 1)}
-          >
+          <IconButton onClick={() => onChangeQuantity(product.id, 1)}>
             <FaPlus />
-          </button>
-          <button
-            className="cart-product-quantity-button remove"
-            onClick={() => onRemoveItem(product.id)}
-          >
+          </IconButton>
+          <IconButton color="red" onClick={() => onRemoveItem(product.id)}>
             <FaTrashAlt />
-          </button>
+          </IconButton>
         </div>
       </Grid>
     </>

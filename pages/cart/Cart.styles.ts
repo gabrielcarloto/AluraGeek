@@ -172,38 +172,6 @@ const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
               alignItems: 'center',
               alignSelf: 'flex-end',
               justifySelf: 'flex-end',
-
-              '.cart-product-quantity-button': {
-                width: '30px',
-                height: '30px',
-                margin: '0 5px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                border: 'none',
-                borderRadius: '50%',
-                backgroundColor: '$secondary',
-                color: '$primary',
-                cursor: 'pointer',
-                transition: 'all 100ms ease-in-out',
-
-                '&.remove': {
-                  backgroundColor: 'rgba(255, 50, 50, 0.15)',
-                  color: '$red',
-                },
-
-                '@media (hover: hover) and (pointer: fine)': {
-                  '&:hover': {
-                    backgroundColor: '$primary',
-                    color: '$white',
-
-                    '&.remove': {
-                      backgroundColor: '$red',
-                      color: '$white',
-                    },
-                  },
-                },
-              },
             },
           },
         },
