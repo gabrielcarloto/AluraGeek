@@ -7,34 +7,21 @@ export function useLocalStorage<T>(key: string, initialValue: string) {
   const [storageValue, setStorageValue] = useState<T>(JSON.parse(initialValue));
 
   useEffect(() => {
-    try {
-      const item = localStorage.getItem(key);
+    const item = localStorage.getItem(key);
 
-      if (item) {
-        const parsed: T = JSON.parse(item);
-        setStorageValue(parsed);
-      } else {
-        localStorage.setItem(key, initialValue);
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
+    if (item) {
+      const parsed: T = JSON.parse(item);
+      setStorageValue(parsed);
+    } else {
+      localStorage.setItem(key, initialValue);
     }
   }, [key, initialValue]);
 
   function updateItem(value: T | ((value: typeof storageValue) => T)) {
-    try {
-      const valueToSet =
-        value instanceof Function ? value(storageValue) : value;
+    const valueToSet = value instanceof Function ? value(storageValue) : value;
 
-      localStorage.setItem(key, JSON.stringify(valueToSet));
-      setStorageValue(valueToSet);
-    } catch (err) {
-      if (err instanceof Error) {
-        console.error(err.message);
-      }
-    }
+    localStorage.setItem(key, JSON.stringify(valueToSet));
+    setStorageValue(valueToSet);
   }
 
   return [storageValue, { updateItem }] as const;
