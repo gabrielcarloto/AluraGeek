@@ -75,11 +75,6 @@ const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
         flexDirection: 'row',
       },
 
-      '.divider': {
-        height: '0',
-        border: '1px solid $border',
-      },
-
       '.cart-products': {
         width: '100%',
         display: 'flex',
@@ -90,7 +85,7 @@ const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
         },
 
         '.products': {
-          height: cartItemsLength * 168.5 + 'px',
+          height: cartItemsLength * 160 + (cartItemsLength - 1) * 8,
           transition: animationEnded ? 'height 300ms ease-in-out' : 'none',
           transitionDelay: '300ms',
         },
@@ -103,6 +98,10 @@ const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
           padding: '5px',
           marginBottom: '8px',
           backgroundColor: '$white',
+
+          '&:last-of-type': {
+            marginBottom: 0,
+          },
 
           '.cart-product-image': {
             width: '30vw',

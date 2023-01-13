@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Button from '@components/Button';
+import Divider from '@components/Divider';
 import Head from '@components/Head';
 import Input from '@components/Inputs/Input';
 import Container from '@components/utils/Container';
@@ -76,7 +77,7 @@ export default function Cart() {
                     ))}
                   </AnimatePresence>
                 </div>
-                <hr className="divider" />
+                <Divider />
                 <Info
                   infos={[
                     `Produtos: ${cart.length ?? 0}`,
@@ -108,7 +109,7 @@ export default function Cart() {
                     </Button>
                   </form>
                 </div>
-                <hr className="divider" />
+                <Divider />
                 <CheckoutInfo total={total} shipping={12} discount={0} />
                 <Button
                   className="cart-checkout-btn"
