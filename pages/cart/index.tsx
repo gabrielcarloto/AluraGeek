@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -17,6 +17,7 @@ import { toCurrency } from '@utils/number';
 import CartStyles, {
   Checkout,
   mainElAnimationProps,
+  Products,
   PromoForm,
 } from './Cart.styles';
 import { CartItem } from './CartItem';
@@ -56,17 +57,17 @@ export default function Cart() {
             </div>
             <Spacer y={16} />
             <div className="cart-container">
-              <section className="cart-products">
-                <div className="products">
+              <Products title="Produtos">
+                <div>
                   <AnimatePresence>
                     {cart?.map((item, i) => (
-                      <CardSlideAnimationWrapper index={i} key={item.id}>
-                        <CartItem
-                          product={item}
-                          onChangeQuantity={handleChangeQuantity}
-                          onRemoveItem={handleRemoveItemFromCart}
-                        />
-                      </CardSlideAnimationWrapper>
+                      <CartItem
+                        product={item}
+                        index={i}
+                        key={item.id}
+                        onChangeQuantity={handleChangeQuantity}
+                        onRemoveItem={handleRemoveItemFromCart}
+                      />
                     ))}
                   </AnimatePresence>
                 </div>
@@ -80,7 +81,7 @@ export default function Cart() {
                     )}`,
                   ]}
                 />
-              </section>
+              </Products>
               <Checkout title="Finalize a compra">
                 <PromoForm>
                   <Input
@@ -197,43 +198,5 @@ function Info({
         <span key={info}>{info}</span>
       ))}
     </StyledDiv>
-  );
-}
-
-function CardSlideAnimationWrapper({
-  index,
-  children,
-}: {
-  index: number;
-  children: ReactNode;
-}) {
-  return (
-    <motion.li
-      className="cart-product"
-      initial={{
-        opacity: 0,
-        translateX: 100,
-      }}
-      animate={{
-        opacity: 1,
-        translateX: 0,
-        transition: {
-          duration: 0.35,
-          ease: [0.18, 0.81, 0.38, 0.89],
-          delay: index * 0.2,
-        },
-      }}
-      exit={{
-        opacity: 0,
-        translateX: -100,
-        transition: {
-          duration: 0.2,
-          ease: [0.59, 0.14, 0.77, 0.49],
-        },
-      }}
-      layout
-    >
-      {children}
-    </motion.li>
   );
 }

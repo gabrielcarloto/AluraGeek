@@ -70,33 +70,6 @@ const CartStyles = css({
       height: 'auto',
       flexDirection: 'row',
     },
-
-    '.cart-products': {
-      gridColumn: 'span 3',
-
-      '@media (min-width: 1024px)': {
-        alignSelf: 'flex-start',
-      },
-
-      '.products': {
-        transition: 'height 300ms ease-in-out',
-        transitionDelay: '300ms',
-      },
-
-      '.cart-product': {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '8px',
-        padding: '5px',
-        marginBottom: '8px',
-        backgroundColor: '$white',
-
-        '&:last-of-type': {
-          marginBottom: 0,
-        },
-      },
-    },
   },
 });
 
@@ -149,6 +122,22 @@ export const PromoForm = styled('form', {
 
   '& button': {
     width: '30%',
+  },
+});
+
+export const Products = styled('div', {
+  gridColumn: 'span 3',
+
+  '@media (min-width: 1024px)': {
+    alignSelf: 'flex-start',
+  },
+
+  '& > div': {
+    transition: 'height 300ms ease-in-out',
+    transitionDelay: '300ms',
+
+    display: 'grid',
+    gap: 8,
   },
 });
 

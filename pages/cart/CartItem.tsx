@@ -1,5 +1,7 @@
+import type { ReactNode } from 'react';
 import { FaMinus, FaPlus, FaTrashAlt } from 'react-icons/fa';
 import { css, styled } from '@stitches/react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { CartProduct } from 'types/cart';
@@ -10,12 +12,6 @@ import type { useCart } from '@hooks/useLocalStorage';
 import { toCurrency } from '@utils/number';
 
 type UseCartReturnFunctions = ReturnType<typeof useCart>[1];
-
-interface CartItemProps {
-  product: CartProduct;
-  onChangeQuantity: UseCartReturnFunctions['updateProductQuantity'];
-  onRemoveItem: UseCartReturnFunctions['removeProduct'];
-}
 
 const QuantityContainer = styled('div', {
   fontSize: '16px',
@@ -55,13 +51,21 @@ const ProductDetails = css({
   },
 });
 
+interface CartItemProps {
+  product: CartProduct;
+  index: number;
+  onChangeQuantity: UseCartReturnFunctions['updateProductQuantity'];
+  onRemoveItem: UseCartReturnFunctions['removeProduct'];
+}
+
 export function CartItem({
   product,
+  index,
   onChangeQuantity,
   onRemoveItem,
 }: CartItemProps) {
   return (
-    <>
+    <ProductListItem index={index}>
       <Link passHref href={`/products/${product.id}`}>
         <ProductImageContainer>
           <Image
@@ -89,7 +93,53 @@ export function CartItem({
           </IconButton>
         </QuantityContainer>
       </Grid>
-    </>
+    </ProductListItem>
+  );
+}
+
+function ProductListItem({
+  index,
+  children,
+}: {
+  index: number;
+  children: ReactNode;
+}) {
+  const StyledMotionListItem = styled(motion.li, {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '8px',
+    padding: '5px',
+    backgroundColor: '$white',
+  });
+
+  return (
+    <StyledMotionListItem
+      initial={{
+        opacity: 0,
+        translateX: 100,
+      }}
+      animate={{
+        opacity: 1,
+        translateX: 0,
+        transition: {
+          duration: 0.35,
+          ease: [0.18, 0.81, 0.38, 0.89],
+          delay: index * 0.2,
+        },
+      }}
+      exit={{
+        opacity: 0,
+        translateX: -100,
+        transition: {
+          duration: 0.2,
+          ease: [0.59, 0.14, 0.77, 0.49],
+        },
+      }}
+      layout
+    >
+      {children}
+    </StyledMotionListItem>
   );
 }
 
