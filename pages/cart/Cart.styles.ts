@@ -7,13 +7,6 @@ const CartStyles = css({
   minHeight: '50vh',
   display: 'grid',
 
-  '@media (min-width: 768px)': {
-    '.cart-container': {
-      display: 'flex',
-      flexDirection: 'row',
-    },
-  },
-
   '.cart-fill': {
     height: '50vh',
 
@@ -51,24 +44,6 @@ const CartStyles = css({
       svg: {
         fontSize: '32px',
       },
-    },
-  },
-
-  '.cart-container': {
-    minHeight: '40vh',
-    display: 'grid',
-    rowGap: '16px',
-    gridTemplateColumns: '1fr',
-    gridTemplateRows: '2fr',
-
-    '@media (min-width: 768px)': {
-      gap: '32px',
-      gridTemplateColumns: 'repeat(5, 1fr)',
-    },
-
-    '@media (min-width: 1024px)': {
-      height: 'auto',
-      flexDirection: 'row',
     },
   },
 });
@@ -122,6 +97,19 @@ export const PromoForm = styled('form', {
 
   '& button': {
     width: '30%',
+  },
+});
+
+export const CartContainer = styled('div', {
+  minHeight: '40vh',
+  display: 'grid',
+  rowGap: '16px',
+  gridTemplateColumns: '1fr',
+  gridTemplateRows: '2fr',
+
+  '@media (min-width: 768px)': {
+    gap: '32px',
+    gridTemplateColumns: 'repeat(5, 1fr)',
   },
 });
 

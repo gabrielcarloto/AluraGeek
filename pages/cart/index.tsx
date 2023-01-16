@@ -15,6 +15,7 @@ import type { Cart } from '@types';
 import { toCurrency } from '@utils/number';
 
 import CartStyles, {
+  CartContainer,
   Checkout,
   mainElAnimationProps,
   Products,
@@ -56,7 +57,7 @@ export default function Cart() {
               <h1>Carrinho</h1>
             </div>
             <Spacer y={16} />
-            <div className="cart-container">
+            <CartContainer>
               <Products title="Produtos">
                 <div
                   style={{ height: cart.length * 160 + (cart.length - 1) * 8 }}
@@ -124,7 +125,7 @@ export default function Cart() {
                   Finalizar compra
                 </Button>
               </Checkout>
-            </div>
+            </CartContainer>
           </Container>
           <Spacer responsive={1} />
         </motion.main>
