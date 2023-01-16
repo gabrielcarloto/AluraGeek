@@ -14,7 +14,7 @@ import { styled } from '@styles/theme';
 import type { Cart } from '@types';
 import { toCurrency } from '@utils/number';
 
-import CartStyles, { mainElAnimationProps } from './Cart.styles';
+import CartStyles, { mainElAnimationProps, PromoForm } from './Cart.styles';
 import { CartItem } from './CartItem';
 export default function Cart() {
   const [animationEnded, setAnimationEnded] = React.useState(false);
@@ -86,33 +86,20 @@ export default function Cart() {
                 />
               </section>
               <section className="cart-checkout">
-                <div className="cart-checkout-promo">
-                  <label className="scr-only" htmlFor="promo-code">
-                    Insira seu cupom de desconto
-                  </label>
-                  <form className="cart-checkout-promo-form">
-                    <Input
-                      className="cart-checkout-promo-input"
-                      type="text"
-                      id="promo-code"
-                      placeholder="Insira seu cupom de desconto"
-                    />
-                    <Button
-                      className="cart-checkout-promo-btn"
-                      type="submit"
-                      color="primary"
-                    >
-                      Aplicar
-                    </Button>
-                  </form>
-                </div>
+                <PromoForm>
+                  <Input
+                    type="text"
+                    id="promo-code"
+                    aria-label="Cupom de desconto"
+                    placeholder="Insira seu cupom de desconto"
+                  />
+                  <Button type="submit" color="primary">
+                    Aplicar
+                  </Button>
+                </PromoForm>
                 <Divider />
                 <CheckoutInfo total={total} shipping={12} discount={0} />
-                <Button
-                  className="cart-checkout-btn"
-                  type="submit"
-                  color="primary"
-                >
+                <Button type="submit" color="primary">
                   Finalizar compra
                 </Button>
               </section>

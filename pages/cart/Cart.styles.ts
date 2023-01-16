@@ -1,6 +1,6 @@
 import type { Variants } from 'framer-motion';
 
-import { css } from '@styles/theme';
+import { css, styled } from '@styles/theme';
 
 const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
   css({
@@ -132,32 +132,6 @@ const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
           width: '50%',
         },
 
-        '.cart-checkout-promo': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-
-          '.cart-checkout-promo-form': {
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-
-            '.cart-checkout-promo-input': {
-              width: '100%',
-              height: '40px',
-              borderRadius: '0',
-
-              '@media (min-width: 768px)': {
-                height: '50px',
-              },
-            },
-
-            '.cart-checkout-promo-btn': {
-              width: '30%',
-            },
-          },
-        },
-
         '.cart-checkout-total': {
           width: '100%',
           display: 'flex',
@@ -201,5 +175,27 @@ export const mainElAnimationProps: Variants = {
     },
   },
 };
+
+export const PromoForm = styled('form', {
+  width: '100%',
+  display: 'flex',
+  flexDirection: 'row',
+
+  '& input': {
+    width: '100%',
+    height: '40px',
+    borderRadius: '0',
+    background: 'white',
+    fontSize: 14,
+
+    '@media (min-width: 768px)': {
+      height: '50px',
+    },
+  },
+
+  '& button': {
+    width: '30%',
+  },
+});
 
 export default CartStyles;
