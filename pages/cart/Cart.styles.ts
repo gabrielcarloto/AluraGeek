@@ -134,7 +134,7 @@ export const Products = styled('div', {
 
   '& > div:first-of-type': {
     transition: 'height 300ms ease-in-out',
-    transitionDelay: '300ms',
+    transitionDelay: '200ms',
 
     display: 'grid',
     gap: 8,

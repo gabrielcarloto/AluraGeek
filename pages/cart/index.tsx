@@ -58,7 +58,9 @@ export default function Cart() {
             <Spacer y={16} />
             <div className="cart-container">
               <Products title="Produtos">
-                <div>
+                <div
+                  style={{ height: cart.length * 160 + (cart.length - 1) * 8 }}
+                >
                   <AnimatePresence>
                     {cart?.map((item, i) => (
                       <CartItem

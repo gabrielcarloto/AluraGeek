@@ -106,6 +106,7 @@ function ProductListItem({
 }) {
   const Styles = css({
     width: '100%',
+    height: 160,
     display: 'flex',
     flexDirection: 'row',
     gap: '8px',
@@ -137,7 +138,7 @@ function ProductListItem({
           ease: [0.59, 0.14, 0.77, 0.49],
         },
       }}
-      layout
+      layout="position"
     >
       {children}
     </motion.li>
