@@ -172,7 +172,7 @@ function Info({
   infos: string[];
   variant?: 'normal' | 'medium' | 'bold';
 }) {
-  const Styled = styled('div', {
+  const StyledDiv = styled('div', {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -200,11 +200,11 @@ function Info({
   });
 
   return (
-    <Styled fontWeight={variant}>
+    <StyledDiv fontWeight={variant}>
       {infos.map((info) => (
         <span key={info}>{info}</span>
       ))}
-    </Styled>
+    </StyledDiv>
   );
 }
 
