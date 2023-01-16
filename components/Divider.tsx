@@ -14,6 +14,7 @@ const Divider = styled('hr', {
 
   height: 0,
   width: '100%',
+  border: 'none',
   borderTop: '1px solid $border',
   marginTop: 8,
   marginBottom: 8,
