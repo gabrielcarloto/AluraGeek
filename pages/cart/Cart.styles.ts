@@ -96,15 +96,6 @@ const CartStyles = css({
           marginBottom: 0,
         },
       },
-
-      '.cart-total-items': {
-        fontSize: '16px',
-        fontWeight: '400',
-        marginTop: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      },
     },
   },
 });
