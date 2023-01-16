@@ -2,164 +2,136 @@ import type { Variants } from 'framer-motion';
 
 import { css, styled } from '@styles/theme';
 
-const CartStyles = (cartItemsLength: number, animationEnded: boolean) =>
-  css({
-    width: '100%',
-    minHeight: '50vh',
+const CartStyles = css({
+  width: '100%',
+  minHeight: '50vh',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+
+  '@media (min-width: 768px)': {
+    '.cart-container': {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+  },
+
+  '.cart-fill': {
+    height: '50vh',
+
+    '@media (min-width: 1024px)': {
+      height: '65vh',
+    },
+
+    '@media (min-width: 1440px)': {
+      height: '58vh',
+    },
+  },
+
+  '.cart-title': {
+    fontWeight: 'bold',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    gap: '10px',
 
-    '@media (min-width: 768px)': {
-      '.cart-container': {
-        display: 'flex',
-        flexDirection: 'row',
-      },
+    h1: {
+      fontSize: '22px',
     },
 
-    '.cart-fill': {
-      height: '50vh',
-
-      '@media (min-width: 1024px)': {
-        height: '65vh',
-      },
-
-      '@media (min-width: 1440px)': {
-        height: '58vh',
-      },
+    svg: {
+      fontSize: '22px',
     },
 
-    '.cart-title': {
-      fontWeight: 'bold',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      gap: '10px',
+    '@media (min-width: 1024px)': {
+      gap: '15px',
 
       h1: {
-        fontSize: '22px',
+        fontSize: '32px',
       },
 
       svg: {
-        fontSize: '22px',
-      },
-
-      '@media (min-width: 1024px)': {
-        gap: '15px',
-
-        h1: {
-          fontSize: '32px',
-        },
-
-        svg: {
-          fontSize: '32px',
-        },
+        fontSize: '32px',
       },
     },
+  },
 
-    '.cart-container': {
-      minHeight: '40vh',
+  '.cart-container': {
+    minHeight: '40vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '16px',
+
+    '@media (min-width: 768px)': {
+      gap: '32px',
+    },
+
+    '@media (min-width: 1024px)': {
+      height: 'auto',
+      flexDirection: 'row',
+    },
+
+    '.cart-products': {
+      width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: '16px',
-
-      '@media (min-width: 768px)': {
-        gap: '32px',
-      },
 
       '@media (min-width: 1024px)': {
-        height: 'auto',
+        alignSelf: 'flex-start',
+      },
+
+      '.products': {
+        transition: 'height 300ms ease-in-out',
+        transitionDelay: '300ms',
+      },
+
+      '.cart-product': {
+        width: '100%',
+        display: 'flex',
         flexDirection: 'row',
-      },
-
-      '.cart-products': {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-
-        '@media (min-width: 1024px)': {
-          alignSelf: 'flex-start',
-        },
-
-        '.products': {
-          height: cartItemsLength * 160 + (cartItemsLength - 1) * 8,
-          transition: animationEnded ? 'height 300ms ease-in-out' : 'none',
-          transitionDelay: '300ms',
-        },
-
-        '.cart-product': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '8px',
-          padding: '5px',
-          marginBottom: '8px',
-          backgroundColor: '$white',
-
-          '&:last-of-type': {
-            marginBottom: 0,
-          },
-        },
-
-        '.cart-total-items': {
-          fontSize: '16px',
-          fontWeight: '400',
-          marginTop: '8px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        },
-      },
-
-      '.cart-checkout': {
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
         gap: '8px',
+        padding: '5px',
+        marginBottom: '8px',
+        backgroundColor: '$white',
 
-        '@media (min-width: 1024px)': {
-          width: '60%',
-          alignSelf: 'flex-start',
-          gap: '16px',
-          position: 'sticky',
-          top: '32px',
+        '&:last-of-type': {
+          marginBottom: 0,
         },
+      },
 
-        '@media (min-width: 1440px)': {
-          width: '50%',
-        },
-
-        '.cart-checkout-total': {
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
-
-          '@media (min-width: 1024px)': {
-            gap: '8px',
-          },
-
-          '.shipping, .discount, .estimated': {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          },
-
-          '.cart-checkout-total--text': {
-            fontSize: '16px',
-            fontWeight: '500',
-
-            '&.estimated': {
-              fontSize: '18px',
-              fontWeight: '700',
-            },
-          },
-        },
+      '.cart-total-items': {
+        fontSize: '16px',
+        fontWeight: '400',
+        marginTop: '8px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
       },
     },
-  });
+
+    '.cart-checkout': {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '8px',
+
+      '@media (min-width: 1024px)': {
+        width: '60%',
+        alignSelf: 'flex-start',
+        gap: '16px',
+        position: 'sticky',
+        top: '32px',
+      },
+
+      '@media (min-width: 1440px)': {
+        width: '50%',
+      },
+    },
+  },
+});
 
 export const mainElAnimationProps: Variants = {
   hidden: {

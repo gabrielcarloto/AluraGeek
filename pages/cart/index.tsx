@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode } from 'react';
 import { FaShoppingCart } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -17,8 +17,6 @@ import { toCurrency } from '@utils/number';
 import CartStyles, { mainElAnimationProps, PromoForm } from './Cart.styles';
 import { CartItem } from './CartItem';
 export default function Cart() {
-  const [animationEnded, setAnimationEnded] = React.useState(false);
-
   const [
     cart,
     {
@@ -26,12 +24,6 @@ export default function Cart() {
       removeProduct: handleRemoveItemFromCart,
     },
   ] = useCart();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAnimationEnded(true);
-    }, (cart?.length ?? 0) * 200);
-  }, [cart.length]);
 
   if (!cart?.length) return <EmptyCart />;
 
@@ -45,7 +37,7 @@ export default function Cart() {
       <Head title="Carrinho" />
       <AnimatePresence exitBeforeEnter>
         <motion.main
-          className={CartStyles(cart.length, animationEnded)()}
+          className={CartStyles()}
           initial="hidden"
           animate="visible"
           exit="hidden"
@@ -117,7 +109,7 @@ function EmptyCart() {
     <>
       <Head title="Carrinho" />
       <main
-        className={CartStyles(0, true)()}
+        className={CartStyles()}
         // initial="hidden"
         // animate="visible"
         // exit="hidden"
@@ -141,13 +133,22 @@ function CheckoutInfo({
   discount: number;
   total: number;
 }) {
+  const CheckoutInfo = styled('div', {
+    display: 'grid',
+    gap: '4px',
+
+    '@media (min-width: 1024px)': {
+      gap: '8px',
+    },
+  });
+
   return (
     <>
-      <div className="cart-checkout-total">
+      <CheckoutInfo>
         <Info infos={['Frete', toCurrency(shipping)]} variant="medium" />
         <Info infos={['Desconto', toCurrency(discount)]} variant="medium" />
         <Info infos={['Total estimado', toCurrency(total)]} variant="bold" />
-      </div>
+      </CheckoutInfo>
     </>
   );
 }
