@@ -132,7 +132,7 @@ export const Products = styled('div', {
     alignSelf: 'flex-start',
   },
 
-  '& > div': {
+  '& > div:first-of-type': {
     transition: 'height 300ms ease-in-out',
     transitionDelay: '300ms',
 
