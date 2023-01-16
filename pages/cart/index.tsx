@@ -71,16 +71,38 @@ export default function Cart() {
                     ))}
                   </AnimatePresence>
                 </div>
-                <Divider />
-                <Info
-                  infos={[
-                    `Produtos: ${cart.length ?? 0}`,
-                    `Total: ${cart.reduce(
-                      (acc, item) => acc + item.quantity,
-                      0,
-                    )}`,
-                  ]}
+                <Divider
+                  animate
+                  css={{
+                    $$delay: cart.length * 150 + 'ms',
+                    $$duration: '500ms',
+                  }}
                 />
+                <motion.div
+                  initial={{
+                    opacity: 0,
+                    translateY: 50,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    translateY: 0,
+                    transition: {
+                      duration: 0.35,
+                      ease: [0.18, 0.81, 0.38, 0.89],
+                      delay: cart.length * 0.2,
+                    },
+                  }}
+                >
+                  <Info
+                    infos={[
+                      `Produtos: ${cart.length ?? 0}`,
+                      `Total: ${cart.reduce(
+                        (acc, item) => acc + item.quantity,
+                        0,
+                      )}`,
+                    ]}
+                  />
+                </motion.div>
               </Products>
               <Checkout title="Finalize a compra">
                 <PromoForm>
