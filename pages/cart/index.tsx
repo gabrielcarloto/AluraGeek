@@ -1,24 +1,21 @@
 import React, { ReactNode, useEffect } from 'react';
-import { FaMinus, FaPlus, FaShoppingCart, FaTrashAlt } from 'react-icons/fa';
+import { FaShoppingCart } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
 
 import Button from '@components/Button';
 import Divider from '@components/Divider';
 import Head from '@components/Head';
-import IconButton from '@components/IconButton';
 import Input from '@components/Inputs/Input';
 import Container from '@components/utils/Container';
 import Fill from '@components/utils/Fill';
-import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
 import { styled } from '@styles/theme';
-import type { Cart, CartProduct } from '@types';
+import type { Cart } from '@types';
 import { toCurrency } from '@utils/number';
 
 import CartStyles, { mainElAnimationProps } from './Cart.styles';
+import { CartItem } from './CartItem';
 export default function Cart() {
   const [animationEnded, setAnimationEnded] = React.useState(false);
 
@@ -148,60 +145,6 @@ function EmptyCart() {
   );
 }
 
-type UseCartReturnFunctions = ReturnType<typeof useCart>[1];
-
-interface CartItemProps {
-  product: CartProduct;
-  onChangeQuantity: UseCartReturnFunctions['updateProductQuantity'];
-  onRemoveItem: UseCartReturnFunctions['removeProduct'];
-}
-
-function CartItem({ product, onChangeQuantity, onRemoveItem }: CartItemProps) {
-  return (
-    <>
-      <Link passHref href={`/products/${product.id}`}>
-        <div className="cart-product-image">
-          <Image
-            src={product.image}
-            layout="fill"
-            objectFit="cover"
-            alt={product.alt}
-          />
-        </div>
-      </Link>
-      <Grid className="cart-product-details">
-        <Link passHref href={`/products/${product.id}`}>
-          <h3 className="cart-product-name">
-            <a>{product.name}</a>
-          </h3>
-        </Link>
-        <div className="cart-product-price">
-          <span>
-            <b>{toCurrency(product.price)}</b>
-            cada
-          </span>
-          <span>
-            <b>{toCurrency(product.price * product.quantity)}</b>
-            no total
-          </span>
-        </div>
-        <div className="cart-product-quantity">
-          <IconButton onClick={() => onChangeQuantity(product.id, -1)}>
-            <FaMinus />
-          </IconButton>
-          <span>{product.quantity}</span>
-          <IconButton onClick={() => onChangeQuantity(product.id, 1)}>
-            <FaPlus />
-          </IconButton>
-          <IconButton color="red" onClick={() => onRemoveItem(product.id)}>
-            <FaTrashAlt />
-          </IconButton>
-        </div>
-      </Grid>
-    </>
-  );
-}
-
 function CheckoutInfo({
   shipping,
   discount,
@@ -235,7 +178,7 @@ function Info({
     justifyContent: 'space-between',
 
     variants: {
-      font: {
+      fontWeight: {
         normal: {
           fontSize: 16,
           fontWeight: 400,
@@ -252,12 +195,12 @@ function Info({
     },
 
     defaultVariants: {
-      font: 'normal',
+      fontWeight: 'normal',
     },
   });
 
   return (
-    <Styled font={variant}>
+    <Styled fontWeight={variant}>
       {infos.map((info) => (
         <span key={info}>{info}</span>
       ))}
