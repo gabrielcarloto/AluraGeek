@@ -104,7 +104,7 @@ function ProductListItem({
   index: number;
   children: ReactNode;
 }) {
-  const StyledMotionListItem = styled(motion.li, {
+  const Styles = css({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
@@ -114,7 +114,8 @@ function ProductListItem({
   });
 
   return (
-    <StyledMotionListItem
+    <motion.li
+      className={Styles()}
       initial={{
         opacity: 0,
         translateX: 100,
@@ -139,7 +140,7 @@ function ProductListItem({
       layout
     >
       {children}
-    </StyledMotionListItem>
+    </motion.li>
   );
 }
 
