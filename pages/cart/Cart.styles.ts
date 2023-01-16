@@ -5,10 +5,7 @@ import { css, styled } from '@styles/theme';
 const CartStyles = css({
   width: '100%',
   minHeight: '50vh',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'flex-start',
+  display: 'grid',
 
   '@media (min-width: 768px)': {
     '.cart-container': {
@@ -59,14 +56,14 @@ const CartStyles = css({
 
   '.cart-container': {
     minHeight: '40vh',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: '16px',
+    display: 'grid',
+    rowGap: '16px',
+    gridTemplateColumns: '1fr',
+    gridTemplateRows: '2fr',
 
     '@media (min-width: 768px)': {
       gap: '32px',
+      gridTemplateColumns: 'repeat(5, 1fr)',
     },
 
     '@media (min-width: 1024px)': {
@@ -75,9 +72,7 @@ const CartStyles = css({
     },
 
     '.cart-products': {
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
+      gridColumn: 'span 3',
 
       '@media (min-width: 1024px)': {
         alignSelf: 'flex-start',
@@ -111,25 +106,6 @@ const CartStyles = css({
         justifyContent: 'space-between',
       },
     },
-
-    '.cart-checkout': {
-      width: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '8px',
-
-      '@media (min-width: 1024px)': {
-        width: '60%',
-        alignSelf: 'flex-start',
-        gap: '16px',
-        position: 'sticky',
-        top: '32px',
-      },
-
-      '@media (min-width: 1440px)': {
-        width: '50%',
-      },
-    },
   },
 });
 
@@ -148,10 +124,25 @@ export const mainElAnimationProps: Variants = {
   },
 };
 
+export const Checkout = styled('section', {
+  width: '100%',
+  height: 'max-content',
+
+  display: 'grid',
+  gap: '8px',
+  gridColumn: 'span 2',
+
+  '@media (min-width: 1024px)': {
+    alignSelf: 'flex-start',
+    gap: '16px',
+    position: 'sticky',
+    top: '32px',
+  },
+});
+
 export const PromoForm = styled('form', {
   width: '100%',
   display: 'flex',
-  flexDirection: 'row',
 
   '& input': {
     width: '100%',

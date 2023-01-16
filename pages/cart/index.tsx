@@ -14,7 +14,11 @@ import { styled } from '@styles/theme';
 import type { Cart } from '@types';
 import { toCurrency } from '@utils/number';
 
-import CartStyles, { mainElAnimationProps, PromoForm } from './Cart.styles';
+import CartStyles, {
+  Checkout,
+  mainElAnimationProps,
+  PromoForm,
+} from './Cart.styles';
 import { CartItem } from './CartItem';
 export default function Cart() {
   const [
@@ -77,7 +81,7 @@ export default function Cart() {
                   ]}
                 />
               </section>
-              <section className="cart-checkout">
+              <Checkout title="Finalize a compra">
                 <PromoForm>
                   <Input
                     type="text"
@@ -94,7 +98,7 @@ export default function Cart() {
                 <Button type="submit" color="primary">
                   Finalizar compra
                 </Button>
-              </section>
+              </Checkout>
             </div>
           </Container>
           <Spacer responsive={1} />
