@@ -8,5 +8,5 @@ export function keysAreOfValue<O extends Record<any, unknown>, V = unknown>(
   value: V,
 ): object is O & boolean {
   if (!isDefined(object)) return false;
-  return Object.keys(object).every((k) => object[k] === value);
+  return Object.values(object).every((v) => v === value);
 }
