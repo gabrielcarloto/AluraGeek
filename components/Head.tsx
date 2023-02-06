@@ -7,9 +7,15 @@ interface LayoutProps {
   title: string;
   description?: string;
   image?: string;
+  removeSeo?: boolean;
 }
 
-export default function Layout({ title, description, image }: LayoutProps) {
+export default function CustomHead({
+  title,
+  description,
+  image,
+  removeSeo = false,
+}: LayoutProps) {
   const router = useRouter();
 
   const metaTitle = `${title} | AluraGeek`;
@@ -18,30 +24,35 @@ export default function Layout({ title, description, image }: LayoutProps) {
   return (
     <Head>
       <title>{metaTitle}</title>
-      <meta name="title" content={metaTitle} />
 
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:type" content="website" />
-      <meta property="og:url" content={metaUrl} />
-
-      <meta property="twitter:title" content={metaTitle} />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content={metaUrl} />
-
-      {description && (
+      {!removeSeo && (
         <>
-          <meta name="description" content={description} />
-          <meta property="og:description" content={description} />
+          <meta name="title" content={metaTitle} />
 
-          <meta property="twitter:description" content={description} />
-        </>
-      )}
+          <meta property="og:title" content={metaTitle} />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={metaUrl} />
 
-      {image && (
-        <>
-          <meta property="og:image" content={image} />
+          <meta property="twitter:title" content={metaTitle} />
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content={metaUrl} />
 
-          <meta property="twitter:image" content={image} />
+          {description && (
+            <>
+              <meta name="description" content={description} />
+              <meta property="og:description" content={description} />
+
+              <meta property="twitter:description" content={description} />
+            </>
+          )}
+
+          {image && (
+            <>
+              <meta property="og:image" content={image} />
+
+              <meta property="twitter:image" content={image} />
+            </>
+          )}
         </>
       )}
     </Head>
