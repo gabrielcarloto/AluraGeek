@@ -187,7 +187,10 @@ export default function ImageZoom(props: ImageZoomProps) {
   }
 
   if (scale === 3) navigator.vibrate(25);
-  if (!isImageZoomed) toggleRootInteraction(false); // prevents a bug where it is not possible to interact with other elements when the parent component re-renders and the image gets zoomed out automatically
+
+  useEffect(() => {
+    if (!isImageZoomed) toggleRootInteraction(false); // prevents a bug where it is not possible to interact with other elements when the parent component re-renders and the image gets zoomed out automatically
+  }, [isImageZoomed]);
 
   function revertToNormalState() {
     setIsImageZoomed(false);
@@ -208,8 +211,8 @@ export default function ImageZoom(props: ImageZoomProps) {
       whileHover={
         !isImageZoomed // only works before the first zoom, but I liked it
           ? {
-              transform: `scale(1.03)`,
-            }
+            transform: `scale(1.03)`,
+          }
           : undefined
       }
       ref={isImageZoomed ? modalImageRef : undefined}
