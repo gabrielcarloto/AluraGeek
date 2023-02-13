@@ -24,6 +24,35 @@ const Modal = styled(motion.dialog, {
   cursor: 'zoom-out',
 });
 
+const ModalLabel = styled(motion.div, {
+  display: 'none',
+
+  '@md': {
+    color: '$lightGray',
+
+    display: 'block',
+    position: 'absolute',
+    top: 10,
+    left: 10,
+  },
+});
+
+const ModalLabelVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -100,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+  },
+};
+
+const ModalLabelTransition: Transition = {
+  type: 'tween',
+  delay: 0.1,
+};
+
 // TODO: change to satisfies
 const ModalVariants: Variants = {
   initial: { backgroundColor: 'rgb(30 30 30 / 0)', border: 'none' },
@@ -229,7 +258,6 @@ export default function ImageZoom(props: ImageZoomProps) {
     />
   );
 
-  // TODO: add keys descriptions
   // NOTE: `AnimatePrecence` is not animating the modal exit idk why but it solves a problem with the image z-index on exit
   return (
     <AnimatePresence>
@@ -245,9 +273,19 @@ export default function ImageZoom(props: ImageZoomProps) {
                 exit="exit"
                 open
                 aria-modal
+                aria-labelledby="modal-label"
                 aria-describedby={imageId}
                 onClick={revertToNormalState}
               >
+                <ModalLabel
+                  id="modal-label"
+                  initial="hidden"
+                  animate="visible"
+                  variants={ModalLabelVariants}
+                  transition={ModalLabelTransition}
+                >
+                  Aperte Esc ou clique fora da imagem para sair
+                </ModalLabel>
                 {cloneElement(image, {
                   style: ModalImageDefaultStyles,
                 })}
