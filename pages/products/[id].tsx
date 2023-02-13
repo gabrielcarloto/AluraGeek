@@ -3,7 +3,6 @@ import type { Product as IProduct } from '@prisma/client';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import Button from '@components/Button';
@@ -14,7 +13,40 @@ import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
+import { css } from '@styles/theme';
 import { BASE_API_URL, fetcher } from '@utils/all';
+
+const ProductImageStyles = css({
+  objectFit: 'cover',
+  objectPosition: 'center',
+
+  position: 'absolute',
+  top: 0,
+  left: 0,
+
+  minWidth: '100%',
+  height: '100%',
+});
+
+const ProductImageContainer = styled('div', {
+  width: '100vw',
+  height: '250px',
+  position: 'relative',
+  cursor: 'zoom-in',
+  // overflow: 'hidden',
+
+  '@media (min-width: 768px)': {
+    width: '70%',
+    height: 'auto',
+    margin: '0',
+    boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
+  },
+
+  '@media (min-width: 1024px)': {
+    width: '50%',
+    height: 400,
+  },
+});
 
 export default function Product({
   product,
@@ -48,9 +80,7 @@ export default function Product({
   const [addedToCart, setAddedToCart] = useState(false);
   const [cart, { updateProductQuantity, addProduct }] = useCart();
 
-  const productInCart = Array.isArray(cart)
-    ? cart.find((p) => p.id === product.id)
-    : undefined;
+  const productInCart = Array.isArray(cart) ? cart.find((p) => p.id === product.id) : undefined;
   const totalProducts = productInCart?.quantity ?? 0;
 
   function addToCart() {
@@ -82,26 +112,6 @@ export default function Product({
     '@media (min-width: 1024px)': {
       marginTop: '64px',
       alignItems: 'center',
-    },
-
-    '.product-image': {
-      width: '100vw',
-      height: '250px',
-      position: 'relative',
-      cursor: 'zoom-in',
-
-      '@media (min-width: 768px)': {
-        width: '70%',
-        height: 'auto',
-        margin: '0',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.2)',
-      },
-
-      '@media (min-width: 1024px)': {
-        width: '50%',
-        height: 'auto',
-        minHeight: '400px',
-      },
     },
 
     '.product-info': {
@@ -191,24 +201,9 @@ export default function Product({
           if (zoom) handleClick;
         }}
       >
-        <div className="product-image" id="zoom-in" onClick={handleClick}>
-          <Image
-            src={product.image}
-            layout="fill"
-            objectFit="cover"
-            alt={product.alt}
-          />
-          <label htmlFor="zoom-in" className="scr-only">
-            Clique para ampliar
-          </label>
-        </div>
-
-        <ImageZoom
-          zoom={zoom}
-          setZoom={setZoom}
-          img={product.image}
-          alt={product.alt}
-        />
+        <ProductImageContainer>
+          <ImageZoom className={ProductImageStyles()} src={product.image} alt={product.alt} />
+        </ProductImageContainer>
 
         <div className="product-info">
           <article>
@@ -220,10 +215,7 @@ export default function Product({
                   currency: 'BRL',
                 })}
               </p>
-              <Link
-                passHref
-                href={`/products/${product.category.replace(/ /g, '-')}`}
-              >
+              <Link passHref href={`/products/${product.category.replace(/ /g, '-')}`}>
                 <a className="product-category">{product.category}</a>
               </Link>
             </div>
@@ -237,11 +229,7 @@ export default function Product({
             anim id est laborum.`}
             </p>
           </article>
-          <Button
-            className="product-button"
-            color="primary"
-            onClick={addToCart}
-          >
+          <Button className="product-button" color="primary" onClick={addToCart}>
             Adicionar ao carrinho {totalProducts > 0 && `(${totalProducts})`}
           </Button>
         </div>
@@ -279,9 +267,7 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ params }) => {
   const param = params as unknown as { id: number };
 
-  const product: IProduct = await fetcher(
-    `${BASE_API_URL}/products/${param.id}`,
-  ); // ! possible error if params is undefined or the id doesnt exist
+  const product: IProduct = await fetcher(`${BASE_API_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
   const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
 
   return {
