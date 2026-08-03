@@ -18,7 +18,6 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "simple-import-sort", "prettier"],
-  "ignorePatterns": ["node_modules/", ".next/", "out/", "build/", "dist/", "lib/generated/"],
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",

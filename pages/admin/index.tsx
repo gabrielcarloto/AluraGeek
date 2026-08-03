@@ -25,7 +25,7 @@ import {
   NewProductFile,
   NewProductForm,
   NewProductIcon,
-} from './Admin.styles';
+} from '../../components/admin/Admin.styles';
 
 interface Props {
   product: Product | undefined;
@@ -49,9 +49,7 @@ const AdminPage: NextPage<Props> = ({ product }) => {
 
   const isMobile = useMediaQuery('768px');
 
-  function handleChange(
-    e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-  ) {
+  function handleChange(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
     setForm((prevForm) => {
       const target = e.target as HTMLInputElement | HTMLTextAreaElement;
 
@@ -143,20 +141,13 @@ const AdminPage: NextPage<Props> = ({ product }) => {
               ) : (
                 <>
                   <MdImage className={NewProductIcon()} />
-                  <FileInputLabel
-                    className="new-product-file-label"
-                    htmlFor="product-image"
-                  >
+                  <FileInputLabel className="new-product-file-label" htmlFor="product-image">
                     Arraste para adicionar uma imagem para o produto
                   </FileInputLabel>
                 </>
               )}
 
-              <FileInput
-                type="file"
-                id="product-image"
-                onChange={handleImageUpload}
-              />
+              <FileInput type="file" id="product-image" onChange={handleImageUpload} />
             </NewProductFile>
             {!isMobile && (
               <>
@@ -222,9 +213,7 @@ const AdminPage: NextPage<Props> = ({ product }) => {
   );
 };
 
-async function uploadProductImage(
-  stringifiedImage: string | ArrayBuffer | null,
-) {
+async function uploadProductImage(stringifiedImage: string | ArrayBuffer | null) {
   let data: { link: string } | null | undefined, error: Error | undefined;
 
   try {
@@ -259,9 +248,7 @@ async function saveProduct(
   if (!response.ok) throw new Error(response.statusText);
 }
 
-AdminPage.getInitialProps = async ({
-  query,
-}: NextPageContext & { query: { product: string } }) => {
+AdminPage.getInitialProps = async ({ query }: NextPageContext & { query: { product: string } }) => {
   if (!query['product']) return { product: undefined };
 
   const id = query['product'];

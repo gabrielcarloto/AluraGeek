@@ -267,6 +267,8 @@ export const getStaticProps: GetStaticProps<{
 }> = async ({ params }) => {
   const param = params as unknown as { id: number };
 
+  console.log(params);
+
   const product: IProduct = await fetcher(`${BASE_API_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
   const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
 
