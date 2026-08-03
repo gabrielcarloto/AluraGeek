@@ -1,4 +1,4 @@
-import type { Product } from '@prisma/client';
+import type { Product } from '@lib/generated/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createProduct, getManyProducts, updateProduct } from '@lib/prisma';

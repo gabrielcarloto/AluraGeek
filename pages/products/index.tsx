@@ -1,4 +1,4 @@
-import type { Product as IProduct } from '@prisma/client';
+import type { Product as IProduct } from '@lib/generated/prisma';
 import Head from 'next/head';
 import useSWR from 'swr';
 

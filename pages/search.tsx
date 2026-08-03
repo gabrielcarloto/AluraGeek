@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Product as IProduct } from '@prisma/client';
+import type { Product as IProduct } from '@lib/generated/prisma';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';

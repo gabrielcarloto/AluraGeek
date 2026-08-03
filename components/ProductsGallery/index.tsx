@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Product as IProduct } from '@prisma/client';
+import type { Product as IProduct } from '@lib/generated/prisma';
 
 import Product from '@components/Product';
 import ProductSkeleton from '@components/Product/ProductSkeleton';

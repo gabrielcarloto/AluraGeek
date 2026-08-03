@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Product } from '@prisma/client';
+import type { Product } from '@lib/generated/prisma';
 import useSWR from 'swr';
 
 import Banner from '@components/Banner';

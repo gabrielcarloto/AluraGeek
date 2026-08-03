@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { Product as IProduct } from '@prisma/client';
+import type { Product as IProduct } from '@lib/generated/prisma';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { MdAdd, MdImage } from 'react-icons/md';
-import type { Product } from '@prisma/client';
+import type { Product } from '@lib/generated/prisma';
 import { AnimatePresence } from 'framer-motion';
 import type { NextPage, NextPageContext } from 'next';
 import NProgress from 'nprogress';
