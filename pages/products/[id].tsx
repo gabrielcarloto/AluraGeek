@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import type { Product as IProduct } from '@lib/generated/prisma';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -13,6 +12,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Product as IProduct } from '@lib/generated/prisma';
 import { css } from '@styles/theme';
 import { BASE_API_URL, fetcher } from '@utils/all';
 

@@ -1,6 +1,6 @@
-import type { Product } from '@lib/generated/prisma';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
+import type { Product } from '@lib/generated/prisma';
 import { createProduct, getManyProducts, updateProduct } from '@lib/prisma';
 import { authAdminAction } from '@utils/admin';
 import { allowedHttpMethods, STATUS } from '@utils/http';

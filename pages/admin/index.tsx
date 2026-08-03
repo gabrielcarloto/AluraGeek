@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { MdAdd, MdImage } from 'react-icons/md';
-import type { Product } from '@lib/generated/prisma';
 import { AnimatePresence } from 'framer-motion';
 import type { NextPage, NextPageContext } from 'next';
 import NProgress from 'nprogress';
@@ -13,6 +12,7 @@ import Success from '@components/Success';
 import Title from '@components/Title';
 import Spacer from '@components/utils/Spacer';
 import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Product } from '@lib/generated/prisma';
 import { BASE_API_URL, fetcher, isDefined, keysAreOfValue } from '@utils/all';
 import type { UndefinedPartial } from '@utils/types';
 

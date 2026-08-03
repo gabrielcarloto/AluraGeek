@@ -1,5 +1,4 @@
 import React from 'react';
-import type { Product } from '@lib/generated/prisma';
 import useSWR from 'swr';
 
 import Banner from '@components/Banner';
@@ -9,6 +8,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Fill from '@components/utils/Fill';
 import Spacer from '@components/utils/Spacer';
 import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Product } from '@lib/generated/prisma';
 import { fetcher } from '@utils/fetch';
 
 export default function Home() {

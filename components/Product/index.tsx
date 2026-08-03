@@ -1,6 +1,5 @@
 import React from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
-import type { Product as IProduct } from '@lib/generated/prisma';
 import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,6 +8,7 @@ import NProgress from 'nprogress';
 
 import Error from '@components/Error';
 import Success from '@components/Success';
+import type { Product as IProduct } from '@lib/generated/prisma';
 import { isAdmin } from '@utils/admin';
 
 import { ProductStyles } from './Product.styles';

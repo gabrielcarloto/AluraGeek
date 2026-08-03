@@ -67,11 +67,7 @@ type MyAppProps = NextAppProps<Props> & {
   Component: NextComponentType<NextPageContext, any, any> & { auth: boolean };
 };
 
-function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-  router,
-}: MyAppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps }, router }: MyAppProps) {
   const isSearch = (path: string) => path.includes('/search');
 
   globalStyles();
@@ -80,10 +76,7 @@ function MyApp({
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content="/meta_image.png" />
-        <meta
-          property="og:url"
-          content="https://alura-geek-mocha.vercel.app/"
-        />
+        <meta property="og:url" content="https://alura-geek-mocha.vercel.app/" />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -130,6 +123,7 @@ function Auth({ children }: { children: ReactNode }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           key={(Router as any).route}
         >
           <Fill display="flex">
@@ -146,6 +140,7 @@ function Auth({ children }: { children: ReactNode }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           key={(Router as any).route}
         >
           {children}
