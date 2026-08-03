@@ -12,7 +12,7 @@ import Success from '@components/Success';
 import Title from '@components/Title';
 import Spacer from '@components/utils/Spacer';
 import { useMediaQuery } from '@hooks/useMediaQuery';
-import type { Product } from '@lib/generated/prisma';
+import type { Product } from '@lib/db';
 import { BASE_API_URL, fetcher, isDefined, keysAreOfValue } from '@utils/all';
 import type { UndefinedPartial } from '@utils/types';
 

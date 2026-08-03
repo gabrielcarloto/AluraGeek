@@ -12,7 +12,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
-import type { Product as IProduct } from '@lib/generated/prisma';
+import type { Product as IProduct } from '@lib/db';
 import { css } from '@styles/theme';
 import { BASE_API_URL, fetcher } from '@utils/all';
 

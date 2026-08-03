@@ -4,7 +4,7 @@ import Product from '@components/Product';
 import ProductSkeleton from '@components/Product/ProductSkeleton';
 import Container from '@components/utils/Container';
 import Grid from '@components/utils/Grid';
-import type { Product as IProduct } from '@lib/generated/prisma';
+import type { Product as IProduct } from '@lib/db';
 
 import ProductsTitle from './ProductsTitle';
 

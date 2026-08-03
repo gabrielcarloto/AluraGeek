@@ -10,7 +10,7 @@ import Container from '@components/utils/Container';
 import Fill from '@components/utils/Fill';
 import Grid from '@components/utils/Grid';
 import Spacer from '@components/utils/Spacer';
-import type { Product as IProduct } from '@lib/generated/prisma';
+import type { Product as IProduct } from '@lib/db';
 import { fetcher } from '@utils/fetch';
 
 export default function Category() {

@@ -8,7 +8,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Fill from '@components/utils/Fill';
 import Spacer from '@components/utils/Spacer';
 import { useMediaQuery } from '@hooks/useMediaQuery';
-import type { Product } from '@lib/generated/prisma';
+import type { Product } from '@lib/db';
 import { fetcher } from '@utils/fetch';
 
 export default function Home() {

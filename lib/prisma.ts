@@ -1,4 +1,4 @@
-import type { Product } from '@lib/generated/prisma';
+import type { Product } from '@lib/db';
 import type { DeepPartial } from '@utils/types';
 
 import { prisma } from './db';

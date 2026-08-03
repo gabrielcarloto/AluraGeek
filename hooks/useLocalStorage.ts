@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Product } from '@lib/generated/prisma';
+import type { Product } from '@lib/db';
 
 import type { Cart } from '@types';
 

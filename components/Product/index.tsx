@@ -8,7 +8,7 @@ import NProgress from 'nprogress';
 
 import Error from '@components/Error';
 import Success from '@components/Success';
-import type { Product as IProduct } from '@lib/generated/prisma';
+import type { Product as IProduct } from '@lib/db';
 import { isAdmin } from '@utils/admin';
 
 import { ProductStyles } from './Product.styles';
