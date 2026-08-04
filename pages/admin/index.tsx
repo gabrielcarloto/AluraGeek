@@ -25,7 +25,7 @@ import {
   NewProductFile,
   NewProductForm,
   NewProductIcon,
-} from '../../components/admin/Admin.styles';
+} from '@components/admin/Admin.styles';
 
 interface Props {
   product: Product | undefined;

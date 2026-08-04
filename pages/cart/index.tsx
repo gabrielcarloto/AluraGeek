@@ -21,7 +21,7 @@ import CartStyles, {
   mainElAnimationProps,
   Products,
   PromoForm,
-} from '../../components/cart/Cart.styles';
+} from '@components/cart/Cart.styles';
 export default function Cart() {
   const [
     cart,
