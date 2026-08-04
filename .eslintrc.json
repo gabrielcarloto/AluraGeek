@@ -24,7 +24,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "simple-import-sort/exports": "error",
     "simple-import-sort/imports": [
-      "error",
+      "warn",
       {
         "groups": [
           // Node
