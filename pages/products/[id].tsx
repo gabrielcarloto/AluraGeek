@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import type { Product as IProduct } from '@prisma/client';
 import { styled } from '@stitches/react';
 import { AnimatePresence } from 'framer-motion';
 import type { GetStaticProps, InferGetStaticPropsType } from 'next';
@@ -13,6 +12,7 @@ import ProductsGallery from '@components/ProductsGallery';
 import Spacer from '@components/utils/Spacer';
 import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Product as IProduct } from '@lib/db';
 import { css } from '@styles/theme';
 import { BASE_API_URL, fetcher } from '@utils/all';
 
@@ -265,27 +265,34 @@ export const getStaticProps: GetStaticProps<{
   product: IProduct;
   products: IProduct[];
 }> = async ({ params }) => {
-  const param = params as unknown as { id: number };
+  const id = params?.id;
 
-  const product: IProduct = await fetcher(`${BASE_API_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
-  const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
+  if (!id) {
+    return { notFound: true };
+  }
 
-  return {
-    props: {
-      product,
-      products,
-    },
-  };
+  try {
+    const product: IProduct = await fetcher(`${BASE_API_URL}/products/${id}`);
+    const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
+
+    if (!product) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        product,
+        products,
+      },
+    };
+  } catch {
+    return { notFound: true };
+  }
 };
 
 export async function getStaticPaths() {
-  const res = await fetcher<IProduct[]>(`${BASE_API_URL}/products`);
-  const paths = res.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   };
 }

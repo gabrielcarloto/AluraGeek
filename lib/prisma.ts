@@ -1,38 +1,28 @@
-import type { Product } from '@prisma/client';
-
-import type { DeepPartial } from '@utils/types';
-
-import { prisma } from './db';
+import type { Prisma, Product } from '@lib/db';
+import { prisma } from '@lib/db';
 
 export async function createProduct(data: Product) {
   try {
     return await prisma.product.create({ data: data });
   } catch (err) {
-    if (err instanceof Error)
-      console.error(`Couldn't create product: ${err.message}`);
+    if (err instanceof Error) console.error(`Couldn't create product: ${err.message}`);
     return undefined;
   }
 }
 
 export async function getUniqueProduct(id: number) {
   try {
-    return await prisma.product.findUnique({ where: { id: id } });
+    return await prisma.product.findUnique({ where: { id } });
   } catch (err) {
-    if (err instanceof Error)
-      console.error(`Couldn't get product (id: ${id}): ${err.message}`);
+    if (err instanceof Error) console.error(`Couldn't get product (id: ${id}): ${err.message}`);
     return undefined;
   }
 }
 
-type GetManyProductsOptions = DeepPartial<{
-  max: number;
-  filter: {
-    category: string;
-    OR: GetManyProductsOptions['filter'];
-    NOT: GetManyProductsOptions['filter'];
-    AND: GetManyProductsOptions['filter'];
-  };
-}>;
+type GetManyProductsOptions = {
+  max?: number;
+  filter?: Prisma.ProductWhereInput;
+};
 
 export async function getManyProducts(options?: GetManyProductsOptions) {
   try {
@@ -41,8 +31,7 @@ export async function getManyProducts(options?: GetManyProductsOptions) {
       where: options?.filter,
     });
   } catch (err) {
-    if (err instanceof Error)
-      console.error(`Couldn't get products: ${err.message}`);
+    if (err instanceof Error) console.error(`Couldn't get products: ${err.message}`);
     return undefined;
   }
 }
@@ -51,8 +40,7 @@ export async function updateProduct(id: number, data: Product) {
   try {
     return await prisma.product.update({ where: { id: id }, data: data });
   } catch (err) {
-    if (err instanceof Error)
-      console.error(`Couldn't update product (id: ${id}): ${err.message}`);
+    if (err instanceof Error) console.error(`Couldn't update product (id: ${id}): ${err.message}`);
     return undefined;
   }
 }
@@ -61,7 +49,6 @@ export async function deleteProduct(id: number) {
   try {
     await prisma.product.delete({ where: { id: id } });
   } catch (err) {
-    if (err instanceof Error)
-      console.error(`Couldn't delete product (id: ${id}): ${err.message}`);
+    if (err instanceof Error) console.error(`Couldn't delete product (id: ${id}): ${err.message}`);
   }
 }

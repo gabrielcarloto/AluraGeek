@@ -4,10 +4,7 @@ import { deleteProduct, getUniqueProduct } from '@lib/prisma';
 import { authAdminAction } from '@utils/admin';
 import { allowedHttpMethods, STATUS } from '@utils/http';
 
-export default async function productHandler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function productHandler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { id },
     method,

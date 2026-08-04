@@ -1,4 +1,4 @@
-import type { Product } from '@prisma/client';
+import type { Product } from '@lib/db';
 
 export type CartProduct = Product & {
   quantity: number;

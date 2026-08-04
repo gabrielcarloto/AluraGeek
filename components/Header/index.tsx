@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { type FormEvent } from 'react';
 import useOnClickOutside from 'react-cool-onclickoutside';
 import {
   FaPlusCircle,
@@ -60,9 +60,7 @@ function Header() {
       if (isLoginPage) return;
 
       setIsOpen(false);
-      (
-        headerUser.current?.childNodes[0] as HTMLElement | undefined
-      )?.classList?.remove('active');
+      (headerUser.current?.childNodes[0] as HTMLElement | undefined)?.classList?.remove('active');
     },
     {
       ignoreClass: ['header-user-image', 'header-user-icon'],
@@ -71,9 +69,7 @@ function Header() {
 
   function toggleUserMenu() {
     setIsOpen(!isOpen);
-    (
-      headerUser.current?.childNodes[0] as HTMLElement | undefined
-    )?.classList.toggle('active');
+    (headerUser.current?.childNodes[0] as HTMLElement | undefined)?.classList.toggle('active');
   }
 
   const userMenuVariants: Variants = {
@@ -113,8 +109,7 @@ function Header() {
 
     function handleSubmit(e: FormEvent<HTMLFormElement>) {
       e.preventDefault();
-      const search = (e.target as EventTarget & { search: HTMLInputElement })
-        .search.value;
+      const search = (e.target as EventTarget & { search: HTMLInputElement }).search.value;
       if (search) router.push(`/search?q=${search}`);
     }
 
@@ -201,11 +196,7 @@ function Header() {
                     </li>
                     <hr />
                     <Link passHref href="/login">
-                      <button
-                        className="header-user-menu-button login"
-                        type="button"
-                        tabIndex={0}
-                      >
+                      <button className="header-user-menu-button login" type="button" tabIndex={0}>
                         Login <FaSignInAlt />
                       </button>
                     </Link>

@@ -2,16 +2,52 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@components/*": ["components/*"],
-      "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"],
-      "@types": ["types/index.ts"],
-      "@lib/*": ["lib/*"],
-      "@hooks/*": ["hooks/*"]
+      "@components/*": [
+        "components/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@types": [
+        "types/index.ts"
+      ],
+      "@lib/*": [
+        "lib/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ]
     },
-    "exactOptionalPropertyTypes": false
+    "exactOptionalPropertyTypes": false,
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
   },
-  "extends": "@tsconfig/next-strictest/tsconfig.json",
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib/generated/"
+  ]
 }

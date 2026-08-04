@@ -3,6 +3,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import Button from '@components/Button';
+import { CartItem } from '@components/cart/CartItem';
 import Divider from '@components/Divider';
 import Head from '@components/Head';
 import Input from '@components/Inputs/Input';
@@ -20,23 +21,16 @@ import CartStyles, {
   mainElAnimationProps,
   Products,
   PromoForm,
-} from './Cart.styles';
-import { CartItem } from './CartItem';
+} from '@components/cart/Cart.styles';
 export default function Cart() {
   const [
     cart,
-    {
-      updateProductQuantity: handleChangeQuantity,
-      removeProduct: handleRemoveItemFromCart,
-    },
+    { updateProductQuantity: handleChangeQuantity, removeProduct: handleRemoveItemFromCart },
   ] = useCart();
 
   if (!cart?.length) return <EmptyCart />;
 
-  const total = cart.reduce(
-    (total, item) => total + item.quantity * item.price,
-    0,
-  );
+  const total = cart.reduce((total, item) => total + item.quantity * item.price, 0);
 
   return (
     <>
@@ -59,9 +53,7 @@ export default function Cart() {
             <Spacer y={16} />
             <CartContainer>
               <Products title="Produtos">
-                <div
-                  style={{ height: cart.length * 160 + (cart.length - 1) * 8 }}
-                >
+                <div style={{ height: cart.length * 160 + (cart.length - 1) * 8 }}>
                   <AnimatePresence>
                     {cart?.map((item, i) => (
                       <CartItem
@@ -99,10 +91,7 @@ export default function Cart() {
                   <Info
                     infos={[
                       `Produtos: ${cart.length ?? 0}`,
-                      `Total: ${cart.reduce(
-                        (acc, item) => acc + item.quantity,
-                        0,
-                      )}`,
+                      `Total: ${cart.reduce((acc, item) => acc + item.quantity, 0)}`,
                     ]}
                   />
                 </motion.div>
@@ -183,13 +172,7 @@ function CheckoutInfo({
   );
 }
 
-function Info({
-  infos,
-  variant,
-}: {
-  infos: string[];
-  variant?: 'normal' | 'medium' | 'bold';
-}) {
+function Info({ infos, variant }: { infos: string[]; variant?: 'normal' | 'medium' | 'bold' }) {
   const StyledDiv = styled('div', {
     display: 'flex',
     flexDirection: 'row',

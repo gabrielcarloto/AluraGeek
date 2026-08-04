@@ -8,10 +8,9 @@ import { getCsrfToken, getSession, signIn } from 'next-auth/react';
 
 import Button from '@components/Button';
 import Error from '@components/Error/index';
+import { Form } from '@components/login/Form';
 import Spacer from '@components/utils/Spacer';
 import { css, styled } from '@styles/theme';
-
-import { Form } from './Form';
 
 export default function Login({
   csrfToken,
@@ -19,9 +18,7 @@ export default function Login({
   const router = useRouter();
   const { error } = router.query as { error: string | undefined };
 
-  const [errorVisible, setErrorVisible] = React.useState<string | undefined>(
-    error,
-  );
+  const [errorVisible, setErrorVisible] = React.useState<string | undefined>(error);
 
   const FormSection = css({
     height: '60vh',
@@ -81,11 +78,7 @@ export default function Login({
         <ProvidersContainer>
           <hr />
           <Spacer responsive={3} />
-          <Button
-            className="provider-btn"
-            color="secondary"
-            onClick={() => signIn('github')}
-          >
+          <Button className="provider-btn" color="secondary" onClick={() => signIn('github')}>
             <VscGithub /> Entrar com GitHub
           </Button>
         </ProvidersContainer>
@@ -93,12 +86,7 @@ export default function Login({
 
       <AnimatePresence>
         {errorVisible && error && (
-          <Error
-            queryError={error}
-            setState={setErrorVisible}
-            close
-            key="error"
-          />
+          <Error queryError={error} setState={setErrorVisible} close key="error" />
         )}
       </AnimatePresence>
     </>
@@ -115,13 +103,10 @@ interface Redirect {
 
 type ExtendedGetServerSidePropsReturn = GetServerSideProps<Props> & Redirect;
 
-export const getServerSideProps: ExtendedGetServerSidePropsReturn = async (
-  context,
-) => {
+export const getServerSideProps: ExtendedGetServerSidePropsReturn = async (context) => {
   const session = await getSession({ req: context.req });
 
-  if (session)
-    return { redirect: { destination: '/' }, props: { csrfToken: undefined } };
+  if (session) return { redirect: { destination: '/' }, props: { csrfToken: undefined } };
 
   return {
     props: { csrfToken: await getCsrfToken(context) },

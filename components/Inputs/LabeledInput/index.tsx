@@ -1,19 +1,9 @@
-import {
-  ChangeEvent,
-  Dispatch,
-  RefObject,
-  SetStateAction,
-  useEffect,
-  useId,
-  useRef,
-} from 'react';
+import { ChangeEvent, Dispatch, RefObject, SetStateAction, useEffect, useId, useRef } from 'react';
 
 import LabeledInputStyles from './LabledInput.styles';
 
 // eslint-disable-next-line no-unused-vars
-function toggleClass<
-  T extends HTMLInputElement | HTMLLabelElement | HTMLTextAreaElement,
->(
+function toggleClass<T extends HTMLInputElement | HTMLLabelElement | HTMLTextAreaElement>(
   ref: RefObject<T>,
   method: 'add' | 'remove' | null | undefined,
   className: string,
@@ -74,9 +64,7 @@ export default function LabeledInput({
     return {
       className: `container__input ${isTextarea ? 'textarea' : ''}`,
       id: `input_${uniqueInput}`,
-      onChange: (
-        e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
-      ) => {
+      onChange: (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
         if (setInputValue) setInputValue(e.target.value);
         if (handleChange) {
           handleChange(
@@ -100,11 +88,7 @@ export default function LabeledInput({
   return (
     <div className={LabeledInputStyles()}>
       <div className="container">
-        <label
-          className="container__label"
-          ref={labelTag}
-          htmlFor={`input_${uniqueInput}`}
-        >
+        <label className="container__label" ref={labelTag} htmlFor={`input_${uniqueInput}`}>
           {label}
         </label>
 
