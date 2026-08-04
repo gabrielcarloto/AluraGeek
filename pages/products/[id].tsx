@@ -265,29 +265,34 @@ export const getStaticProps: GetStaticProps<{
   product: IProduct;
   products: IProduct[];
 }> = async ({ params }) => {
-  const param = params as unknown as { id: number };
+  const id = params?.id;
 
-  console.log(params);
+  if (!id) {
+    return { notFound: true };
+  }
 
-  const product: IProduct = await fetcher(`${BASE_API_URL}/products/${param.id}`); // ! possible error if params is undefined or the id doesnt exist
-  const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
+  try {
+    const product: IProduct = await fetcher(`${BASE_API_URL}/products/${id}`);
+    const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
 
-  return {
-    props: {
-      product,
-      products,
-    },
-  };
+    if (!product) {
+      return { notFound: true };
+    }
+
+    return {
+      props: {
+        product,
+        products,
+      },
+    };
+  } catch {
+    return { notFound: true };
+  }
 };
 
 export async function getStaticPaths() {
-  const res = await fetcher<IProduct[]>(`${BASE_API_URL}/products`);
-  const paths = res.map((product) => ({
-    params: { id: product.id.toString() },
-  }));
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   };
 }
