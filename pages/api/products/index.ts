@@ -12,9 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(STATUS.OK).json(products);
     }
     case 'POST': {
-      return adminAction(req, res, () => {
+      return adminAction(req, res, async () => {
         const productData: Product = JSON.parse(req.body);
-        const product = createProduct(productData);
+        const product = await createProduct(productData);
 
         return res.status(STATUS.CREATED).json(product);
       });
