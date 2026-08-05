@@ -214,11 +214,16 @@ const AdminPage: NextPage<Props> = ({ product, error: initialError }) => {
 };
 
 async function uploadProductImage(stringifiedImage: string | ArrayBuffer | null) {
+  const pwrd = prompt('Insira a senha para adicionar a imagem:') || '';
+
   let data: { link: string } | null | undefined, error: Error | undefined;
 
   try {
     const res = await fetch('/api/upload', {
       method: 'POST',
+      headers: {
+        Authorization: pwrd,
+      },
       body: stringifiedImage,
     });
 
