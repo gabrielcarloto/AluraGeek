@@ -16,6 +16,9 @@ lib/generated
 # production
 /build
 
+# typescript
+tsconfig.tsbuildinfo
+
 # misc
 .DS_Store
 *.pem
