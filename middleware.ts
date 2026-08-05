@@ -5,15 +5,16 @@ import { getToken } from 'next-auth/jwt';
 import { BASE_URL, isAdmin } from '@utils/all';
 
 export async function middleware(req: NextRequest) {
-  // return early if url isn't supposed to be protected
-  // ? probably it isnt needed
-  if (!req.url.includes('/admin')) {
+  // The matcher already restricts this middleware to `/admin/:path*`, but we
+  // double-check the pathname so a query string can't trick it into running
+  // on a non-admin route.
+  if (!req.nextUrl.pathname.startsWith('/admin')) {
     return NextResponse.next();
   }
 
   const session = await getToken({
     req,
-    secret: process.env['SECRET'] as string,
+    secret: process.env['NEXTAUTH_SECRET'] as string,
   });
 
   if (!isAdmin(session)) return NextResponse.redirect(BASE_URL);
