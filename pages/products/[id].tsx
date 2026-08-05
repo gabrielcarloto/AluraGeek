@@ -14,7 +14,7 @@ import { useCart } from '@hooks/useLocalStorage';
 import { useMediaQuery } from '@hooks/useMediaQuery';
 import type { Product as IProduct } from '@lib/db';
 import { css } from '@styles/theme';
-import { BASE_API_URL, fetcher } from '@utils/all';
+import { fetcher, getApiUrl } from '@utils/all';
 
 const ProductImageStyles = css({
   objectFit: 'cover',
@@ -272,8 +272,8 @@ export const getStaticProps: GetStaticProps<{
   }
 
   try {
-    const product: IProduct = await fetcher(`${BASE_API_URL}/products/${id}`);
-    const products: IProduct[] = await fetcher(`${BASE_API_URL}/products`);
+    const product: IProduct = await fetcher(getApiUrl(`/products/${id}`));
+    const products: IProduct[] = await fetcher(getApiUrl('/products'));
 
     if (!product) {
       return { notFound: true };

@@ -4,18 +4,6 @@ import { AnimatePresence } from 'framer-motion';
 import type { NextPage, NextPageContext } from 'next';
 import NProgress from 'nprogress';
 
-import Button from '@components/Button/index';
-import ErrorDialog from '@components/Error';
-import Head from '@components/Head';
-import LabeledInput from '@components/Inputs/LabeledInput';
-import Success from '@components/Success';
-import Title from '@components/Title';
-import Spacer from '@components/utils/Spacer';
-import { useMediaQuery } from '@hooks/useMediaQuery';
-import type { Product } from '@lib/db';
-import { BASE_API_URL, fetcher, isDefined, keysAreOfValue } from '@utils/all';
-import type { UndefinedPartial } from '@utils/types';
-
 import {
   AdminPageContainer,
   FileInput,
@@ -26,13 +14,25 @@ import {
   NewProductForm,
   NewProductIcon,
 } from '@components/admin/Admin.styles';
+import Button from '@components/Button/index';
+import ErrorDialog from '@components/Error';
+import Head from '@components/Head';
+import LabeledInput from '@components/Inputs/LabeledInput';
+import Success from '@components/Success';
+import Title from '@components/Title';
+import Spacer from '@components/utils/Spacer';
+import { useMediaQuery } from '@hooks/useMediaQuery';
+import type { Product } from '@lib/db';
+import { fetcher, getApiUrl, isDefined, keysAreOfValue } from '@utils/all';
+import type { UndefinedPartial } from '@utils/types';
 
 interface Props {
   product: Product | undefined;
+  error?: string;
 }
 
-const AdminPage: NextPage<Props> = ({ product }) => {
-  const [error, setError] = React.useState<string>();
+const AdminPage: NextPage<Props> = ({ product, error: initialError }) => {
+  const [error, setError] = React.useState<string>(initialError);
   const [success, setSuccess] = React.useState<boolean>();
 
   const title = (product ? 'Editar' : 'Adicionar') + ' produto';
@@ -104,7 +104,7 @@ const AdminPage: NextPage<Props> = ({ product }) => {
       const productData = {
         ...form,
         alt: form.name,
-        price: form.price, // ! maybe it has to be converted from string to number
+        price: Number(form.price),
         id: product?.id,
       };
 
@@ -214,11 +214,16 @@ const AdminPage: NextPage<Props> = ({ product }) => {
 };
 
 async function uploadProductImage(stringifiedImage: string | ArrayBuffer | null) {
+  const pwrd = prompt('Insira a senha para adicionar a imagem:') || '';
+
   let data: { link: string } | null | undefined, error: Error | undefined;
 
   try {
     const res = await fetch('/api/upload', {
       method: 'POST',
+      headers: {
+        Authorization: pwrd,
+      },
       body: stringifiedImage,
     });
 
@@ -252,11 +257,14 @@ AdminPage.getInitialProps = async ({ query }: NextPageContext & { query: { produ
   if (!query['product']) return { product: undefined };
 
   const id = query['product'];
-  const product = await fetcher<Product>(`${BASE_API_URL}/products/${id}`);
 
-  return {
-    product,
-  };
+  try {
+    const product = await fetcher<Product>(getApiUrl(`/products/${id}`));
+
+    return { product };
+  } catch {
+    return { product: undefined, error: 'Não foi possível carregar o produto' };
+  }
 };
 
 export default AdminPage;

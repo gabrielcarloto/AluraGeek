@@ -2,8 +2,8 @@ import type { ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { NextComponentType, NextPageContext } from 'next';
 import type { AppProps as NextAppProps } from 'next/app';
-import { Router } from 'next/dist/client/router';
 import Head from 'next/head';
+import Router from 'next/router';
 import type { Session } from 'next-auth';
 import { SessionProvider, useSession } from 'next-auth/react';
 import NProgress from 'nprogress';
@@ -92,7 +92,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }: MyAp
             animate="animate"
             exit="exit"
             variants={transitionVariants}
-            key={isSearch(router.route) ? 'search' : Math.random()}
+            key={isSearch(router.route) ? 'search' : router.asPath}
           >
             {Component.auth ? (
               <Auth>
@@ -123,8 +123,7 @@ function Auth({ children }: { children: ReactNode }) {
           animate="animate"
           exit="exit"
           variants={transitionVariants}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          key={(Router as any).route}
+          key={Router.route}
         >
           <Fill display="flex">
             <h1>Carregando...</h1>
