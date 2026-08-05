@@ -13,6 +13,7 @@
 Esse projeto está sendo desenvolvido durante o terceiro Challenge Front-End da Alura. O objetivo é criar um site baseando-se num modelo do [Figma](https://www.figma.com), em um período de quatro semanas.
 
 Segredo ultra secreto :shushing_face: : o login de admin é
+
 - Usuário: peypey
 - Senha: negoney
 
@@ -20,3 +21,8 @@ Segredo ultra secreto :shushing_face: : o login de admin é
 
 - [Next.js](https://nextjs.org/)
 - [Stitches](https://stitches.dev/)
+- [Next.js](https://nextjs.org/)
+- [Stitches](https://stitches.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [PrismaORM](https://www.prisma.io/orm)
+

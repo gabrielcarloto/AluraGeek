@@ -10,11 +10,12 @@
 
 ## :clipboard: About
 
-*Psst: tem em [português](/README-pt.md) também!* :raising_hand_man:
+_Psst: tem em [português](/README-pt.md) também!_ :raising_hand_man:
 
 This project is being developed during the third Alura's Front-End Challenge. The main goal is to build a website based on a [Figma](https://www.figma.com) model, within four weeks.
 
-Top secret :shushing_face: : the admin login is 
+Top secret :shushing_face: : the admin login is
+
 - User: peypey
 - Password: negoney
 
@@ -22,3 +23,6 @@ Top secret :shushing_face: : the admin login is
 
 - [Next.js](https://nextjs.org/)
 - [Stitches](https://stitches.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [PrismaORM](https://www.prisma.io/orm)
+
