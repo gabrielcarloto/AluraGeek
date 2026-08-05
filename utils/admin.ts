@@ -3,6 +3,7 @@ import type { Session } from 'next-auth';
 import type { JWT } from 'next-auth/jwt';
 
 import { getENV } from './env';
+import { STATUS } from './http';
 
 export const ADMIN_USER = {
   NAME: 'Admin',
@@ -26,8 +27,7 @@ export function isAdmin(session: JWT | Session | null): boolean {
     );
   else
     return Boolean(
-      (session as JWT).name === ADMIN_USER.NAME &&
-        (session as JWT).email === ADMIN_USER.EMAIL,
+      (session as JWT).name === ADMIN_USER.NAME && (session as JWT).email === ADMIN_USER.EMAIL,
     );
 }
 
@@ -36,13 +36,16 @@ export function isAdmin(session: JWT | Session | null): boolean {
  * someone deleting, adding or changing products, I added this verification, with
  * a password only I know
  */
-export function authAdminAction(req: NextApiRequest, res: NextApiResponse) {
+export function adminAction(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  cb: () => Promise<void> | void,
+) {
   const PRODUCTS_PASSWORD = getENV('PRODUCTS_PASSWORD').PRODUCTS_PASSWORD;
 
   if (req.headers.authorization !== PRODUCTS_PASSWORD) {
-    res.status(401).json({ error: 'Unauthorized' });
-    return false;
+    return res.status(STATUS.UNAUTHORIZED).json({ error: 'Unauthorized' });
   }
 
-  return true;
+  return cb();
 }

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { deleteProduct, getUniqueProduct } from '@lib/prisma';
-import { authAdminAction } from '@utils/admin';
+import { adminAction } from '@utils/admin';
 import { allowedHttpMethods, STATUS } from '@utils/http';
 
 export default async function productHandler(req: NextApiRequest, res: NextApiResponse) {
@@ -22,9 +22,10 @@ export default async function productHandler(req: NextApiRequest, res: NextApiRe
     case 'GET':
       return res.status(STATUS.OK).json(product);
     case 'DELETE': {
-      authAdminAction(req, res);
-      await deleteProduct(productId);
-      return res.status(STATUS.OK).json({ success: true });
+      return adminAction(req, res, async () => {
+        await deleteProduct(productId);
+        return res.status(STATUS.OK).json({ success: true });
+      });
     }
 
     default:
