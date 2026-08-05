@@ -19,7 +19,7 @@ export default function CustomHead({
   const router = useRouter();
 
   const metaTitle = `${title} | AluraGeek`;
-  const metaUrl = BASE_URL + router.pathname;
+  const metaUrl = BASE_URL ? `${BASE_URL}${router.pathname}` : undefined;
 
   return (
     <Head>
@@ -31,11 +31,11 @@ export default function CustomHead({
 
           <meta property="og:title" content={metaTitle} />
           <meta property="og:type" content="website" />
-          <meta property="og:url" content={metaUrl} />
+          {metaUrl && <meta property="og:url" content={metaUrl} />}
 
           <meta property="twitter:title" content={metaTitle} />
           <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content={metaUrl} />
+          {metaUrl && <meta property="twitter:url" content={metaUrl} />}
 
           {description && (
             <>
