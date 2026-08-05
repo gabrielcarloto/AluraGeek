@@ -104,7 +104,7 @@ const AdminPage: NextPage<Props> = ({ product, error: initialError }) => {
       const productData = {
         ...form,
         alt: form.name,
-        price: form.price, // ! maybe it has to be converted from string to number
+        price: Number(form.price),
         id: product?.id,
       };
 
