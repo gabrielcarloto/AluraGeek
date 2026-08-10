@@ -15,7 +15,7 @@
     "@prisma/adapter-pg": "^7.9.1",
     "@prisma/client": "^7.9.1",
     "@stitches/react": "^1.2.7",
-    "framer-motion": "^6.2.9",
+    "framer-motion": "^10.10.0",
     "imgur": "^2.1.4",
     "next": "12.3.4",
     "next-auth": "^4.3.1",
